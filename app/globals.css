@@ -165,6 +165,26 @@ button {
   justify-self: end;
 }
 
+.topbar-actions {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-self: end;
+  min-width: 0;
+}
+
+.install-app-button {
+  background: var(--green-deep);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 8px 11px;
+  white-space: nowrap;
+}
+
 .source-status > span {
   align-items: center;
   display: flex;
@@ -1272,6 +1292,10 @@ button {
   margin-right: 3px;
 }
 
+.mobile-gesture {
+  display: none;
+}
+
 .feed-filters {
   display: flex;
   gap: 3px;
@@ -1492,6 +1516,7 @@ button {
 
 .feed-heart {
   align-items: center;
+  background: transparent;
   border: 1px solid #d9dfda;
   border-radius: 50%;
   color: #87918b;
@@ -1501,6 +1526,7 @@ button {
   justify-content: center;
   justify-self: end;
   margin-top: 1px;
+  padding: 0;
   width: 36px;
 }
 
@@ -1685,6 +1711,10 @@ button {
 .reader-actions button small {
   font-size: 7px;
   margin-left: 1px;
+}
+
+.reader-actions button.reader-close {
+  display: none;
 }
 
 .reader-links {
@@ -2026,7 +2056,17 @@ button {
   }
 
   .source-status {
-    font-size: 0;
+    display: none;
+  }
+
+  .topbar-actions {
+    gap: 0;
+  }
+
+  .install-app-button {
+    font-size: 9px;
+    min-height: 36px;
+    padding: 8px 12px;
   }
 
   .workspace {
@@ -2034,12 +2074,17 @@ button {
   }
 
   .feed-workspace {
-    padding: 24px 12px 36px;
+    padding: 18px 10px max(18px, env(safe-area-inset-bottom));
   }
 
   .feed-column {
-    height: 680px;
-    min-height: 0;
+    height: calc(100dvh - 136px);
+    max-height: 760px;
+    min-height: 540px;
+  }
+
+  .feed-heading {
+    padding-bottom: 12px;
   }
 
   .feed-heading h1 {
@@ -2048,6 +2093,15 @@ button {
 
   .gesture-guide {
     gap: 7px 10px;
+    padding: 8px 10px;
+  }
+
+  .desktop-gesture {
+    display: none;
+  }
+
+  .mobile-gesture {
+    display: inline;
   }
 
   .feed-tools {
@@ -2062,6 +2116,13 @@ button {
     padding: 19px 15px;
   }
 
+  .feed-heart,
+  .superheart-trigger,
+  .bookmark-trigger {
+    min-height: 38px;
+    min-width: 38px;
+  }
+
   .feed-card-open {
     grid-template-columns: 1fr;
   }
@@ -2074,21 +2135,90 @@ button {
     font-size: 20px;
   }
 
-  .paper-reader {
-    height: 620px;
-    min-height: 620px;
+  .paper-reader:not(.has-paper) {
+    display: none;
+  }
+
+  .paper-reader.has-paper {
+    border: 0;
+    border-radius: 0;
+    height: 100dvh;
+    inset: 0;
+    min-height: 0;
+    position: fixed;
+    z-index: 100;
   }
 
   .reader-details {
-    align-items: start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    gap: 9px;
+    padding: max(10px, env(safe-area-inset-top)) 10px 9px;
   }
 
-  .preview-header,
-  .pdf-header-tools {
+  .reader-title-copy h2 {
+    font-size: 15px;
+    margin-top: 4px;
+  }
+
+  .reader-featured-links {
+    display: none;
+  }
+
+  .reader-actions {
+    gap: 4px;
+  }
+
+  .reader-actions button {
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .reader-actions button.reader-close {
+    display: inline-block;
+    font-size: 22px;
+    line-height: 1;
+    order: 4;
+  }
+
+  .reader-actions button.clear-status {
+    display: none;
+  }
+
+  .preview-header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 9px;
+    gap: 7px;
+    padding: 8px 10px;
+  }
+
+  .pdf-header-tools {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .pdf-pinch-hint {
+    display: none;
+  }
+
+  .reader-links {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .reader-links button,
+  .reader-links a {
+    font-size: 8px;
+    padding: 5px 0;
+  }
+
+  .pdf-canvas-pages {
+    gap: 8px;
+    padding: 8px;
   }
 
   .paper-card {

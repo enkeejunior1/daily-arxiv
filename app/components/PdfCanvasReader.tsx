@@ -253,6 +253,63 @@ export function PdfCanvasReader({
     };
   }, [applyZoomAtPoint]);
 
+  useEffect(() => {
+    const root = scrollRef.current;
+    if (!root) return;
+    const points = new Map<number, { x: number; y: number }>();
+    let pinchStartDistance = 0;
+    let pinchStartZoom = zoomRef.current;
+
+    const pinchGeometry = () => {
+      const [first, second] = [...points.values()];
+      if (!first || !second) return null;
+      return {
+        distance: Math.hypot(second.x - first.x, second.y - first.y),
+        centerX: (first.x + second.x) / 2,
+        centerY: (first.y + second.y) / 2,
+      };
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== "touch") return;
+      points.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (points.size === 2) {
+        const geometry = pinchGeometry();
+        if (!geometry) return;
+        event.preventDefault();
+        pinchStartDistance = geometry.distance;
+        pinchStartZoom = zoomRef.current;
+      }
+    };
+    const handlePointerMove = (event: PointerEvent) => {
+      if (!points.has(event.pointerId)) return;
+      points.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (points.size < 2 || pinchStartDistance <= 0) return;
+      const geometry = pinchGeometry();
+      if (!geometry) return;
+      event.preventDefault();
+      applyZoomAtPoint(
+        pinchStartZoom * (geometry.distance / pinchStartDistance),
+        geometry.centerX,
+        geometry.centerY,
+      );
+    };
+    const handlePointerEnd = (event: PointerEvent) => {
+      points.delete(event.pointerId);
+      if (points.size < 2) pinchStartDistance = 0;
+    };
+
+    root.addEventListener("pointerdown", handlePointerDown, { passive: false });
+    root.addEventListener("pointermove", handlePointerMove, { passive: false });
+    root.addEventListener("pointerup", handlePointerEnd);
+    root.addEventListener("pointercancel", handlePointerEnd);
+    return () => {
+      root.removeEventListener("pointerdown", handlePointerDown);
+      root.removeEventListener("pointermove", handlePointerMove);
+      root.removeEventListener("pointerup", handlePointerEnd);
+      root.removeEventListener("pointercancel", handlePointerEnd);
+    };
+  }, [applyZoomAtPoint]);
+
   const fitScale = Math.max(0.1, (availableWidth - 32) / baseWidth);
   const scale = fitScale * (zoomPercent / 100);
   const handleFirstPageRendered = useCallback(() => {
@@ -265,7 +322,7 @@ export function PdfCanvasReader({
     <div
       className="pdf-canvas-reader"
       ref={scrollRef}
-      aria-label={`${title} PDF 뷰어. 트랙패드 핀치로 확대 및 축소`}
+      aria-label={`${title} PDF 뷰어. 트랙패드 또는 두 손가락 핀치로 확대 및 축소`}
     >
       {error ? (
         <div className="pdf-canvas-message">{error}</div>

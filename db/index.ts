@@ -12,3 +12,11 @@ export function getDb() {
 
   return drizzle(runtimeEnv.DB, { schema });
 }
+
+export function getD1() {
+  const runtimeEnv = env as unknown as { DB?: D1Database };
+  if (!runtimeEnv.DB) {
+    throw new Error("Cloudflare D1 binding `DB` is unavailable.");
+  }
+  return runtimeEnv.DB;
+}

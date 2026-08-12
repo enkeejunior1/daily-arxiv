@@ -7,7 +7,9 @@ import {
   keywordGroupMatches,
   normalizeText,
 } from "../lib/keyword-groups.mjs";
+import initialRules from "../../config/rules.json";
 import { PdfCanvasReader } from "./PdfCanvasReader";
+import { PwaInstallButton } from "./PwaInstallButton";
 
 type Decision = "heart" | "superheart";
 type View = "daily" | "saved" | "rules";
@@ -77,14 +79,22 @@ type DownloadRecord = {
   savedAt: string;
 };
 
-type CompanionSnapshot = {
-  connected: boolean;
+type PersistedSnapshot = {
   rules?: Rules;
   state?: {
     reviews?: ReviewRecord[];
     progress?: FeedProgress;
     downloads?: Record<string, DownloadRecord>;
   };
+};
+
+type CompanionSnapshot = PersistedSnapshot & {
+  connected: boolean;
+};
+
+type CloudSnapshotResponse = {
+  connected: boolean;
+  snapshot?: PersistedSnapshot | null;
 };
 
 const STORAGE_KEY = "daily-arxiv-state-v3";
@@ -111,19 +121,17 @@ function todayKey() {
   return `${year}-${month}-${day}`;
 }
 
-const DEFAULT_RULES: Rules = {
-  authors: ["Yann LeCun", "Chelsea Finn"],
-  positiveKeywords: [
-    "reasoning",
-    "vision-language",
-    "multimodal",
-    "language model",
-    "reinforcement learning",
-    "world model",
-  ],
-  negativeKeywords: ["medical imaging", "wireless network"],
-  citationSeeds: [],
-};
+function pdfFilename(paper: Paper) {
+  const safeTitle = paper.title
+    .normalize("NFKC")
+    .replace(/[\\/:*?"<>|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 120);
+  return `${todayKey()}_${safeTitle || paper.id}.pdf`;
+}
+
+const DEFAULT_RULES: Rules = normalizeRules(initialRules);
 
 const DEMO_PAPERS: Paper[] = [
   {
@@ -548,6 +556,8 @@ export function DailyArxivApp() {
   const [companionStatus, setCompanionStatus] = useState<"loading" | "connected" | "offline">(
     "loading",
   );
+  const [cloudStatus, setCloudStatus] = useState<"loading" | "connected" | "offline">("loading");
+  const [touchMode, setTouchMode] = useState(false);
   const [downloads, setDownloads] = useState<Record<string, DownloadRecord>>({});
   const [notice, setNotice] = useState("");
   const [selectedPaper, setSelectedPaper] = useState<ScoredPaper | null>(null);
@@ -567,9 +577,9 @@ export function DailyArxivApp() {
   useEffect(() => {
     let active = true;
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 1800);
+    const timeout = window.setTimeout(() => controller.abort(), 2600);
 
-    function applySnapshot(snapshot: CompanionSnapshot) {
+    function applySnapshot(snapshot: PersistedSnapshot, includeDownloads = true) {
       if (snapshot.rules) {
         const nextRules = normalizeRules(snapshot.rules);
         setRules(nextRules);
@@ -583,7 +593,7 @@ export function DailyArxivApp() {
           })),
         );
       }
-      if (snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
+      if (includeDownloads && snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
       if (snapshot.state?.progress?.date === todayKey()) {
         setSeenIds(new Set(snapshot.state.progress.seenIds));
         setAutoBookmarkId(snapshot.state.progress.autoBookmarkId);
@@ -602,33 +612,58 @@ export function DailyArxivApp() {
             progress?: FeedProgress;
             downloads?: Record<string, DownloadRecord>;
           };
-          applySnapshot({ connected: false, rules: parsed.rules, state: parsed });
+          applySnapshot({ rules: parsed.rules, state: parsed });
         }
       } catch {
         setNotice("저장된 설정을 읽지 못해 기본값으로 시작했어요.");
       }
     }
 
-    fetch(`${COMPANION_URL}/snapshot`, { signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) throw new Error("local companion unavailable");
-        return (await response.json()) as CompanionSnapshot;
-      })
-      .then((snapshot) => {
+    async function hydrate() {
+      let loadedSharedState = false;
+      try {
+        const response = await fetch("/api/sync", { signal: controller.signal });
+        const cloud = (await response.json()) as CloudSnapshotResponse;
+        if (!response.ok || !cloud.connected) throw new Error("cloud sync unavailable");
+        setCloudStatus("connected");
+        if (cloud.snapshot) {
+          applySnapshot(cloud.snapshot, false);
+          loadedSharedState = true;
+        }
+      } catch {
         if (!active) return;
-        applySnapshot(snapshot);
-        setCompanionStatus("connected");
-      })
-      .catch(() => {
-        if (!active) return;
-        applyLocalFallback();
+        setCloudStatus("offline");
+      }
+
+      const isLocalApp = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      if (isLocalApp) {
+        try {
+          const response = await fetch(`${COMPANION_URL}/snapshot`, { signal: controller.signal });
+          if (!response.ok) throw new Error("local companion unavailable");
+          const snapshot = (await response.json()) as CompanionSnapshot;
+          if (!active) return;
+          if (loadedSharedState) {
+            if (snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
+          } else {
+            applySnapshot(snapshot);
+            loadedSharedState = true;
+          }
+          setCompanionStatus("connected");
+        } catch {
+          if (!active) return;
+          setCompanionStatus("offline");
+        }
+      } else {
         setCompanionStatus("offline");
-      })
-      .finally(() => {
-        if (!active) return;
-        window.clearTimeout(timeout);
-        setHydrated(true);
-      });
+      }
+
+      if (!loadedSharedState) applyLocalFallback();
+      if (!active) return;
+      window.clearTimeout(timeout);
+      setHydrated(true);
+    }
+
+    void hydrate();
 
     return () => {
       active = false;
@@ -636,6 +671,23 @@ export function DailyArxivApp() {
       window.clearTimeout(timeout);
     };
   }, []);
+
+  useEffect(() => {
+    const query = window.matchMedia("(pointer: coarse)");
+    const update = () => setTouchMode(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedPaper || !window.matchMedia("(max-width: 720px)").matches) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [selectedPaper]);
 
   useEffect(() => {
     let active = true;
@@ -744,22 +796,42 @@ export function DailyArxivApp() {
     };
     const state = { reviews, progress, downloads };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ rules, ...state }));
-    if (companionStatus !== "connected") return;
-
-    const controller = new AbortController();
+    const companionController = new AbortController();
+    const cloudController = new AbortController();
     const timer = window.setTimeout(() => {
-      fetch(`${COMPANION_URL}/snapshot`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rules, state }),
-        signal: controller.signal,
-      }).catch(() => setCompanionStatus("offline"));
-    }, 300);
+      if (cloudStatus === "connected") {
+        fetch("/api/sync", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rules, state: { reviews, progress } }),
+          signal: cloudController.signal,
+        }).then((response) => {
+          if (!response.ok) setCloudStatus("offline");
+        }).catch((error) => {
+          if (!(error instanceof DOMException && error.name === "AbortError")) {
+            setCloudStatus("offline");
+          }
+        });
+      }
+      if (companionStatus === "connected") {
+        fetch(`${COMPANION_URL}/snapshot`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rules, state }),
+          signal: companionController.signal,
+        }).catch((error) => {
+          if (!(error instanceof DOMException && error.name === "AbortError")) {
+            setCompanionStatus("offline");
+          }
+        });
+      }
+    }, 450);
     return () => {
-      controller.abort();
+      companionController.abort();
+      cloudController.abort();
       window.clearTimeout(timer);
     };
-  }, [autoBookmarkId, companionStatus, downloads, hydrated, manualBookmarkId, reviews, rules, seenIds]);
+  }, [autoBookmarkId, cloudStatus, companionStatus, downloads, hydrated, manualBookmarkId, reviews, rules, seenIds]);
 
   const enrichedPapers = useMemo(
     () =>
@@ -1022,20 +1094,30 @@ export function DailyArxivApp() {
             Rules
           </button>
         </nav>
-        <div className="source-status">
-          <span>
+        <div className="topbar-actions">
+          <PwaInstallButton />
+          <div className="source-status">
+            <span title="규칙, 선택, 북마크를 기기 간 동기화">
+              <i className={cloudStatus === "connected" ? "online" : ""} />
+              {cloudStatus === "loading"
+                ? "Cloud 확인 중"
+                : cloudStatus === "connected"
+                  ? "Cloud synced"
+                  : "Cloud offline"}
+            </span>
+            <span>
             <i className={source === "arxiv" ? "online" : ""} />
             {source === "loading" ? "피드 확인 중" : source === "arxiv" ? "arXiv live" : "demo data"}
-          </span>
-          <span title="DeepXiv 최근 7일 Trending Top 50">
+            </span>
+            <span title="DeepXiv 최근 7일 Trending Top 50">
             <i className={deepxivSource === "connected" ? "featured-online" : ""} />
             {deepxivSource === "loading"
               ? "DeepXiv 확인 중"
               : deepxivSource === "connected"
                 ? `DeepXiv ${Object.keys(deepxivByPaper).length}`
                 : "DeepXiv 오류"}
-          </span>
-          <span title="Semantic Scholar citation graph">
+            </span>
+            <span title="Semantic Scholar citation graph">
             <i className={activeCitationSource === "connected" ? "citation-online" : ""} />
             {activeCitationSource === "loading"
               ? "Citations 확인 중"
@@ -1044,15 +1126,16 @@ export function DailyArxivApp() {
                 : activeCitationSource === "error"
                   ? "Citations 오류"
                   : "Citations off"}
-          </span>
-          <span title="choices CSV, rules.json, PDF cache를 저장하는 로컬 companion">
+            </span>
+            <span title="choices CSV, rules.json, PDF cache를 저장하는 로컬 companion">
             <i className={companionStatus === "connected" ? "online" : ""} />
             {companionStatus === "loading"
               ? "Repo 확인 중"
               : companionStatus === "connected"
                 ? "Repo synced"
                 : "Repo offline"}
-          </span>
+            </span>
+          </div>
         </div>
       </header>
 
@@ -1070,8 +1153,10 @@ export function DailyArxivApp() {
             <div className="gesture-guide" aria-label="피드 사용법">
               <span><b>Scroll</b> skip</span>
               <span><b>Click</b> open PDF</span>
-              <span><b>Double-click</b> ♡ heart</span>
-              <span><b>♥+ ×2</b> superheart</span>
+              <span className="desktop-gesture"><b>Double-click</b> card → heart</span>
+              <span className="desktop-gesture"><b>♥+ ×2</b> superheart</span>
+              <span className="mobile-gesture"><b>Tap ♡</b> heart</span>
+              <span className="mobile-gesture"><b>Tap ♥+</b> superheart</span>
             </div>
             <div className="feed-tools">
               <div className="feed-filters" aria-label="피드 필터">
@@ -1154,21 +1239,30 @@ export function DailyArxivApp() {
                         </div>
                       </button>
                       <div className="feed-side-actions">
-                        <div className={`feed-heart ${status ?? ""}`} aria-hidden="true">
+                        <button
+                          className={`feed-heart ${status ?? ""}`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            if (touchMode) togglePaper(paper, "heart");
+                            else setNotice("Heart는 카드를 더블클릭하거나 모바일에서 ♡를 탭하세요.");
+                          }}
+                          aria-label={`${paper.title} Heart${touchMode ? "" : ". 카드를 더블클릭"}`}
+                        >
                           {status === "superheart" ? "♥+" : status === "heart" ? "♥" : seenIds.has(paper.id) ? "✓" : "♡"}
-                        </div>
+                        </button>
                         <button
                           className="superheart-trigger"
                           onClick={(event) => {
                             event.stopPropagation();
-                            setNotice("Superheart는 이 버튼을 한 번 더 클릭하세요.");
+                            if (touchMode) handleSuperheart(paper);
+                            else setNotice("Superheart는 이 버튼을 더블클릭하세요.");
                           }}
                           onDoubleClick={(event) => {
                             event.stopPropagation();
-                            handleSuperheart(paper);
+                            if (!touchMode) handleSuperheart(paper);
                           }}
-                          aria-label={`${paper.title} Superheart. 더블클릭`}
-                        >♥+ <small>2×</small></button>
+                          aria-label={`${paper.title} Superheart. ${touchMode ? "탭" : "더블클릭"}`}
+                        >♥+ {!touchMode && <small>2×</small>}</button>
                         <button
                           className={`bookmark-trigger ${manualBookmarkId === paper.id ? "active" : ""}`}
                           onClick={(event) => {
@@ -1187,7 +1281,7 @@ export function DailyArxivApp() {
             </div>
           </section>
 
-          <aside className="paper-reader">
+          <aside className={`paper-reader ${currentPaper ? "has-paper" : ""}`}>
             {currentPaper ? (
               <>
                 <div className="reader-details">
@@ -1207,17 +1301,35 @@ export function DailyArxivApp() {
                   </div>
                   <div className="reader-actions">
                     <button
+                      className="reader-close"
+                      onClick={() => {
+                        setSelectedPaper(null);
+                        setPdfState("idle");
+                      }}
+                      aria-label="PDF 뷰어 닫기"
+                    >×</button>
+                    <button
                       className={statusByPaper.get(currentPaper.id) === "heart" ? "active" : ""}
-                      onClick={() => setNotice("Heart는 이 버튼을 더블클릭하세요.")}
-                      onDoubleClick={() => togglePaper(currentPaper, "heart")}
-                      aria-label="Heart로 저장. 더블클릭"
-                    >♡ <small>2×</small></button>
+                      onClick={() => {
+                        if (touchMode) togglePaper(currentPaper, "heart");
+                        else setNotice("Heart는 이 버튼을 더블클릭하세요.");
+                      }}
+                      onDoubleClick={() => {
+                        if (!touchMode) togglePaper(currentPaper, "heart");
+                      }}
+                      aria-label={`Heart로 저장. ${touchMode ? "탭" : "더블클릭"}`}
+                    >♡ {!touchMode && <small>2×</small>}</button>
                     <button
                       className={statusByPaper.get(currentPaper.id) === "superheart" ? "active super" : ""}
-                      onClick={() => setNotice("Superheart는 이 버튼을 더블클릭하세요.")}
-                      onDoubleClick={() => togglePaper(currentPaper, "superheart")}
-                      aria-label="Superheart로 저장. 더블클릭"
-                    >♥+ <small>2×</small></button>
+                      onClick={() => {
+                        if (touchMode) togglePaper(currentPaper, "superheart");
+                        else setNotice("Superheart는 이 버튼을 더블클릭하세요.");
+                      }}
+                      onDoubleClick={() => {
+                        if (!touchMode) togglePaper(currentPaper, "superheart");
+                      }}
+                      aria-label={`Superheart로 저장. ${touchMode ? "탭" : "더블클릭"}`}
+                    >♥+ {!touchMode && <small>2×</small>}</button>
                     {statusByPaper.has(currentPaper.id) && (
                       <button className="clear-status" onClick={() => removeSavedStatus(currentPaper.id)}>Clear</button>
                     )}
@@ -1253,12 +1365,16 @@ export function DailyArxivApp() {
                         Fit
                       </button>
                     </div>
-                    <span className="pdf-pinch-hint">trackpad pinch</span>
+                    <span className="pdf-pinch-hint">pinch to zoom</span>
                     <div className="reader-links">
                       <a href={currentPaper.arxivUrl} target="_blank" rel="noreferrer">arXiv ↗</a>
                       {!currentLocalPdfUrl && (
                         <button onClick={() => void cachePdf(currentPaper)}>Save locally</button>
                       )}
+                      <a
+                        href={`/api/pdf-source?arxivId=${encodeURIComponent(currentPaper.id)}&download=1`}
+                        download={pdfFilename(currentPaper)}
+                      >Download PDF ↓</a>
                       <a href={currentPdfUrl} target="_blank" rel="noreferrer">Open PDF ↗</a>
                     </div>
                   </div>
@@ -1405,9 +1521,15 @@ export function DailyArxivApp() {
             }}
           />
           <div className="local-note">
-            <span>{companionStatus === "connected" ? "Repository synced" : "Browser fallback"}</span>
+            <span>
+              {cloudStatus === "connected"
+                ? "Cloud synced across devices"
+                : companionStatus === "connected"
+                  ? "Repository synced on this Mac"
+                  : "Browser fallback"}
+            </span>
             <p>
-              규칙은 <code>config/rules.json</code>, 선택은 <code>choices/{new Date().getFullYear()}.csv</code>, PDF는 gitignore된 <code>.local/papers/</code>에 저장됩니다.
+              Cloud는 규칙·선택·북마크를 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
             </p>
           </div>
         </section>
