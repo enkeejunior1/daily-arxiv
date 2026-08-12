@@ -15,6 +15,7 @@ type StoredSnapshot = {
   rules?: unknown;
   state?: {
     reviews?: unknown;
+    notes?: unknown;
     progress?: unknown;
   };
 };
@@ -77,6 +78,7 @@ export async function PUT(request: Request) {
       rules: snapshot.rules,
       state: {
         reviews: snapshot.state?.reviews,
+        notes: snapshot.state?.notes,
         progress: snapshot.state?.progress,
       },
     });

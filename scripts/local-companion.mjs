@@ -39,6 +39,7 @@ const csvColumns = [
   "first_author",
   "last_author",
   "score",
+  "note",
   "selected_at",
 ];
 
@@ -191,6 +192,21 @@ function normalizeReviews(value) {
   });
 }
 
+function normalizeNotes(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([paperId, note]) => {
+      if (!isArxivId(paperId) || !note || typeof note !== "object") return [];
+      const text = typeof note.text === "string" ? note.text.trim().slice(0, 200) : "";
+      if (!text) return [];
+      return [[paperId, {
+        text,
+        updatedAt: typeof note.updatedAt === "string" ? note.updatedAt : new Date(0).toISOString(),
+      }]];
+    }),
+  );
+}
+
 function normalizeDownloads(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   return Object.fromEntries(
@@ -210,8 +226,9 @@ function normalizeDownloads(value) {
 function normalizeState(value) {
   const progress = value?.progress;
   return {
-    version: 1,
+    version: 2,
     reviews: normalizeReviews(value?.reviews),
+    notes: normalizeNotes(value?.notes),
     progress:
       progress && /^\d{4}-\d{2}-\d{2}$/.test(progress.date ?? "")
         ? {
@@ -289,7 +306,7 @@ function reviewDate(review) {
   return review.reviewedAt.slice(0, 10);
 }
 
-function rowFromReview(review, date) {
+function rowFromReview(review, date, notes) {
   return {
     date,
     decision: review.decision,
@@ -299,6 +316,7 @@ function rowFromReview(review, date) {
     first_author: review.paper.authors[0] ?? "",
     last_author: review.paper.authors.at(-1) ?? "",
     score: review.paper.baseScore ?? 0,
+    note: notes[review.paper.id]?.text ?? "",
     selected_at: review.reviewedAt,
   };
 }
@@ -327,11 +345,11 @@ async function updateReadme(rows) {
   const recent = [...rows].sort(sortChoiceRows).slice(0, 10);
   const table = recent.length
     ? [
-        "| Date | Pick | Paper | Authors |",
-        "| --- | --- | --- | --- |",
+        "| Date | Pick | Paper | Authors | Note |",
+        "| --- | --- | --- | --- | --- |",
         ...recent.map(
           (row) =>
-            `| ${markdownEscape(row.date)} | ${row.decision === "superheart" ? "♥+" : "♥"} | [${markdownEscape(row.title)}](${row.arxiv_link}) | ${markdownEscape(row.first_author)} · ${markdownEscape(row.last_author)} |`,
+            `| ${markdownEscape(row.date)} | ${row.decision === "superheart" ? "♥+" : "♥"} | [${markdownEscape(row.title)}](${row.arxiv_link}) | ${markdownEscape(row.first_author)} · ${markdownEscape(row.last_author)} | ${markdownEscape(row.note)} |`,
         ),
       ].join("\n")
     : "No published choices yet.";
@@ -342,7 +360,7 @@ async function updateReadme(rows) {
   await writeIfChanged(readmePath, `${next.trimEnd()}\n`);
 }
 
-async function updateChoices(reviews, targetDate) {
+async function updateChoices(reviews, notes, targetDate) {
   const year = targetDate.slice(0, 4);
   const csvPath = path.join(choicesRoot, `${year}.csv`);
   let existing = [];
@@ -354,7 +372,7 @@ async function updateChoices(reviews, targetDate) {
   const retained = existing.filter((row) => row.date !== targetDate);
   const todayRows = reviews
     .filter((review) => reviewDate(review) === targetDate)
-    .map((review) => rowFromReview(review, targetDate));
+    .map((review) => rowFromReview(review, targetDate, notes));
   const rows = [...retained, ...todayRows].sort(sortChoiceRows);
   await writeIfChanged(csvPath, serializeCsv(rows));
   await updateReadme(rows);
@@ -518,7 +536,7 @@ const server = createServer(async (request, response) => {
       const csvPath = await enqueueWrite(async () => {
         await writeIfChanged(rulesPath, `${JSON.stringify(rules, null, 2)}\n`);
         await writeIfChanged(statePath, `${JSON.stringify(state, null, 2)}\n`);
-        return updateChoices(state.reviews, state.progress.date);
+        return updateChoices(state.reviews, state.notes, state.progress.date);
       });
       sendJson(request, response, 200, { saved: true, csvPath });
       return;
