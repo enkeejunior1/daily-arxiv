@@ -1,0 +1,53 @@
+# Daily arXiv
+
+A local-first, mode-seeking paper feed for machine learning, language, and vision research.
+
+## Current MVP
+
+- Reads up to 500 papers from the current arXiv feeds for `cs.LG`, `stat.ML`, `cs.CL`, `cs.CV`, `cs.AI`, and `cs.NE`.
+- Gives tracked authors absolute priority.
+- Adds a configurable score when a new paper cites one of your tracked arXiv seed papers, using Semantic Scholar's citation graph.
+- Adds `Featured +5` to papers in DeepXiv's recent 7-day Trending Top 50.
+- Scores every positive keyword once at `+2` and every negative keyword once at `-2` across the title and abstract.
+- Supports keyword alias groups separated by `|`; matching any number of aliases in one group applies that group's score only once.
+- Shows up to 250 papers, ordered by score with a stable daily shuffle for ties.
+- Uses a two-pane feed: scroll to skip, click to open the PDF, double-click a card for Heart, and double-click `♥+` for Superheart.
+- Renders papers with Mozilla PDF.js so trackpad pinch zooms only the PDF under the pointer, while the feed and app chrome stay fixed.
+- Restores automatic and manual bookmarks when the app reopens.
+- Saves rules to `config/rules.json` and selected papers to a yearly CSV under `choices/`.
+- Caches Heart and Superheart PDFs under the gitignored `.local/papers/YYYY-MM-DD/` directory.
+- Falls back to browser storage and CSV download if the local companion is unavailable.
+
+## Run locally
+
+```bash
+npm run dev
+```
+
+This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage and the PDF cache. DeepXiv's public trending endpoint does not require a token.
+
+Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
+
+## Repository data
+
+The files intended for GitHub are:
+
+- `config/rules.json`: tracked authors, positive/negative keywords, and citation seed papers with their weights.
+- Keyword alias example: `"ttt | test-time training | test time training"` is one `+2` group.
+- Citation seed example: `{ "arxivId": "1706.03762", "weight": 10 }` adds `+10` to a paper that cites that seed.
+- `choices/YYYY.csv`: Heart and Superheart choices, regenerated for the current day whenever state changes.
+- The Recent choices table below, generated from the same CSV.
+
+Progress and downloaded PDFs stay local under `.local/` and are excluded by `.gitignore`.
+
+The CSV schema is:
+
+```text
+date,decision,arxiv_id,arxiv_link,title,first_author,last_author,score,selected_at
+```
+
+## Recent choices
+
+<!-- DAILY_ARXIV_CHOICES_START -->
+No published choices yet.
+<!-- DAILY_ARXIV_CHOICES_END -->

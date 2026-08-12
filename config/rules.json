@@ -1,0 +1,16 @@
+{
+  "authors": [],
+  "positiveKeywords": [
+    "reinforcement learning",
+    "world model",
+    "ttt | test-time training | test time training",
+    "world action model | WAM",
+    "video model | video generation",
+    "image generation",
+    "diffusion model | flow matching",
+    "scaling law",
+    "hyper-parameter transfer | hyper parameter transfer | mup"
+  ],
+  "negativeKeywords": [],
+  "citationSeeds": []
+}
