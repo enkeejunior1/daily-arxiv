@@ -709,6 +709,102 @@ button {
   opacity: 0.4;
 }
 
+.guide-steps {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.guide-steps article {
+  align-items: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 34px 1fr;
+  padding: 19px 21px;
+}
+
+.guide-steps article > span {
+  align-items: center;
+  background: var(--green-soft);
+  border-radius: 50%;
+  color: var(--green-deep);
+  display: flex;
+  font-size: 12px;
+  font-weight: 800;
+  height: 34px;
+  justify-content: center;
+}
+
+.guide-steps strong,
+.guide-grid h2,
+.guide-tip strong {
+  color: var(--ink);
+}
+
+.guide-steps p,
+.guide-tip p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 6px 0 0;
+}
+
+.guide-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 28px;
+}
+
+.guide-grid article {
+  background: #ecefe9;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.guide-grid h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+  margin: 8px 0 14px;
+}
+
+.guide-grid ul {
+  color: #59655e;
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 0;
+  padding-left: 17px;
+}
+
+.guide-grid li + li {
+  margin-top: 6px;
+}
+
+.guide-grid code {
+  color: var(--green-deep);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.guide-tip {
+  background: var(--green);
+  border-radius: 14px;
+  padding: 21px 24px;
+}
+
+.guide-tip strong,
+.guide-tip p {
+  color: #fff;
+}
+
+.guide-tip p {
+  opacity: 0.82;
+}
+
 .saved-list {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -1872,6 +1968,33 @@ button {
   text-align: center;
 }
 
+.pdf-canvas-error {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdf-canvas-error strong {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.pdf-canvas-error p {
+  line-height: 1.55;
+  margin: 0;
+}
+
+.pdf-canvas-error button {
+  background: var(--green);
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+  margin-top: 5px;
+  padding: 8px 13px;
+}
+
 .pdf-loading {
   align-items: center;
   background: #e7ebe6;
@@ -2053,6 +2176,11 @@ button {
     grid-row: 2;
     justify-content: center;
     margin-top: 11px;
+  }
+
+  .main-nav button {
+    font-size: 11px;
+    padding: 8px 12px;
   }
 
   .source-status {
@@ -2272,6 +2400,15 @@ button {
     align-items: start;
     flex-direction: column;
     gap: 20px;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-steps article {
+    gap: 12px;
+    padding: 17px;
   }
 
   .rules-grid {

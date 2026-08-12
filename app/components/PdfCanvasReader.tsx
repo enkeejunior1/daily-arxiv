@@ -8,12 +8,32 @@ import {
   type RefObject,
 } from "react";
 import type { PDFDocumentProxy, PDFPageProxy, RenderTask } from "pdfjs-dist";
+import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
 const MIN_ZOOM = 50;
 const MAX_ZOOM = 300;
 
 function clampZoom(value: number) {
   return Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, value));
+}
+
+function describePdfError(error: unknown) {
+  if (!(error instanceof Error)) return "알 수 없는 PDF 오류가 발생했어요.";
+  const status = (error as Error & { status?: number }).status;
+  if (status) return `arXiv PDF 요청이 실패했어요 (HTTP ${status}).`;
+  if (/missing pdf/i.test(error.name) || /missing pdf/i.test(error.message)) {
+    return "arXiv에서 PDF를 찾지 못했어요.";
+  }
+  if (/invalid pdf/i.test(error.name) || /invalid pdf/i.test(error.message)) {
+    return "PDF 파일 형식을 읽지 못했어요.";
+  }
+  if (/password/i.test(error.name) || /password/i.test(error.message)) {
+    return "암호로 보호된 PDF는 앱 뷰어에서 열 수 없어요.";
+  }
+  if (/worker|window is not defined/i.test(error.message)) {
+    return "PDF 렌더러를 시작하지 못했어요.";
+  }
+  return "네트워크가 불안정하거나 arXiv가 잠시 응답하지 않았어요.";
 }
 
 function PdfPageCanvas({
@@ -130,21 +150,29 @@ export function PdfCanvasReader({
   onZoomChange,
   onReady,
   onError,
+  onRetry,
 }: {
   url: string;
   title: string;
   zoomPercent: number;
   onZoomChange: (zoom: number) => void;
   onReady: () => void;
-  onError: () => void;
+  onError: (message: string) => void;
+  onRetry: () => void;
 }) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const zoomRef = useRef(zoomPercent);
   const firstPageReadyRef = useRef(false);
+  const callbacksRef = useRef({ onReady, onError, onRetry });
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
   const [baseWidth, setBaseWidth] = useState(612);
   const [availableWidth, setAvailableWidth] = useState(640);
   const [error, setError] = useState("");
+  const [retryCount, setRetryCount] = useState(0);
+
+  useEffect(() => {
+    callbacksRef.current = { onReady, onError, onRetry };
+  }, [onError, onReady, onRetry]);
 
   useEffect(() => {
     zoomRef.current = zoomPercent;
@@ -167,7 +195,8 @@ export function PdfCanvasReader({
 
     async function loadPdf() {
       try {
-        const pdfjs = await import("pdfjs-dist/webpack.mjs");
+        const pdfjs = await import("pdfjs-dist");
+        pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
         const task = pdfjs.getDocument({ url });
         loadingTask = task;
         document = await task.promise;
@@ -177,10 +206,11 @@ export function PdfCanvasReader({
         if (!active) return;
         setBaseWidth(viewport.width);
         setPdf(document);
-      } catch {
+      } catch (cause) {
         if (!active) return;
-        setError("PDF를 앱 뷰어로 불러오지 못했어요.");
-        onError();
+        const message = describePdfError(cause);
+        setError(message);
+        callbacksRef.current.onError(message);
       }
     }
 
@@ -189,7 +219,7 @@ export function PdfCanvasReader({
       active = false;
       void loadingTask?.destroy();
     };
-  }, [onError, url]);
+  }, [retryCount, url]);
 
   const applyZoomAtPoint = useCallback(
     (nextZoom: number, clientX: number, clientY: number) => {
@@ -315,8 +345,16 @@ export function PdfCanvasReader({
   const handleFirstPageRendered = useCallback(() => {
     if (firstPageReadyRef.current) return;
     firstPageReadyRef.current = true;
-    onReady();
-  }, [onReady]);
+    callbacksRef.current.onReady();
+  }, []);
+
+  const retryPdf = useCallback(() => {
+    firstPageReadyRef.current = false;
+    setPdf(null);
+    setError("");
+    callbacksRef.current.onRetry();
+    setRetryCount((value) => value + 1);
+  }, []);
 
   return (
     <div
@@ -325,7 +363,11 @@ export function PdfCanvasReader({
       aria-label={`${title} PDF 뷰어. 트랙패드 또는 두 손가락 핀치로 확대 및 축소`}
     >
       {error ? (
-        <div className="pdf-canvas-message">{error}</div>
+        <div className="pdf-canvas-message pdf-canvas-error">
+          <strong>PDF를 앱 뷰어로 불러오지 못했어요.</strong>
+          <p>{error}</p>
+          <button onClick={retryPdf}>다시 시도</button>
+        </div>
       ) : pdf ? (
         <div className="pdf-canvas-pages">
           {Array.from({ length: pdf.numPages }, (_, index) => (

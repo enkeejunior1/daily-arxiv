@@ -12,7 +12,7 @@ import { PdfCanvasReader } from "./PdfCanvasReader";
 import { PwaInstallButton } from "./PwaInstallButton";
 
 type Decision = "heart" | "superheart";
-type View = "daily" | "saved" | "rules";
+type View = "daily" | "saved" | "rules" | "guide";
 type FeedFilter = "all" | "unread" | "heart" | "superheart";
 
 type DeepXivSignal = {
@@ -932,6 +932,20 @@ export function DailyArxivApp() {
     setPdfState("loading");
   }, []);
 
+  const handlePdfReady = useCallback(() => {
+    setPdfState("ready");
+  }, []);
+
+  const handlePdfError = useCallback((message: string) => {
+    setPdfState("error");
+    setNotice(message);
+  }, []);
+
+  const handlePdfRetry = useCallback(() => {
+    setPdfState("loading");
+    setNotice("PDF를 다시 불러오는 중이에요.");
+  }, []);
+
   const handleSingleClick = useCallback((paper: ScoredPaper) => {
     openPaper(paper);
   }, [openPaper]);
@@ -1092,6 +1106,9 @@ export function DailyArxivApp() {
           </button>
           <button className={view === "rules" ? "active" : ""} onClick={() => setView("rules")}>
             Rules
+          </button>
+          <button className={view === "guide" ? "active" : ""} onClick={() => setView("guide")}>
+            Guide
           </button>
         </nav>
         <div className="topbar-actions">
@@ -1389,8 +1406,9 @@ export function DailyArxivApp() {
                     title={currentPaper.title}
                     zoomPercent={pdfZoom}
                     onZoomChange={updatePdfZoom}
-                    onReady={() => setPdfState("ready")}
-                    onError={() => setPdfState("error")}
+                    onReady={handlePdfReady}
+                    onError={handlePdfError}
+                    onRetry={handlePdfRetry}
                   />
                 </div>
               </>
@@ -1531,6 +1549,50 @@ export function DailyArxivApp() {
             <p>
               Cloud는 규칙·선택·북마크를 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
             </p>
+          </div>
+        </section>
+      )}
+
+      {view === "guide" && (
+        <section className="content-page guide-page">
+          <div className="page-title-row">
+            <div>
+              <p className="eyebrow">QUICK START</p>
+              <h1>Daily arXiv 사용법</h1>
+              <p>매일 짧게 훑고, 중요한 논문만 남긴 뒤 실제 읽기로 바로 이어가는 흐름입니다.</p>
+            </div>
+            <button className="primary-button" onClick={() => setView("daily")}>오늘 피드 시작</button>
+          </div>
+
+          <div className="guide-steps">
+            <article><span>1</span><div><strong>Rules는 가끔만 조정</strong><p>Author, positive/negative keyword, citation seed를 설정합니다. 매일 바꾸기보다 관심사가 변할 때만 다듬는 편이 좋아요.</p></div></article>
+            <article><span>2</span><div><strong>Daily에서는 스크롤이 기본</strong><p>관심 없는 논문은 그냥 지나갑니다. 화면 위로 넘어간 논문은 확인한 것으로 저장되고 다음 접속 때 그 지점부터 이어집니다.</p></div></article>
+            <article><span>3</span><div><strong>궁금하면 PDF를 바로 열기</strong><p>카드를 누르면 피드는 그대로 두고 PDF를 엽니다. 오류가 나면 다시 시도하거나 원본 PDF 링크를 사용하세요.</p></div></article>
+            <article><span>4</span><div><strong>Heart는 읽을 후보, ♥+는 최우선</strong><p>Android에서는 버튼을 한 번 탭합니다. Mac에서는 카드 또는 버튼을 더블클릭합니다. 같은 선택을 다시 하면 취소됩니다.</p></div></article>
+            <article><span>5</span><div><strong>Saved에서 실제 읽기로 전환</strong><p>하루 피드를 끝낸 뒤 Saved만 다시 보세요. PDF 다운로드와 arXiv 원문 확인은 여기서 이어가면 됩니다.</p></div></article>
+          </div>
+
+          <div className="guide-grid">
+            <article>
+              <p className="eyebrow">ANDROID</p>
+              <h2>이동 중 선별</h2>
+              <ul><li>Chrome에서 Install app으로 홈 화면에 설치</li><li>♡/♥+는 한 번 탭</li><li>PDF는 Download PDF로 Android Downloads에 저장</li></ul>
+            </article>
+            <article>
+              <p className="eyebrow">MAC</p>
+              <h2>정리와 보관</h2>
+              <ul><li><code>npm run dev</code>로 companion과 함께 실행</li><li>클라우드 선택을 repository CSV로 반영</li><li>선택한 PDF를 gitignored <code>.local/papers</code>에 캐시</li></ul>
+            </article>
+            <article>
+              <p className="eyebrow">SYNC</p>
+              <h2>기기 사이에서 이어보기</h2>
+              <ul><li>같은 ChatGPT 계정으로 로그인</li><li>Rules, Heart, ♥+, 북마크는 자동 동기화</li><li>PDF 파일 자체는 각 기기에 따로 저장</li></ul>
+            </article>
+          </div>
+
+          <div className="guide-tip">
+            <strong>추천 루틴 · 15–25분</strong>
+            <p>Daily를 빠르게 스크롤 → 궁금한 논문만 PDF 첫 페이지 확인 → Heart 3–10편 → ♥+ 1–3편 → Saved에서 실제 읽을 논문을 고릅니다.</p>
           </div>
         </section>
       )}
