@@ -1,0 +1,24 @@
+{
+  "name": "Daily arXiv",
+  "short_name": "Daily arXiv",
+  "description": "A mode-seeking feed for machine learning papers.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f3ed",
+  "theme_color": "#163d2f",
+  "icons": [
+    {
+      "src": "/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

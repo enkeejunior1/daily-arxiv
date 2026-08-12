@@ -13,6 +13,9 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Shows up to 250 papers, ordered by score with a stable daily shuffle for ties.
 - Uses a two-pane feed: scroll to skip, click to open the PDF, double-click a card for Heart, and double-click `♥+` for Superheart.
 - Renders papers with Mozilla PDF.js so trackpad pinch zooms only the PDF under the pointer, while the feed and app chrome stay fixed.
+- Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
+- Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
+- Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
 - Restores automatic and manual bookmarks when the app reopens.
 - Saves rules to `config/rules.json` and selected papers to a yearly CSV under `choices/`.
 - Caches Heart and Superheart PDFs under the gitignored `.local/papers/YYYY-MM-DD/` directory.
@@ -28,6 +31,12 @@ This starts both the web UI and the local companion. The companion only listens 
 
 Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
 
+## Android
+
+Open the deployed HTTPS URL in Chrome and choose **Install app** (or **Add to Home screen**). Sign in with the same account on each device to share rules, choices, and bookmarks. On touch screens, tap `♡` or `♥+` directly; tapping a paper opens a full-screen PDF reader, where a two-finger pinch changes only the PDF zoom.
+
+Android browsers choose the physical download directory. `Download PDF` saves to the browser-managed Downloads area; the Mac companion continues to cache selected PDFs under the gitignored `.local/papers/` directory.
+
 ## Repository data
 
 The files intended for GitHub are:
@@ -39,6 +48,7 @@ The files intended for GitHub are:
 - The Recent choices table below, generated from the same CSV.
 
 Progress and downloaded PDFs stay local under `.local/` and are excluded by `.gitignore`.
+The deployed app stores the shared rules, choices, and bookmark snapshot in D1. Local PDF paths are deliberately excluded from cloud sync because they are device-specific.
 
 The CSV schema is:
 

@@ -28,10 +28,12 @@ test("server-renders the Daily arXiv product", async () => {
   const html = await response.text();
   assert.match(html, /<title>Daily arXiv<\/title>/i);
   assert.match(html, /og:image/i);
+  assert.match(html, /manifest\.webmanifest/i);
   assert.match(html, /http:\/\/localhost(?::3000)?\/og\.png/i);
   assert.match(html, /관심 논문 피드/);
   assert.match(html, /DeepXiv 확인 중/);
   assert.match(html, /Repo 확인 중/);
+  assert.match(html, /Cloud 확인 중/);
   assert.match(html, /Double-click/);
   assert.doesNotMatch(html, /Figure 1|Institution|X API/);
 });
@@ -104,7 +106,33 @@ test("handles trackpad pinch inside the app PDF reader", async () => {
   assert.match(reader, /event\.ctrlKey/);
   assert.match(reader, /event\.preventDefault\(\)/);
   assert.match(reader, /gesturechange/);
+  assert.match(reader, /pointerType !== "touch"/);
+  assert.match(reader, /pinchStartDistance/);
   assert.match(reader, /applyZoomAtPoint/);
   assert.match(pdfSource, /Content-Type.*application\/pdf/s);
+  assert.match(pdfSource, /Content-Disposition/);
   assert.match(pdfSource, /Invalid arXiv id/);
+});
+
+test("supports Android installation and cross-device cloud state", async () => {
+  const [manifest, serviceWorker, hosting, schema, syncRoute, component] = await Promise.all([
+    readFile(new URL("../public/manifest.webmanifest", import.meta.url), "utf8"),
+    readFile(new URL("../public/sw.js", import.meta.url), "utf8"),
+    readFile(new URL("../.openai/hosting.json", import.meta.url), "utf8"),
+    readFile(new URL("../db/schema.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/sync/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/DailyArxivApp.tsx", import.meta.url), "utf8"),
+  ]);
+
+  const parsedManifest = JSON.parse(manifest);
+  assert.equal(parsedManifest.display, "standalone");
+  assert.equal(parsedManifest.icons.length, 2);
+  assert.match(serviceWorker, /daily-arxiv-shell-v1/);
+  assert.equal(JSON.parse(hosting).d1, "DB");
+  assert.match(schema, /daily_arxiv_state/);
+  assert.match(syncRoute, /oai-authenticated-user-id|currentUserId/);
+  assert.match(syncRoute, /ON CONFLICT\(user_id\)/);
+  assert.match(component, /Cloud synced across devices/);
+  assert.match(component, /Download PDF/);
+  assert.match(component, /paper-reader.*has-paper/);
 });
