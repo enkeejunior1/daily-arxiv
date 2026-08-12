@@ -13,6 +13,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Shows up to 250 papers, ordered by score with a stable daily shuffle for ties.
 - Uses a two-pane feed: scroll to skip, click to open the PDF, double-click a card for Heart, and double-click `♥+` for Superheart.
 - Renders papers with Mozilla PDF.js so trackpad pinch zooms only the PDF under the pointer, while the feed and app chrome stay fixed.
+- Retries temporary arXiv failures through a fallback host and offers an in-reader Retry action when a PDF still cannot load.
 - Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
 - Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
 - Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
@@ -36,6 +37,19 @@ Citation matching uses Semantic Scholar's public Academic Graph API. It works wi
 Open the deployed HTTPS URL in Chrome and choose **Install app** (or **Add to Home screen**). Sign in with the same account on each device to share rules, choices, and bookmarks. On touch screens, tap `♡` or `♥+` directly; tapping a paper opens a full-screen PDF reader, where a two-finger pinch changes only the PDF zoom.
 
 Android browsers choose the physical download directory. `Download PDF` saves to the browser-managed Downloads area; the Mac companion continues to cache selected PDFs under the gitignored `.local/papers/` directory.
+
+## Recommended daily workflow
+
+1. Set tracked authors and keyword groups in **Rules**. Treat Rules as a filter profile: tune it when your interests change, not every day.
+2. Spend 15–25 minutes in **Daily**. Scroll past irrelevant papers, and open the PDF only when the title or abstract is promising. The automatic bookmark remembers how far you got.
+3. Use **Heart** for papers worth reading later and **Superheart** for the 1–3 papers you intend to read first. Selecting the same action again removes it.
+4. Finish in **Saved**, not in the full feed. This is the short reading queue that should lead to downloading, reading, or removing a paper.
+
+Android is best for lightweight triage while away from the desk. The hosted app syncs Rules, decisions, and bookmarks between devices signed in with the same account. PDF files are device-local: Android downloads them to browser-managed storage.
+
+Mac is best for durable repository output. Run `npm run dev` from this repository; the local companion mirrors the current snapshot to `config/rules.json`, `choices/YYYY.csv`, the README table, and the gitignored `.local/papers/` cache. Those GitHub-facing files are only published after you commit and push them.
+
+The same quick explanation is available in the app's **Guide** tab.
 
 ## Repository data
 

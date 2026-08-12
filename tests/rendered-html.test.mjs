@@ -35,6 +35,7 @@ test("server-renders the Daily arXiv product", async () => {
   assert.match(html, /Repo 확인 중/);
   assert.match(html, /Cloud 확인 중/);
   assert.match(html, /Double-click/);
+  assert.match(html, />Guide<\/button>/);
   assert.doesNotMatch(html, /Figure 1|Institution|X API/);
 });
 
@@ -71,6 +72,8 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /custom weight each/);
   assert.match(component, /PDF 확대 및 축소/);
   assert.match(component, /PDF_ZOOM_MAX = 300/);
+  assert.match(component, /Daily arXiv 사용법/);
+  assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
   assert.match(arxivRoute, /entries\.slice\(0, 500\)/);
   assert.match(deepxivRoute, /TRENDING_LIMIT = 50/);
@@ -102,7 +105,11 @@ test("handles trackpad pinch inside the app PDF reader", async () => {
     readFile(new URL("../app/api/pdf-source/route.ts", import.meta.url), "utf8"),
   ]);
 
-  assert.match(reader, /pdfjs-dist\/webpack\.mjs/);
+  assert.match(reader, /pdfjs-dist\/build\/pdf\.worker\.min\.mjs\?url/);
+  assert.match(reader, /GlobalWorkerOptions\.workerSrc = pdfWorkerUrl/);
+  assert.match(reader, /callbacksRef/);
+  assert.match(reader, /\[retryCount, url\]/);
+  assert.match(reader, /다시 시도/);
   assert.match(reader, /event\.ctrlKey/);
   assert.match(reader, /event\.preventDefault\(\)/);
   assert.match(reader, /gesturechange/);
@@ -112,6 +119,9 @@ test("handles trackpad pinch inside the app PDF reader", async () => {
   assert.match(pdfSource, /Content-Type.*application\/pdf/s);
   assert.match(pdfSource, /Content-Disposition/);
   assert.match(pdfSource, /Invalid arXiv id/);
+  assert.match(pdfSource, /RETRYABLE_STATUSES/);
+  assert.match(pdfSource, /export\.arxiv\.org/);
+  assert.match(pdfSource, /RETRY_DELAYS_MS/);
 });
 
 test("supports Android installation and cross-device cloud state", async () => {
