@@ -859,6 +859,15 @@ button {
   margin: 0;
 }
 
+.saved-main .saved-note {
+  border-left: 2px solid #b9c9be;
+  color: #405148;
+  font-size: 11px;
+  line-height: 1.55;
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
 .saved-meta span {
   color: var(--green);
   font-weight: 800;
@@ -1601,6 +1610,28 @@ button {
   overflow: hidden;
 }
 
+.feed-note {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  background: #edf2ed;
+  border-radius: 8px;
+  color: #43544a;
+  display: -webkit-box;
+  font-size: 10px;
+  line-height: 1.5;
+  margin: 10px 0 0;
+  overflow: hidden;
+  padding: 8px 10px;
+}
+
+.feed-note span {
+  color: var(--green);
+  font-size: 8px;
+  font-weight: 800;
+  margin-right: 7px;
+  text-transform: uppercase;
+}
+
 .score-reasons.compact {
   margin-top: 13px;
 }
@@ -1804,6 +1835,20 @@ button {
   min-width: auto;
 }
 
+.reader-actions button.note-toggle {
+  font-size: 9px;
+  font-weight: 750;
+  min-width: 67px;
+  white-space: nowrap;
+}
+
+.reader-actions button.note-toggle.open,
+.reader-actions button.note-toggle.has-note {
+  background: var(--green-soft);
+  border-color: #b9d0c0;
+  color: var(--green-deep);
+}
+
 .reader-actions button small {
   font-size: 7px;
   margin-left: 1px;
@@ -1914,6 +1959,91 @@ button {
 
 .pdf-frame-wrap .pdf-preview {
   height: 100%;
+}
+
+.paper-note-panel {
+  background: #f8faf7;
+  border-left: 1px solid #cdd7cf;
+  display: flex;
+  flex: 0 0 300px;
+  flex-direction: column;
+  gap: 13px;
+  min-width: 0;
+  padding: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.paper-note-panel header {
+  align-items: start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paper-note-panel header div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.paper-note-panel header span {
+  color: var(--green);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.paper-note-panel header strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.paper-note-panel header button {
+  background: transparent;
+  border: 0;
+  color: #7a867f;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+}
+
+.paper-note-panel > p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.paper-note-panel textarea {
+  background: #fff;
+  border: 1px solid #ccd6ce;
+  border-radius: 11px;
+  color: var(--ink);
+  font: 13px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 160px;
+  outline: none;
+  padding: 13px;
+  resize: vertical;
+  width: 100%;
+}
+
+.paper-note-panel textarea:focus {
+  border-color: #779787;
+  box-shadow: 0 0 0 3px rgba(53, 104, 78, 0.1);
+}
+
+.paper-note-panel textarea::placeholder {
+  color: #a0aaa4;
+}
+
+.paper-note-panel footer {
+  align-items: center;
+  color: #849087;
+  display: flex;
+  font-size: 8px;
+  justify-content: space-between;
 }
 
 .pdf-canvas-reader {
@@ -2313,6 +2443,12 @@ button {
     display: none;
   }
 
+  .reader-actions button.note-toggle {
+    font-size: 8px;
+    min-width: 58px;
+    padding: 0 6px;
+  }
+
   .preview-header {
     align-items: flex-start;
     flex-direction: column;
@@ -2347,6 +2483,25 @@ button {
   .pdf-canvas-pages {
     gap: 8px;
     padding: 8px;
+  }
+
+  .paper-note-panel {
+    border-left: 0;
+    border-top: 1px solid #cdd7cf;
+    bottom: 0;
+    box-shadow: 0 -12px 35px rgba(35, 52, 42, 0.18);
+    flex-basis: auto;
+    left: 0;
+    max-height: 45dvh;
+    padding: 18px 18px max(18px, env(safe-area-inset-bottom));
+    position: absolute;
+    right: 0;
+    width: 100%;
+  }
+
+  .paper-note-panel textarea {
+    min-height: 110px;
+    resize: none;
   }
 
   .paper-card {

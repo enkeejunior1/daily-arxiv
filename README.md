@@ -16,6 +16,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Retries temporary arXiv failures through a fallback host and offers an in-reader Retry action when a PDF still cannot load.
 - Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
 - Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
+- Adds an optional 200-character note beside the PDF and syncs it across devices without automatically selecting the paper.
 - Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
 - Restores automatic and manual bookmarks when the app reopens.
 - Saves rules to `config/rules.json` and selected papers to a yearly CSV under `choices/`.
@@ -67,7 +68,7 @@ The deployed app stores the shared rules, choices, and bookmark snapshot in D1. 
 The CSV schema is:
 
 ```text
-date,decision,arxiv_id,arxiv_link,title,first_author,last_author,score,selected_at
+date,decision,arxiv_id,arxiv_link,title,first_author,last_author,score,note,selected_at
 ```
 
 ## Recent choices

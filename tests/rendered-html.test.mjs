@@ -60,9 +60,13 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
     "positiveKeywords",
   ]);
   assert.match(choices, /^"date","decision","arxiv_id"/);
+  assert.match(choices, /"score","note","selected_at"/);
   assert.match(companion, /choicesRoot/);
   assert.match(companion, /papersRoot = path\.join\(localRoot, "papers"\)/);
   assert.match(companion, /Only arXiv PDF URLs can be cached/);
+  assert.match(companion, /function normalizeNotes/);
+  assert.match(companion, /"note"/);
+  assert.match(companion, /\| Note \|/);
   assert.match(component, /COMPANION_URL/);
   assert.match(component, /DAILY_TARGET = 250/);
   assert.match(component, /하루 최대 250개/);
@@ -72,6 +76,9 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /custom weight each/);
   assert.match(component, /PDF 확대 및 축소/);
   assert.match(component, /PDF_ZOOM_MAX = 300/);
+  assert.match(component, /NOTE_MAX_LENGTH = 200/);
+  assert.match(component, /paper-note-panel/);
+  assert.match(component, /자동 저장됨/);
   assert.match(component, /Daily arXiv 사용법/);
   assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
@@ -142,6 +149,7 @@ test("supports Android installation and cross-device cloud state", async () => {
   assert.match(schema, /daily_arxiv_state/);
   assert.match(syncRoute, /oai-authenticated-user-id|currentUserId/);
   assert.match(syncRoute, /ON CONFLICT\(user_id\)/);
+  assert.match(syncRoute, /notes: snapshot\.state\?\.notes/);
   assert.match(component, /Cloud synced across devices/);
   assert.match(component, /Download PDF/);
   assert.match(component, /paper-reader.*has-paper/);

@@ -67,6 +67,11 @@ type ReviewRecord = {
   selectedDate: string;
 };
 
+type NoteRecord = {
+  text: string;
+  updatedAt: string;
+};
+
 type FeedProgress = {
   date: string;
   seenIds: string[];
@@ -83,6 +88,7 @@ type PersistedSnapshot = {
   rules?: Rules;
   state?: {
     reviews?: ReviewRecord[];
+    notes?: Record<string, NoteRecord>;
     progress?: FeedProgress;
     downloads?: Record<string, DownloadRecord>;
   };
@@ -106,6 +112,7 @@ const FEATURED_SCORE = 5;
 const PDF_ZOOM_MIN = 50;
 const PDF_ZOOM_MAX = 300;
 const PDF_ZOOM_STEP = 25;
+const NOTE_MAX_LENGTH = 200;
 
 function todayKey() {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -253,6 +260,19 @@ function normalizeRules(value: Partial<Rules> | undefined): Rules {
         })
       : [],
   };
+}
+
+function normalizeNotes(value: unknown): Record<string, NoteRecord> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([paperId, note]) => {
+      if (!normalizeArxivId(paperId) || !note || typeof note !== "object") return [];
+      const candidate = note as Partial<NoteRecord>;
+      const text = typeof candidate.text === "string" ? candidate.text.slice(0, NOTE_MAX_LENGTH) : "";
+      if (!text.trim()) return [];
+      return [[paperId, { text, updatedAt: typeof candidate.updatedAt === "string" ? candidate.updatedAt : new Date(0).toISOString() }]];
+    }),
+  );
 }
 
 function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
@@ -545,6 +565,7 @@ export function DailyArxivApp() {
   const [papers, setPapers] = useState<Paper[]>(DEMO_PAPERS);
   const [rules, setRules] = useState<Rules>(DEFAULT_RULES);
   const [reviews, setReviews] = useState<ReviewRecord[]>([]);
+  const [notes, setNotes] = useState<Record<string, NoteRecord>>({});
   const [source, setSource] = useState<"loading" | "arxiv" | "demo">("loading");
   const [deepxivSource, setDeepxivSource] = useState<"loading" | "connected" | "error">("loading");
   const [deepxivByPaper, setDeepxivByPaper] = useState<Record<string, DeepXivSignal>>({});
@@ -561,6 +582,7 @@ export function DailyArxivApp() {
   const [downloads, setDownloads] = useState<Record<string, DownloadRecord>>({});
   const [notice, setNotice] = useState("");
   const [selectedPaper, setSelectedPaper] = useState<ScoredPaper | null>(null);
+  const [notePanelOpen, setNotePanelOpen] = useState(false);
   const [feedFilter, setFeedFilter] = useState<FeedFilter>("all");
   const [pdfState, setPdfState] = useState<"idle" | "loading" | "downloading" | "ready" | "error">(
     "idle",
@@ -573,6 +595,7 @@ export function DailyArxivApp() {
   const feedRef = useRef<HTMLDivElement | null>(null);
   const restoreDoneRef = useRef(false);
   const scrollRafRef = useRef<number | null>(null);
+  const noteInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -593,6 +616,7 @@ export function DailyArxivApp() {
           })),
         );
       }
+      if (snapshot.state?.notes) setNotes(normalizeNotes(snapshot.state.notes));
       if (includeDownloads && snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
       if (snapshot.state?.progress?.date === todayKey()) {
         setSeenIds(new Set(snapshot.state.progress.seenIds));
@@ -609,6 +633,7 @@ export function DailyArxivApp() {
           const parsed = JSON.parse(saved) as {
             rules?: Rules;
             reviews?: ReviewRecord[];
+            notes?: Record<string, NoteRecord>;
             progress?: FeedProgress;
             downloads?: Record<string, DownloadRecord>;
           };
@@ -688,6 +713,12 @@ export function DailyArxivApp() {
       document.body.style.overflow = previous;
     };
   }, [selectedPaper]);
+
+  useEffect(() => {
+    if (!notePanelOpen) return;
+    const frame = window.requestAnimationFrame(() => noteInputRef.current?.focus());
+    return () => window.cancelAnimationFrame(frame);
+  }, [notePanelOpen, selectedPaper?.id]);
 
   useEffect(() => {
     let active = true;
@@ -794,7 +825,7 @@ export function DailyArxivApp() {
       autoBookmarkId,
       manualBookmarkId,
     };
-    const state = { reviews, progress, downloads };
+    const state = { reviews, notes, progress, downloads };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ rules, ...state }));
     const companionController = new AbortController();
     const cloudController = new AbortController();
@@ -803,7 +834,7 @@ export function DailyArxivApp() {
         fetch("/api/sync", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rules, state: { reviews, progress } }),
+          body: JSON.stringify({ rules, state: { reviews, notes, progress } }),
           signal: cloudController.signal,
         }).then((response) => {
           if (!response.ok) setCloudStatus("offline");
@@ -831,7 +862,7 @@ export function DailyArxivApp() {
       cloudController.abort();
       window.clearTimeout(timer);
     };
-  }, [autoBookmarkId, cloudStatus, companionStatus, downloads, hydrated, manualBookmarkId, reviews, rules, seenIds]);
+  }, [autoBookmarkId, cloudStatus, companionStatus, downloads, hydrated, manualBookmarkId, notes, reviews, rules, seenIds]);
 
   const enrichedPapers = useMemo(
     () =>
@@ -858,6 +889,7 @@ export function DailyArxivApp() {
   const currentPaper = selectedPaper
     ? queue.find((paper) => paper.id === selectedPaper.id) ?? selectedPaper
     : null;
+  const currentNote = currentPaper ? notes[currentPaper.id]?.text ?? "" : "";
   const currentLocalPdfUrl = currentPaper ? companionPdfUrl(downloads[currentPaper.id]) : null;
   const currentPdfUrl = currentLocalPdfUrl ?? currentPaper?.pdfUrl ?? "";
   const pdfReaderUrl = currentPaper
@@ -929,7 +961,23 @@ export function DailyArxivApp() {
 
   const openPaper = useCallback((paper: ScoredPaper) => {
     setSelectedPaper(paper);
+    setNotePanelOpen(false);
     setPdfState("loading");
+  }, []);
+
+  const updateNote = useCallback((paperId: string, text: string) => {
+    const nextText = text.slice(0, NOTE_MAX_LENGTH);
+    setNotes((previous) => {
+      if (!nextText) {
+        const next = { ...previous };
+        delete next[paperId];
+        return next;
+      }
+      return {
+        ...previous,
+        [paperId]: { text: nextText, updatedAt: new Date().toISOString() },
+      };
+    });
   }, []);
 
   const handlePdfReady = useCallback(() => {
@@ -1036,6 +1084,7 @@ export function DailyArxivApp() {
       "first_author",
       "last_author",
       "score",
+      "note",
       "selected_at",
     ];
     const escape = (value: string | number) => `"${String(value).replaceAll('"', '""')}"`;
@@ -1048,6 +1097,7 @@ export function DailyArxivApp() {
       review.paper.authors[0] ?? "",
       review.paper.authors.at(-1) ?? "",
       review.paper.baseScore,
+      notes[review.paper.id]?.text.trim() ?? "",
       review.reviewedAt,
     ]);
     const csv = [header, ...rows].map((row) => row.map(escape).join(",")).join("\n");
@@ -1075,7 +1125,7 @@ export function DailyArxivApp() {
       const response = await fetch(`${COMPANION_URL}/snapshot`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rules, state: { reviews, progress, downloads } }),
+        body: JSON.stringify({ rules, state: { reviews, notes, progress, downloads } }),
       });
       const data = (await response.json()) as { csvPath?: string; error?: string };
       if (!response.ok) throw new Error(data.error ?? "CSV sync failed");
@@ -1114,7 +1164,7 @@ export function DailyArxivApp() {
         <div className="topbar-actions">
           <PwaInstallButton />
           <div className="source-status">
-            <span title="규칙, 선택, 북마크를 기기 간 동기화">
+            <span title="규칙, 선택, 메모, 북마크를 기기 간 동기화">
               <i className={cloudStatus === "connected" ? "online" : ""} />
               {cloudStatus === "loading"
                 ? "Cloud 확인 중"
@@ -1246,6 +1296,9 @@ export function DailyArxivApp() {
                             </p>
                           ) : null}
                           <p className="feed-abstract">{paper.abstract}</p>
+                          {notes[paper.id]?.text.trim() ? (
+                            <p className="feed-note"><span>메모</span>{notes[paper.id].text.trim()}</p>
+                          ) : null}
                           <div className="score-reasons compact">
                             {paper.reasons.slice(0, 4).map((reason) => (
                               <span className={reason.kind} key={`${reason.kind}-${reason.label}`}>
@@ -1321,6 +1374,7 @@ export function DailyArxivApp() {
                       className="reader-close"
                       onClick={() => {
                         setSelectedPaper(null);
+                        setNotePanelOpen(false);
                         setPdfState("idle");
                       }}
                       aria-label="PDF 뷰어 닫기"
@@ -1347,6 +1401,12 @@ export function DailyArxivApp() {
                       }}
                       aria-label={`Superheart로 저장. ${touchMode ? "탭" : "더블클릭"}`}
                     >♥+ {!touchMode && <small>2×</small>}</button>
+                    <button
+                      className={`note-toggle ${notePanelOpen ? "open" : ""} ${currentNote.trim() ? "has-note" : ""}`}
+                      onClick={() => setNotePanelOpen((open) => !open)}
+                      aria-expanded={notePanelOpen}
+                      aria-controls="paper-note-panel"
+                    >한줄메모{currentNote.trim() ? " ·" : ""}</button>
                     {statusByPaper.has(currentPaper.id) && (
                       <button className="clear-status" onClick={() => removeSavedStatus(currentPaper.id)}>Clear</button>
                     )}
@@ -1410,6 +1470,30 @@ export function DailyArxivApp() {
                     onError={handlePdfError}
                     onRetry={handlePdfRetry}
                   />
+                  {notePanelOpen ? (
+                    <aside className="paper-note-panel" id="paper-note-panel" aria-label="논문 한줄메모">
+                      <header>
+                        <div><span>ONE-LINE NOTE</span><strong>한줄메모</strong></div>
+                        <button onClick={() => setNotePanelOpen(false)} aria-label="한줄메모 닫기">×</button>
+                      </header>
+                      <p>이 논문이 왜 흥미로운지, 나중에 무엇을 확인할지 짧게 남겨보세요.</p>
+                      <textarea
+                        ref={noteInputRef}
+                        value={currentNote}
+                        maxLength={NOTE_MAX_LENGTH}
+                        onChange={(event) => updateNote(currentPaper.id, event.target.value)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Escape") setNotePanelOpen(false);
+                        }}
+                        placeholder="예: TTT를 diffusion policy에 적용한 방식. 실험 설정 확인 필요."
+                        aria-label={`${currentPaper.title} 한줄메모`}
+                      />
+                      <footer>
+                        <span>{currentNote.length}/{NOTE_MAX_LENGTH}</span>
+                        <span>{currentNote.trim() ? "자동 저장됨" : "선택과 별도로 저장됩니다"}</span>
+                      </footer>
+                    </aside>
+                  ) : null}
                 </div>
               </>
             ) : (
@@ -1449,6 +1533,9 @@ export function DailyArxivApp() {
                     </div>
                     <h2>{review.paper.title}</h2>
                     <p>{review.paper.authors[0]} · {review.paper.authors.at(-1)}</p>
+                    {notes[review.paper.id]?.text.trim() ? (
+                      <p className="saved-note">“{notes[review.paper.id].text.trim()}”</p>
+                    ) : null}
                   </div>
                   <div className="saved-actions">
                     <a href={review.paper.arxivUrl} target="_blank" rel="noreferrer">arXiv</a>
@@ -1547,7 +1634,7 @@ export function DailyArxivApp() {
                   : "Browser fallback"}
             </span>
             <p>
-              Cloud는 규칙·선택·북마크를 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
+              Cloud는 규칙·선택·메모·북마크를 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
             </p>
           </div>
         </section>
@@ -1567,7 +1654,7 @@ export function DailyArxivApp() {
           <div className="guide-steps">
             <article><span>1</span><div><strong>Rules는 가끔만 조정</strong><p>Author, positive/negative keyword, citation seed를 설정합니다. 매일 바꾸기보다 관심사가 변할 때만 다듬는 편이 좋아요.</p></div></article>
             <article><span>2</span><div><strong>Daily에서는 스크롤이 기본</strong><p>관심 없는 논문은 그냥 지나갑니다. 화면 위로 넘어간 논문은 확인한 것으로 저장되고 다음 접속 때 그 지점부터 이어집니다.</p></div></article>
-            <article><span>3</span><div><strong>궁금하면 PDF를 바로 열기</strong><p>카드를 누르면 피드는 그대로 두고 PDF를 엽니다. 오류가 나면 다시 시도하거나 원본 PDF 링크를 사용하세요.</p></div></article>
+            <article><span>3</span><div><strong>궁금하면 PDF와 한줄메모 열기</strong><p>카드를 누르면 피드는 그대로 두고 PDF를 엽니다. 한줄메모 버튼으로 읽을 이유나 확인할 점을 남길 수 있어요.</p></div></article>
             <article><span>4</span><div><strong>Heart는 읽을 후보, ♥+는 최우선</strong><p>Android에서는 버튼을 한 번 탭합니다. Mac에서는 카드 또는 버튼을 더블클릭합니다. 같은 선택을 다시 하면 취소됩니다.</p></div></article>
             <article><span>5</span><div><strong>Saved에서 실제 읽기로 전환</strong><p>하루 피드를 끝낸 뒤 Saved만 다시 보세요. PDF 다운로드와 arXiv 원문 확인은 여기서 이어가면 됩니다.</p></div></article>
           </div>
@@ -1586,7 +1673,7 @@ export function DailyArxivApp() {
             <article>
               <p className="eyebrow">SYNC</p>
               <h2>기기 사이에서 이어보기</h2>
-              <ul><li>같은 ChatGPT 계정으로 로그인</li><li>Rules, Heart, ♥+, 북마크는 자동 동기화</li><li>PDF 파일 자체는 각 기기에 따로 저장</li></ul>
+              <ul><li>같은 ChatGPT 계정으로 로그인</li><li>Rules, Heart, ♥+, 메모, 북마크는 자동 동기화</li><li>PDF 파일 자체는 각 기기에 따로 저장</li></ul>
             </article>
           </div>
 
