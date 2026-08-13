@@ -3,6 +3,7 @@ import { mkdir, open, readFile, rename, stat, unlink, writeFile } from "node:fs/
 import { createServer } from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { normalizePositiveKeywordWeights } from "../app/lib/keyword-weights.mjs";
 
 const projectRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const localRoot = path.join(projectRoot, ".local");
@@ -147,9 +148,14 @@ function uniqueStrings(value) {
 }
 
 function normalizeRules(value) {
+  const positiveKeywords = uniqueStrings(value?.positiveKeywords);
   return {
     authors: uniqueStrings(value?.authors),
-    positiveKeywords: uniqueStrings(value?.positiveKeywords),
+    positiveKeywords,
+    positiveKeywordWeights: normalizePositiveKeywordWeights(
+      value?.positiveKeywordWeights,
+      positiveKeywords,
+    ),
     negativeKeywords: uniqueStrings(value?.negativeKeywords),
     citationSeeds: normalizeCitationSeeds(value?.citationSeeds),
   };

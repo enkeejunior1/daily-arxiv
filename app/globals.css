@@ -1070,6 +1070,80 @@ button {
   margin-left: 4px;
 }
 
+.weighted-keyword-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 172px;
+  margin: 14px 0 12px;
+  overflow: auto;
+  padding-right: 3px;
+}
+
+.weighted-keyword-row {
+  align-items: center;
+  background: #eef3ee;
+  border: 1px solid #d9e2db;
+  border-radius: 9px;
+  display: grid;
+  flex: 0 0 auto;
+  gap: 7px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  min-height: 35px;
+  padding: 4px 6px 4px 10px;
+}
+
+.weighted-keyword-row > span {
+  color: #334a3e;
+  font-size: 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weighted-keyword-row label {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #cbd8cf;
+  border-radius: 7px;
+  color: var(--green);
+  display: flex;
+  height: 25px;
+  overflow: hidden;
+}
+
+.weighted-keyword-row label b {
+  font-size: 10px;
+  padding-left: 7px;
+}
+
+.weighted-keyword-row input {
+  appearance: textfield;
+  background: transparent;
+  border: 0;
+  color: var(--green-deep);
+  font-size: 10px;
+  font-weight: 800;
+  outline: none;
+  padding: 0 5px 0 2px;
+  text-align: center;
+  width: 34px;
+}
+
+.weighted-keyword-row input::-webkit-inner-spin-button,
+.weighted-keyword-row input::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.weighted-keyword-row > button {
+  background: transparent;
+  border: 0;
+  color: #819087;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 3px 5px;
+}
+
 .rule-input-row {
   display: grid;
   gap: 7px;
