@@ -72,6 +72,14 @@ type NoteRecord = {
   updatedAt: string;
 };
 
+type AiGuideState = {
+  status: "loading" | "ready" | "error";
+  response?: string;
+  createdAt?: string;
+  cached?: boolean;
+  error?: string;
+};
+
 type FeedProgress = {
   date: string;
   seenIds: string[];
@@ -583,6 +591,8 @@ export function DailyArxivApp() {
   const [notice, setNotice] = useState("");
   const [selectedPaper, setSelectedPaper] = useState<ScoredPaper | null>(null);
   const [notePanelOpen, setNotePanelOpen] = useState(false);
+  const [aiPanelOpen, setAiPanelOpen] = useState(false);
+  const [aiGuides, setAiGuides] = useState<Record<string, AiGuideState>>({});
   const [feedFilter, setFeedFilter] = useState<FeedFilter>("all");
   const [pdfState, setPdfState] = useState<"idle" | "loading" | "downloading" | "ready" | "error">(
     "idle",
@@ -890,6 +900,7 @@ export function DailyArxivApp() {
     ? queue.find((paper) => paper.id === selectedPaper.id) ?? selectedPaper
     : null;
   const currentNote = currentPaper ? notes[currentPaper.id]?.text ?? "" : "";
+  const currentAiGuide = currentPaper ? aiGuides[currentPaper.id] : undefined;
   const currentLocalPdfUrl = currentPaper ? companionPdfUrl(downloads[currentPaper.id]) : null;
   const currentPdfUrl = currentLocalPdfUrl ?? currentPaper?.pdfUrl ?? "";
   const pdfReaderUrl = currentPaper
@@ -962,8 +973,77 @@ export function DailyArxivApp() {
   const openPaper = useCallback((paper: ScoredPaper) => {
     setSelectedPaper(paper);
     setNotePanelOpen(false);
+    setAiPanelOpen(false);
     setPdfState("loading");
   }, []);
+
+  const runAiGuide = useCallback(async (paper: ScoredPaper, force = false) => {
+    if (companionStatus !== "connected") {
+      setAiGuides((previous) => ({
+        ...previous,
+        [paper.id]: {
+          status: "error",
+          error: "AI 논문 소개는 Mac에서 npm run dev로 앱을 열었을 때 사용할 수 있어요.",
+        },
+      }));
+      return;
+    }
+    if (!force && aiGuides[paper.id]?.status === "ready") return;
+
+    setAiGuides((previous) => ({
+      ...previous,
+      [paper.id]: { status: "loading" },
+    }));
+    try {
+      const response = await fetch(`${COMPANION_URL}/ai`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          arxivId: paper.id,
+          title: paper.title,
+          pdfUrl: paper.pdfUrl,
+          date: todayKey(),
+          relativePath: downloads[paper.id]?.relativePath,
+          force,
+        }),
+      });
+      const data = (await response.json()) as {
+        response?: string;
+        createdAt?: string;
+        cached?: boolean;
+        error?: string;
+      };
+      if (!response.ok || !data.response) throw new Error(data.error ?? "AI paper guide failed");
+      setAiGuides((previous) => ({
+        ...previous,
+        [paper.id]: {
+          status: "ready",
+          response: data.response,
+          createdAt: data.createdAt,
+          cached: data.cached,
+        },
+      }));
+      setNotice(data.cached ? "저장된 Codex 논문 소개를 열었어요." : "Codex 논문 소개가 완성됐어요.");
+    } catch (error) {
+      setAiGuides((previous) => ({
+        ...previous,
+        [paper.id]: {
+          status: "error",
+          error: error instanceof Error ? error.message : "Codex 논문 소개를 만들지 못했어요.",
+        },
+      }));
+    }
+  }, [aiGuides, companionStatus, downloads]);
+
+  const toggleAiGuide = useCallback((paper: ScoredPaper) => {
+    if (aiPanelOpen) {
+      setAiPanelOpen(false);
+      return;
+    }
+    setNotePanelOpen(false);
+    setAiPanelOpen(true);
+    void runAiGuide(paper);
+  }, [aiPanelOpen, runAiGuide]);
 
   const updateNote = useCallback((paperId: string, text: string) => {
     const nextText = text.slice(0, NOTE_MAX_LENGTH);
@@ -1375,6 +1455,7 @@ export function DailyArxivApp() {
                       onClick={() => {
                         setSelectedPaper(null);
                         setNotePanelOpen(false);
+                        setAiPanelOpen(false);
                         setPdfState("idle");
                       }}
                       aria-label="PDF 뷰어 닫기"
@@ -1403,10 +1484,19 @@ export function DailyArxivApp() {
                     >♥+ {!touchMode && <small>2×</small>}</button>
                     <button
                       className={`note-toggle ${notePanelOpen ? "open" : ""} ${currentNote.trim() ? "has-note" : ""}`}
-                      onClick={() => setNotePanelOpen((open) => !open)}
+                      onClick={() => {
+                        setAiPanelOpen(false);
+                        setNotePanelOpen((open) => !open);
+                      }}
                       aria-expanded={notePanelOpen}
                       aria-controls="paper-note-panel"
                     >한줄메모{currentNote.trim() ? " ·" : ""}</button>
+                    <button
+                      className={`ai-toggle ${aiPanelOpen ? "open" : ""} ${currentAiGuide?.status === "ready" ? "has-guide" : ""}`}
+                      onClick={() => toggleAiGuide(currentPaper)}
+                      aria-expanded={aiPanelOpen}
+                      aria-controls="paper-ai-panel"
+                    >AI{currentAiGuide?.status === "ready" ? " ·" : ""}</button>
                     {statusByPaper.has(currentPaper.id) && (
                       <button className="clear-status" onClick={() => removeSavedStatus(currentPaper.id)}>Clear</button>
                     )}
@@ -1492,6 +1582,46 @@ export function DailyArxivApp() {
                         <span>{currentNote.length}/{NOTE_MAX_LENGTH}</span>
                         <span>{currentNote.trim() ? "자동 저장됨" : "선택과 별도로 저장됩니다"}</span>
                       </footer>
+                    </aside>
+                  ) : null}
+                  {aiPanelOpen ? (
+                    <aside className="paper-ai-panel" id="paper-ai-panel" aria-label="Codex 논문 소개">
+                      <header>
+                        <div><span>CODEX PAPER GUIDE</span><strong>AI 논문 소개</strong></div>
+                        <button onClick={() => setAiPanelOpen(false)} aria-label="AI 논문 소개 닫기">×</button>
+                      </header>
+                      <p className="ai-guide-prompt">“이 논문을 소개해줘. 특히 method를 구체적으로 소개해줘.”</p>
+                      {currentAiGuide?.status === "loading" ? (
+                        <div className="ai-guide-loading" role="status">
+                          <i />
+                          <strong>PDF를 읽고 method를 분석하는 중</strong>
+                          <span>첫 분석은 몇 분 걸릴 수 있어요. 완성된 답변은 로컬에 저장됩니다.</span>
+                        </div>
+                      ) : currentAiGuide?.status === "ready" ? (
+                        <>
+                          <div className="ai-guide-response">{currentAiGuide.response}</div>
+                          <footer>
+                            <span>{currentAiGuide.cached ? "저장된 답변" : "방금 분석함"}</span>
+                            <div>
+                              <button
+                                onClick={() => {
+                                  void navigator.clipboard?.writeText(currentAiGuide.response ?? "");
+                                  setNotice("AI 논문 소개를 복사했어요.");
+                                }}
+                              >복사</button>
+                              <button onClick={() => void runAiGuide(currentPaper, true)}>다시 분석</button>
+                            </div>
+                          </footer>
+                        </>
+                      ) : (
+                        <div className="ai-guide-error">
+                          <strong>AI 논문 소개를 열 수 없어요</strong>
+                          <p>{currentAiGuide?.error ?? "Mac의 로컬 앱에서 사용할 수 있는 기능입니다."}</p>
+                          {companionStatus === "connected" ? (
+                            <button onClick={() => void runAiGuide(currentPaper)}>다시 시도</button>
+                          ) : null}
+                        </div>
+                      )}
                     </aside>
                   ) : null}
                 </div>
@@ -1654,7 +1784,7 @@ export function DailyArxivApp() {
           <div className="guide-steps">
             <article><span>1</span><div><strong>Rules는 가끔만 조정</strong><p>Author, positive/negative keyword, citation seed를 설정합니다. 매일 바꾸기보다 관심사가 변할 때만 다듬는 편이 좋아요.</p></div></article>
             <article><span>2</span><div><strong>Daily에서는 스크롤이 기본</strong><p>관심 없는 논문은 그냥 지나갑니다. 화면 위로 넘어간 논문은 확인한 것으로 저장되고 다음 접속 때 그 지점부터 이어집니다.</p></div></article>
-            <article><span>3</span><div><strong>궁금하면 PDF와 한줄메모 열기</strong><p>카드를 누르면 피드는 그대로 두고 PDF를 엽니다. 한줄메모 버튼으로 읽을 이유나 확인할 점을 남길 수 있어요.</p></div></article>
+            <article><span>3</span><div><strong>궁금하면 PDF, AI, 한줄메모 열기</strong><p>카드를 누르면 피드는 그대로 두고 PDF를 엽니다. Mac의 AI 버튼은 Codex로 method 중심 소개를 만들고, 한줄메모에는 읽을 이유나 확인할 점을 남길 수 있어요.</p></div></article>
             <article><span>4</span><div><strong>Heart는 읽을 후보, ♥+는 최우선</strong><p>Android에서는 버튼을 한 번 탭합니다. Mac에서는 카드 또는 버튼을 더블클릭합니다. 같은 선택을 다시 하면 취소됩니다.</p></div></article>
             <article><span>5</span><div><strong>Saved에서 실제 읽기로 전환</strong><p>하루 피드를 끝낸 뒤 Saved만 다시 보세요. PDF 다운로드와 arXiv 원문 확인은 여기서 이어가면 됩니다.</p></div></article>
           </div>
@@ -1668,7 +1798,7 @@ export function DailyArxivApp() {
             <article>
               <p className="eyebrow">MAC</p>
               <h2>정리와 보관</h2>
-              <ul><li><code>npm run dev</code>로 companion과 함께 실행</li><li>클라우드 선택을 repository CSV로 반영</li><li>선택한 PDF를 gitignored <code>.local/papers</code>에 캐시</li></ul>
+              <ul><li><code>npm run dev</code>로 companion과 함께 실행</li><li>AI 버튼으로 Codex method 소개 생성</li><li>PDF와 AI 답변을 gitignored <code>.local</code>에 캐시</li></ul>
             </article>
             <article>
               <p className="eyebrow">SYNC</p>

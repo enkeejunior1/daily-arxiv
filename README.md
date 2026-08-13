@@ -17,6 +17,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
 - Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
 - Adds an optional 200-character note beside the PDF and syncs it across devices without automatically selecting the paper.
+- Adds a Mac-local Codex paper guide beside the PDF, with a Korean method-focused prompt and a per-paper cached response under `.local/ai/`.
 - Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
 - Restores automatic and manual bookmarks when the app reopens.
 - Saves rules to `config/rules.json` and selected papers to a yearly CSV under `choices/`.
@@ -29,7 +30,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 npm run dev
 ```
 
-This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage and the PDF cache. DeepXiv's public trending endpoint does not require a token.
+This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage, the PDF cache, and the Codex paper guide. The AI button uses the Codex login already available on the Mac, extracts text from the PDF, and stores the response under `.local/ai/`; it does not require an OpenAI API key. DeepXiv's public trending endpoint does not require a token.
 
 Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
 
@@ -62,7 +63,7 @@ The files intended for GitHub are:
 - `choices/YYYY.csv`: Heart and Superheart choices, regenerated for the current day whenever state changes.
 - The Recent choices table below, generated from the same CSV.
 
-Progress and downloaded PDFs stay local under `.local/` and are excluded by `.gitignore`.
+Progress, downloaded PDFs, extracted paper text, and Codex paper guides stay local under `.local/` and are excluded by `.gitignore`.
 The deployed app stores the shared rules, choices, and bookmark snapshot in D1. Local PDF paths are deliberately excluded from cloud sync because they are device-specific.
 
 The CSV schema is:

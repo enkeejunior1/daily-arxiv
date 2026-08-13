@@ -1849,6 +1849,19 @@ button {
   color: var(--green-deep);
 }
 
+.reader-actions button.ai-toggle {
+  font-size: 9px;
+  font-weight: 800;
+  min-width: 38px;
+}
+
+.reader-actions button.ai-toggle.open,
+.reader-actions button.ai-toggle.has-guide {
+  background: #eee9fb;
+  border-color: #c9bce8;
+  color: #60449d;
+}
+
 .reader-actions button small {
   font-size: 7px;
   margin-left: 1px;
@@ -2044,6 +2057,143 @@ button {
   display: flex;
   font-size: 8px;
   justify-content: space-between;
+}
+
+.paper-ai-panel {
+  background: #f8f7fc;
+  border-left: 1px solid #d4cde3;
+  display: flex;
+  flex: 0 0 370px;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.paper-ai-panel header {
+  align-items: start;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+}
+
+.paper-ai-panel header div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.paper-ai-panel header span {
+  color: #6b50a3;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.paper-ai-panel header strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.paper-ai-panel header > button {
+  background: transparent;
+  border: 0;
+  color: #7f778b;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+}
+
+.ai-guide-prompt {
+  background: #eee9f8;
+  border-radius: 9px;
+  color: #604b89;
+  flex: 0 0 auto;
+  font-size: 10px;
+  line-height: 1.55;
+  margin: 14px 0;
+  padding: 10px 11px;
+}
+
+.ai-guide-loading,
+.ai-guide-error {
+  align-items: center;
+  color: #71677e;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 180px;
+  text-align: center;
+}
+
+.ai-guide-loading i {
+  animation: pdf-spin 0.9s linear infinite;
+  border: 2px solid #dcd3ed;
+  border-radius: 50%;
+  border-top-color: #7457ae;
+  height: 24px;
+  margin-bottom: 13px;
+  width: 24px;
+}
+
+.ai-guide-loading strong,
+.ai-guide-error strong {
+  color: #473b57;
+  font-size: 12px;
+}
+
+.ai-guide-loading span,
+.ai-guide-error p {
+  font-size: 9px;
+  line-height: 1.6;
+  margin: 7px 0 0;
+  max-width: 250px;
+}
+
+.ai-guide-error button,
+.paper-ai-panel footer button {
+  background: #fff;
+  border: 1px solid #cec3e1;
+  border-radius: 7px;
+  color: #60449d;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 750;
+  padding: 7px 9px;
+}
+
+.ai-guide-error button {
+  margin-top: 13px;
+}
+
+.ai-guide-response {
+  color: #303633;
+  flex: 1;
+  font: 11px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 4px 14px 0;
+  white-space: pre-wrap;
+}
+
+.paper-ai-panel footer {
+  align-items: center;
+  border-top: 1px solid #ddd6e7;
+  color: #867e8e;
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 8px;
+  justify-content: space-between;
+  padding-top: 11px;
+}
+
+.paper-ai-panel footer div {
+  display: flex;
+  gap: 6px;
 }
 
 .pdf-canvas-reader {
@@ -2449,6 +2599,11 @@ button {
     padding: 0 6px;
   }
 
+  .reader-actions button.ai-toggle {
+    min-width: 38px;
+    padding: 0 6px;
+  }
+
   .preview-header {
     align-items: flex-start;
     flex-direction: column;
@@ -2502,6 +2657,24 @@ button {
   .paper-note-panel textarea {
     min-height: 110px;
     resize: none;
+  }
+
+  .paper-ai-panel {
+    border-left: 0;
+    border-top: 1px solid #d4cde3;
+    bottom: 0;
+    box-shadow: 0 -12px 35px rgba(41, 32, 58, 0.2);
+    flex-basis: auto;
+    left: 0;
+    max-height: 72dvh;
+    padding: 18px 18px max(18px, env(safe-area-inset-bottom));
+    position: absolute;
+    right: 0;
+    width: 100%;
+  }
+
+  .ai-guide-response {
+    font-size: 12px;
   }
 
   .paper-card {
