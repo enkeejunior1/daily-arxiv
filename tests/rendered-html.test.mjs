@@ -7,6 +7,10 @@ import {
   keywordGroupKey,
   keywordGroupMatches,
 } from "../app/lib/keyword-groups.mjs";
+import {
+  normalizePositiveKeywordWeights,
+  positiveKeywordWeight,
+} from "../app/lib/keyword-weights.mjs";
 
 async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -53,7 +57,7 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
     ]);
 
   assert.match(gitignore, /^\/\.local\/$/m);
-  assert.deepEqual(Object.keys(JSON.parse(rules)).sort(), [
+  assert.deepEqual(Object.keys(JSON.parse(rules)).filter((key) => key !== "positiveKeywordWeights").sort(), [
     "authors",
     "citationSeeds",
     "negativeKeywords",
@@ -71,6 +75,7 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(companion, /url\.pathname === "\/ai"/);
   assert.match(companion, /promptVersion: aiPromptVersion/);
   assert.match(companion, /function normalizeNotes/);
+  assert.match(companion, /normalizePositiveKeywordWeights/);
   assert.match(companion, /"note"/);
   assert.match(companion, /\| Note \|/);
   assert.match(component, /COMPANION_URL/);
@@ -78,6 +83,8 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /하루 최대 250개/);
   assert.match(component, /DeepXiv Top 50/);
   assert.match(component, /alias는 \| 로 연결/);
+  assert.match(component, /custom \+1–100/);
+  assert.match(component, /weighted-keyword-row/);
   assert.match(component, /CITATION SEEDS/);
   assert.match(component, /custom weight each/);
   assert.match(component, /PDF 확대 및 축소/);
@@ -114,6 +121,21 @@ test("treats keyword aliases as one scoring group", () => {
   assert.equal(keywordGroupMatches("TTT improves test-time training.", group), true);
   assert.equal(keywordGroupMatches("Ordinary supervised pretraining.", group), false);
   assert.equal(keywordGroupKey("test-time training"), keywordGroupKey("test time training"));
+});
+
+test("assigns a custom score to each positive keyword group", () => {
+  const groups = ["ttt | test-time training", "world model", "scaling law"];
+  const weights = normalizePositiveKeywordWeights(
+    { "test-time training | ttt": 4, "world model": 6 },
+    groups,
+  );
+
+  assert.deepEqual(weights, {
+    "ttt | test-time training": 4,
+    "world model": 6,
+    "scaling law": 2,
+  });
+  assert.equal(positiveKeywordWeight(weights, "TTT | test time training"), 4);
 });
 
 test("handles trackpad pinch inside the app PDF reader", async () => {

@@ -7,6 +7,11 @@ import {
   keywordGroupMatches,
   normalizeText,
 } from "../lib/keyword-groups.mjs";
+import {
+  clampPositiveKeywordWeight,
+  normalizePositiveKeywordWeights,
+  positiveKeywordWeight,
+} from "../lib/keyword-weights.mjs";
 import initialRules from "../../config/rules.json";
 import { PdfCanvasReader } from "./PdfCanvasReader";
 import { PwaInstallButton } from "./PwaInstallButton";
@@ -46,6 +51,7 @@ type Paper = {
 type Rules = {
   authors: string[];
   positiveKeywords: string[];
+  positiveKeywordWeights: Record<string, number>;
   negativeKeywords: string[];
   citationSeeds: CitationSeed[];
 };
@@ -254,9 +260,14 @@ function normalizeArxivId(value: string) {
 }
 
 function normalizeRules(value: Partial<Rules> | undefined): Rules {
+  const positiveKeywords = Array.isArray(value?.positiveKeywords) ? value.positiveKeywords : [];
   return {
     authors: Array.isArray(value?.authors) ? value.authors : [],
-    positiveKeywords: Array.isArray(value?.positiveKeywords) ? value.positiveKeywords : [],
+    positiveKeywords,
+    positiveKeywordWeights: normalizePositiveKeywordWeights(
+      value?.positiveKeywordWeights,
+      positiveKeywords,
+    ),
     negativeKeywords: Array.isArray(value?.negativeKeywords) ? value.negativeKeywords : [],
     citationSeeds: Array.isArray(value?.citationSeeds)
       ? value.citationSeeds.flatMap((seed) => {
@@ -288,7 +299,9 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
     paper.authors.some((author) => normalize(author) === normalize(tracked)),
   );
   const text = `${paper.title} ${paper.abstract}`;
-  const positiveHits = rules.positiveKeywords.filter((group) => keywordGroupMatches(text, group));
+  const positiveHits = rules.positiveKeywords
+    .filter((group) => keywordGroupMatches(text, group))
+    .map((group) => ({ group, weight: positiveKeywordWeight(rules.positiveKeywordWeights, group) }));
   const negativeHits = rules.negativeKeywords.filter((group) => keywordGroupMatches(text, group));
   const citationHits = (paper.citationSeedIds ?? []).flatMap((seedId) => {
     const seed = rules.citationSeeds.find((candidate) => candidate.arxivId === seedId);
@@ -304,8 +317,8 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
       kind: "featured",
     });
   }
-  positiveHits.forEach((keyword) =>
-    reasons.push({ label: keyword, value: 2, kind: "positive" }),
+  positiveHits.forEach(({ group, weight }) =>
+    reasons.push({ label: group, value: weight, kind: "positive" }),
   );
   negativeHits.forEach((keyword) =>
     reasons.push({ label: keyword, value: -2, kind: "negative" }),
@@ -319,7 +332,7 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
     authorHit,
     baseScore:
       (isFeatured ? FEATURED_SCORE : 0) +
-      positiveHits.length * 2 -
+      positiveHits.reduce((total, hit) => total + hit.weight, 0) -
       negativeHits.length * 2 +
       citationHits.reduce((total, seed) => total + seed.weight, 0),
     reasons,
@@ -437,6 +450,80 @@ function TagsEditor({
             }
           }}
           placeholder={placeholder ?? `${label} 추가`}
+        />
+        <button onClick={addValue}>추가</button>
+      </div>
+    </section>
+  );
+}
+
+function PositiveKeywordsEditor({
+  values,
+  weights,
+  onChange,
+}: {
+  values: string[];
+  weights: Record<string, number>;
+  onChange: (values: string[], weights: Record<string, number>) => void;
+}) {
+  const [draft, setDraft] = useState("");
+
+  function addValue() {
+    const value = canonicalizeKeywordGroup(draft);
+    const valueKey = keywordGroupKey(value);
+    if (!valueKey || values.some((item) => keywordGroupKey(item) === valueKey)) return;
+    onChange([...values, value], { ...weights, [value]: 2 });
+    setDraft("");
+  }
+
+  function removeValue(value: string) {
+    const nextWeights = { ...weights };
+    delete nextWeights[value];
+    onChange(values.filter((item) => item !== value), nextWeights);
+  }
+
+  return (
+    <section className="rule-block weighted-keywords">
+      <div className="rule-heading">
+        <div>
+          <h3>Positive keywords</h3>
+          <p>키워드별 +1–100 · alias는 | 로 연결</p>
+        </div>
+        <span>{values.length}</span>
+      </div>
+      <div className="weighted-keyword-list">
+        {values.map((value) => (
+          <div className="weighted-keyword-row" key={value}>
+            <span title={value}>{value}</span>
+            <label>
+              <b>+</b>
+              <input
+                type="number"
+                min="1"
+                max="100"
+                value={positiveKeywordWeight(weights, value)}
+                onChange={(event) => onChange(values, {
+                  ...weights,
+                  [value]: clampPositiveKeywordWeight(event.target.value),
+                })}
+                aria-label={`${value} positive keyword score`}
+              />
+            </label>
+            <button onClick={() => removeValue(value)} aria-label={`${value} 삭제`}>×</button>
+          </div>
+        ))}
+      </div>
+      <div className="rule-input-row">
+        <input
+          value={draft}
+          onChange={(event) => setDraft(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              addValue();
+            }
+          }}
+          placeholder="예: ttt | test-time training | test time training"
         />
         <button onClick={addValue}>추가</button>
       </div>
@@ -1699,7 +1786,7 @@ export function DailyArxivApp() {
             <b>+</b>
             <div><span>DeepXiv Top 50</span><strong>+5 once</strong></div>
             <b>+</b>
-            <div><span>Positive keyword</span><strong>+2 each</strong></div>
+            <div><span>Positive keyword</span><strong>custom +1–100</strong></div>
             <b>−</b>
             <div><span>Negative keyword</span><strong>−2 each</strong></div>
           </div>
@@ -1722,13 +1809,12 @@ export function DailyArxivApp() {
           </section>
           <div className="rules-grid">
             <TagsEditor label="Positive authors" hint="정확한 저자명 매칭 · 최우선 노출" values={rules.authors} onChange={(authors) => setRules({ ...rules, authors })} />
-            <TagsEditor
-              label="Positive keywords"
-              hint="그룹당 +2 · alias는 | 로 연결"
+            <PositiveKeywordsEditor
               values={rules.positiveKeywords}
-              supportsAliases
-              placeholder="예: ttt | test-time training | test time training"
-              onChange={(positiveKeywords) => setRules({ ...rules, positiveKeywords })}
+              weights={rules.positiveKeywordWeights}
+              onChange={(positiveKeywords, positiveKeywordWeights) =>
+                setRules({ ...rules, positiveKeywords, positiveKeywordWeights })
+              }
             />
             <TagsEditor
               label="Negative keywords"
