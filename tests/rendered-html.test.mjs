@@ -164,3 +164,20 @@ test("supports Android installation and cross-device cloud state", async () => {
   assert.match(component, /Download PDF/);
   assert.match(component, /paper-reader.*has-paper/);
 });
+
+test("provides a one-click Mac background launcher", async () => {
+  const [launcher, appExecutable, infoPlist, packageJson] = await Promise.all([
+    readFile(new URL("../scripts/launch-background.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../Daily arXiv.app/Contents/MacOS/Daily arXiv", import.meta.url), "utf8"),
+    readFile(new URL("../Daily arXiv.app/Contents/Info.plist", import.meta.url), "utf8"),
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(launcher, /detached: true/);
+  assert.match(launcher, /dev\.pid/);
+  assert.match(launcher, /appIsReady/);
+  assert.match(launcher, /--stop/);
+  assert.match(appExecutable, /npm run launch/);
+  assert.match(infoPlist, /com\.enkeejunior1\.daily-arxiv/);
+  assert.match(packageJson, /"launch": "node scripts\/launch-background\.mjs"/);
+});

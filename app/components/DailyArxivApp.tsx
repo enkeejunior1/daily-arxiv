@@ -1798,7 +1798,7 @@ export function DailyArxivApp() {
             <article>
               <p className="eyebrow">MAC</p>
               <h2>정리와 보관</h2>
-              <ul><li><code>npm run dev</code>로 companion과 함께 실행</li><li>AI 버튼으로 Codex method 소개 생성</li><li>PDF와 AI 답변을 gitignored <code>.local</code>에 캐시</li></ul>
+              <ul><li>Finder에서 <code>Daily arXiv.app</code>을 더블클릭해 백그라운드 실행</li><li>이미 실행 중이면 새 서버 없이 브라우저만 열기</li><li>AI, PDF, 답변 캐시는 Mac 안에 보관</li></ul>
             </article>
             <article>
               <p className="eyebrow">SYNC</p>
