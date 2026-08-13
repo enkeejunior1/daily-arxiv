@@ -9,6 +9,8 @@
     "dev": "node scripts/dev.mjs",
     "dev:web": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "local": "node scripts/local-companion.mjs",
+    "launch": "node scripts/launch-background.mjs",
+    "stop": "node scripts/launch-background.mjs --stop",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",

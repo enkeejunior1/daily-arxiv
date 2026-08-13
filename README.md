@@ -32,6 +32,8 @@ npm run dev
 
 This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage, the PDF cache, and the Codex paper guide. The AI button uses the Codex login already available on the Mac, extracts text from the PDF, and stores the response under `.local/ai/`; it does not require an OpenAI API key. DeepXiv's public trending endpoint does not require a token.
 
+For one-click Mac startup, double-click `Daily arXiv.app` in Finder. It starts the same web UI and companion in the background, waits until both are ready, and opens `http://localhost:3000/`. Clicking it again only reopens the browser instead of starting a duplicate server. Keep the app bundle in this repository; you can drag it to the Dock without moving it. Runtime logs and the managed process ID stay under `.local/`. Run `npm run stop` when you want to stop the background server.
+
 Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
 
 ## Android
