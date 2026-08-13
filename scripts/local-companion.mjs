@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const localRoot = path.join(projectRoot, ".local");
 const papersRoot = path.join(localRoot, "papers");
+const aiRoot = path.join(localRoot, "ai");
 const statePath = path.join(localRoot, "state.json");
 const rulesPath = path.join(projectRoot, "config", "rules.json");
 const choicesRoot = path.join(projectRoot, "choices");
@@ -14,7 +15,9 @@ const readmePath = path.join(projectRoot, "README.md");
 const port = Number.parseInt(process.env.DAILY_ARXIV_COMPANION_PORT ?? "4317", 10);
 const maxBodyBytes = 5 * 1024 * 1024;
 const maxPdfBytes = 100 * 1024 * 1024;
+const maxPaperTextCharacters = 140_000;
 const userTimeZone = process.env.DAILY_ARXIV_TIME_ZONE ?? "America/Los_Angeles";
+const aiPromptVersion = 1;
 
 const defaultRules = {
   authors: ["Yann LeCun", "Chelsea Finn"],
@@ -44,6 +47,8 @@ const csvColumns = [
 ];
 
 let writeQueue = Promise.resolve();
+const aiJobs = new Map();
+let codexClientPromise;
 
 function enqueueWrite(task) {
   const next = writeQueue.then(task, task);
@@ -451,6 +456,183 @@ async function downloadPdf(body) {
   return { relativePath, cached: false };
 }
 
+function safeAiStem(arxivId) {
+  return arxivId.replaceAll("/", "_");
+}
+
+function aiRecordPath(arxivId) {
+  return path.join(aiRoot, `${safeAiStem(arxivId)}.json`);
+}
+
+function aiTextPath(arxivId) {
+  return path.join(aiRoot, `${safeAiStem(arxivId)}.txt`);
+}
+
+function resolvePaperPath(relativePath) {
+  if (
+    typeof relativePath !== "string" ||
+    !relativePath.startsWith(".local/papers/") ||
+    relativePath.includes("..")
+  ) return null;
+  const candidate = path.resolve(projectRoot, relativePath);
+  return candidate.startsWith(`${papersRoot}${path.sep}`) ? candidate : null;
+}
+
+async function resolvePdfForAnalysis(body) {
+  const existing = resolvePaperPath(body.relativePath);
+  if (existing && await isUsablePdf(existing)) {
+    return { relativePath: body.relativePath, cached: true };
+  }
+  return downloadPdf(body);
+}
+
+async function extractPaperText(pdfPath, paper) {
+  const textPath = aiTextPath(paper.arxivId);
+  try {
+    const cached = await readFile(textPath, "utf8");
+    if (cached.startsWith(`arXiv: ${paper.arxivId}\n`) && cached.length > 500) {
+      return { text: cached, textPath, cached: true };
+    }
+  } catch {
+    // Extract the PDF below.
+  }
+
+  const { getDocument } = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  const bytes = new Uint8Array(await readFile(pdfPath));
+  const loadingTask = getDocument({ data: bytes, useSystemFonts: true });
+  const document = await loadingTask.promise;
+  const sections = [`arXiv: ${paper.arxivId}`, `Title: ${paper.title}`, `URL: https://arxiv.org/abs/${paper.arxivId}`];
+  let characterCount = sections.join("\n").length;
+
+  try {
+    for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
+      const page = await document.getPage(pageNumber);
+      const content = await page.getTextContent();
+      const pageText = content.items
+        .map((item) => ("str" in item ? item.str : ""))
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!pageText) continue;
+      const section = `\n\n--- Page ${pageNumber} ---\n${pageText}`;
+      const remaining = maxPaperTextCharacters - characterCount;
+      if (remaining <= 0) break;
+      sections.push(section.slice(0, remaining));
+      characterCount += Math.min(section.length, remaining);
+      if (section.length > remaining) break;
+    }
+  } finally {
+    await loadingTask.destroy();
+  }
+
+  const text = `${sections.join("\n").trim()}\n`;
+  if (text.length < 500) throw new Error("PDF에서 분석할 텍스트를 충분히 추출하지 못했어요.");
+  await writeIfChanged(textPath, text);
+  return { text, textPath, cached: false };
+}
+
+async function getCodexClient() {
+  if (!codexClientPromise) {
+    codexClientPromise = import("@openai/codex-sdk").then(({ Codex }) => new Codex());
+  }
+  return codexClientPromise;
+}
+
+function paperGuidePrompt(paperText) {
+  return `너는 머신러닝 연구자를 돕는 꼼꼼한 논문 리뷰어다.
+
+요청: 이 논문을 한국어로 소개해줘. 특히 method를 구체적으로 소개해줘.
+
+다음 형식으로 답해라.
+1. 한눈에 보는 요약: 논문이 푸는 문제, 핵심 아이디어, 결과를 짧게 설명한다.
+2. 문제 설정과 핵심 기여: 기존 방식의 한계와 이 논문의 차별점을 구분한다.
+3. Method 상세: 입력과 출력, 전체 pipeline, 각 component의 역할과 데이터 흐름, 학습 objective/loss, training과 inference 절차, 중요한 수식과 구현 세부사항을 가능한 구체적으로 설명한다. 단계가 있으면 번호를 붙인다.
+4. 실험: 어떤 실험이 method의 주장을 뒷받침하는지 핵심 결과와 ablation 중심으로 설명한다.
+5. 한계와 읽을 때 확인할 점: 논문이 밝힌 한계와 본문에서 확인해야 할 불확실한 점을 구분한다.
+
+규칙:
+- 아래에 제공된 논문 본문만 근거로 사용하고, 없는 내용을 지어내지 않는다.
+- method에 관한 주요 설명과 수치 뒤에는 가능한 경우 [p.N] 형식으로 페이지를 표시한다.
+- 수식의 기호가 텍스트 추출 과정에서 깨졌다면 억지로 복원하지 말고 그 사실을 밝힌다.
+- 마케팅식 표현 대신 ML 연구자가 재구현을 판단할 수 있을 정도로 기술적으로 쓴다.
+
+<paper>
+${paperText}
+</paper>`;
+}
+
+async function readAiRecord(arxivId) {
+  const record = await readJsonFile(aiRecordPath(arxivId), null);
+  if (
+    !record ||
+    record.arxivId !== arxivId ||
+    record.promptVersion !== aiPromptVersion ||
+    typeof record.response !== "string" ||
+    !record.response.trim()
+  ) return null;
+  return record;
+}
+
+function friendlyAiError(error) {
+  const message = error instanceof Error ? error.message : "Codex 분석에 실패했어요.";
+  if (/login|auth|unauthorized|401/i.test(message)) {
+    return new Error("Codex 로그인이 필요해요. Codex 앱에서 로그인한 뒤 npm run dev를 다시 실행해주세요.");
+  }
+  if (/rate.?limit|usage.?limit|quota/i.test(message)) {
+    return new Error("현재 Codex 사용 한도에 도달했어요. 한도가 갱신된 뒤 다시 시도해주세요.");
+  }
+  return new Error(`Codex 분석에 실패했어요: ${message.slice(0, 300)}`);
+}
+
+async function createAiGuide(body) {
+  if (!isArxivId(body.arxivId)) throw new Error("Invalid arXiv ID.");
+  if (typeof body.title !== "string" || !body.title.trim()) throw new Error("Missing paper title.");
+
+  const cached = await readAiRecord(body.arxivId);
+  if (cached && !body.force) return { ...cached, cached: true };
+
+  const pdf = await resolvePdfForAnalysis(body);
+  const pdfPath = resolvePaperPath(pdf.relativePath);
+  if (!pdfPath) throw new Error("Invalid local PDF path.");
+  const extracted = await extractPaperText(pdfPath, body);
+
+  try {
+    const codex = await getCodexClient();
+    const thread = codex.startThread({
+      workingDirectory: projectRoot,
+      sandboxMode: "read-only",
+      approvalPolicy: "never",
+      networkAccessEnabled: false,
+      webSearchMode: "disabled",
+      modelReasoningEffort: "medium",
+    });
+    const turn = await thread.run(paperGuidePrompt(extracted.text));
+    if (!turn.finalResponse.trim()) throw new Error("Codex가 빈 응답을 반환했어요.");
+    const record = {
+      arxivId: body.arxivId,
+      title: body.title.trim(),
+      promptVersion: aiPromptVersion,
+      response: turn.finalResponse.trim(),
+      createdAt: new Date().toISOString(),
+      threadId: thread.id,
+      sourcePdfRelativePath: pdf.relativePath,
+      sourceTextRelativePath: path.relative(projectRoot, extracted.textPath),
+    };
+    await writeIfChanged(aiRecordPath(body.arxivId), `${JSON.stringify(record, null, 2)}\n`);
+    return { ...record, cached: false };
+  } catch (error) {
+    throw friendlyAiError(error);
+  }
+}
+
+async function runAiGuide(body) {
+  const arxivId = typeof body.arxivId === "string" ? body.arxivId : "";
+  if (aiJobs.has(arxivId)) return aiJobs.get(arxivId);
+  const job = createAiGuide(body).finally(() => aiJobs.delete(arxivId));
+  aiJobs.set(arxivId, job);
+  return job;
+}
+
 async function servePaper(request, response, pathname) {
   const suffix = decodeURIComponent(pathname.slice("/papers/".length));
   const candidate = path.resolve(papersRoot, suffix);
@@ -512,7 +694,20 @@ const server = createServer(async (request, response) => {
         projectRoot,
         choicesPath: "choices/",
         papersPath: ".local/papers/",
+        aiPath: ".local/ai/",
+        codexPaperGuide: true,
       });
+      return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/ai") {
+      const arxivId = normalizeArxivId(url.searchParams.get("arxivId") ?? "");
+      if (!arxivId) {
+        sendJson(request, response, 400, { error: "Invalid arXiv ID." });
+        return;
+      }
+      const record = await readAiRecord(arxivId);
+      sendJson(request, response, 200, record ? { ...record, cached: true } : { cached: false });
       return;
     }
 
@@ -548,6 +743,12 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "POST" && url.pathname === "/ai") {
+      const result = await runAiGuide(await readJsonBody(request));
+      sendJson(request, response, 200, result);
+      return;
+    }
+
     if (request.method === "GET" && url.pathname.startsWith("/papers/")) {
       await servePaper(request, response, url.pathname);
       return;
@@ -561,7 +762,7 @@ const server = createServer(async (request, response) => {
   }
 });
 
-await mkdir(localRoot, { recursive: true });
+await Promise.all([mkdir(localRoot, { recursive: true }), mkdir(aiRoot, { recursive: true })]);
 server.listen(port, "127.0.0.1", () => {
   process.stdout.write(`Daily arXiv local companion: http://127.0.0.1:${port}\n`);
 });

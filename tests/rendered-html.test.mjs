@@ -63,7 +63,13 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(choices, /"score","note","selected_at"/);
   assert.match(companion, /choicesRoot/);
   assert.match(companion, /papersRoot = path\.join\(localRoot, "papers"\)/);
+  assert.match(companion, /aiRoot = path\.join\(localRoot, "ai"\)/);
   assert.match(companion, /Only arXiv PDF URLs can be cached/);
+  assert.match(companion, /@openai\/codex-sdk/);
+  assert.match(companion, /이 논문을 한국어로 소개해줘\. 특히 method를 구체적으로 소개해줘/);
+  assert.match(companion, /sandboxMode: "read-only"/);
+  assert.match(companion, /url\.pathname === "\/ai"/);
+  assert.match(companion, /promptVersion: aiPromptVersion/);
   assert.match(companion, /function normalizeNotes/);
   assert.match(companion, /"note"/);
   assert.match(companion, /\| Note \|/);
@@ -79,6 +85,10 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /NOTE_MAX_LENGTH = 200/);
   assert.match(component, /paper-note-panel/);
   assert.match(component, /자동 저장됨/);
+  assert.match(component, /paper-ai-panel/);
+  assert.match(component, /CODEX PAPER GUIDE/);
+  assert.match(component, /PDF를 읽고 method를 분석하는 중/);
+  assert.match(component, /저장된 Codex 논문 소개/);
   assert.match(component, /Daily arXiv 사용법/);
   assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
