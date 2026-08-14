@@ -908,7 +908,7 @@ export function DailyArxivApp() {
     const controller = new AbortController();
     setSource("loading");
     fetch(
-      `/api/arxiv?days=${preferences.feedPeriodDays}&limit=${preferences.candidateLimit}`,
+      `/api/arxiv?days=${preferences.feedPeriodDays}&limit=${preferences.candidateLimit}&feedMode=latest-announcement`,
       { signal: controller.signal },
     )
       .then(async (response) => {
