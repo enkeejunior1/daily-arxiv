@@ -8,9 +8,22 @@
     "video model | video generation",
     "image generation",
     "diffusion model | flow matching",
-    "scaling law",
-    "hyper-parameter transfer | hyper parameter transfer | mup"
+    "hyper-parameter transfer | hyper parameter transfer | mup",
+    "EoS | edge of stability",
+    "scaling law"
   ],
+  "positiveKeywordWeights": {
+    "reinforcement learning": 2,
+    "world model": 2,
+    "ttt | test-time training | test time training": 2,
+    "world action model | WAM": 2,
+    "video model | video generation": 2,
+    "image generation": 2,
+    "diffusion model | flow matching": 2,
+    "hyper-parameter transfer | hyper parameter transfer | mup": 2,
+    "EoS | edge of stability": 2,
+    "scaling law": 2
+  },
   "negativeKeywords": [],
   "citationSeeds": []
 }

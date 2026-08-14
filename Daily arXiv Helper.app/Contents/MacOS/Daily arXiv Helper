@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+app_root="$(cd "$(dirname "$0")/../../.." && pwd)"
+export DAILY_ARXIV_LAUNCH_ROOT="$app_root"
+
+if [[ "$(/usr/sbin/sysctl -n hw.optional.arm64 2>/dev/null)" == "1" ]]; then
+  /usr/bin/arch -arm64 /bin/zsh -lic 'cd "$DAILY_ARXIV_LAUNCH_ROOT" && npm run launch -- --no-open'
+else
+  /bin/zsh -lic 'cd "$DAILY_ARXIV_LAUNCH_ROOT" && npm run launch -- --no-open'
+fi

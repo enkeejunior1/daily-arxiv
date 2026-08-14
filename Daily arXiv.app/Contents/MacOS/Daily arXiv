@@ -2,6 +2,12 @@
 
 app_root="$(cd "$(dirname "$0")/../../.." && pwd)"
 export DAILY_ARXIV_LAUNCH_ROOT="$app_root"
+helper_app="$app_root/Daily arXiv Helper.app"
+launch_services_register="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+
+if [[ -x "$launch_services_register" && -d "$helper_app" ]]; then
+  "$launch_services_register" -f "$helper_app" >/dev/null 2>&1
+fi
 
 if [[ "$(/usr/sbin/sysctl -n hw.optional.arm64 2>/dev/null)" == "1" ]]; then
   /usr/bin/arch -arm64 /bin/zsh -lic 'cd "$DAILY_ARXIV_LAUNCH_ROOT" && npm run launch'
