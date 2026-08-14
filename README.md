@@ -4,7 +4,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 
 ## Current MVP
 
-- Reads the latest 100, 500, or 1,000 papers over a selectable 1-, 7-, or 30-day window for `cs.LG`, `stat.ML`, `cs.CL`, `cs.CV`, `cs.AI`, and `cs.NE`.
+- Reads the latest 100, 500, or 1,000 papers for `cs.LG`, `stat.ML`, `cs.CL`, `cs.CV`, `cs.AI`, and `cs.NE`. `1d` means the latest available arXiv announcement day, while `7d` and `30d` use rolling windows.
 - Gives tracked authors absolute priority.
 - Adds a configurable score when a new paper cites one of your tracked arXiv seed papers, using Semantic Scholar's citation graph.
 - Adds `Featured +5` to papers in DeepXiv's recent 7-day Trending Top 50.
