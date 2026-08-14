@@ -241,10 +241,25 @@ function normalizeDownloads(value) {
   );
 }
 
+function normalizePreferences(value) {
+  const feedPeriodDays = [1, 7, 30].includes(Number(value?.feedPeriodDays))
+    ? Number(value.feedPeriodDays)
+    : 1;
+  const candidateLimit = [100, 500, 1000].includes(Number(value?.candidateLimit))
+    ? Number(value.candidateLimit)
+    : 500;
+  const savedSort = value?.savedSort === "arxiv-date" ? "arxiv-date" : "saved-date";
+  const savedLimit =
+    value?.savedLimit === "all" || [10, 25, 50, 100].includes(Number(value?.savedLimit))
+      ? value.savedLimit === "all" ? "all" : Number(value.savedLimit)
+      : 25;
+  return { feedPeriodDays, candidateLimit, savedSort, savedLimit };
+}
+
 function normalizeState(value) {
   const progress = value?.progress;
   return {
-    version: 2,
+    version: 3,
     reviews: normalizeReviews(value?.reviews),
     notes: normalizeNotes(value?.notes),
     progress:
@@ -266,6 +281,7 @@ function normalizeState(value) {
             manualBookmarkId: null,
           },
     downloads: normalizeDownloads(value?.downloads),
+    preferences: normalizePreferences(value?.preferences),
   };
 }
 

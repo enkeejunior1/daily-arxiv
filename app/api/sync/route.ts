@@ -17,6 +17,7 @@ type StoredSnapshot = {
     reviews?: unknown;
     notes?: unknown;
     progress?: unknown;
+    preferences?: unknown;
   };
 };
 
@@ -80,6 +81,7 @@ export async function PUT(request: Request) {
         reviews: snapshot.state?.reviews,
         notes: snapshot.state?.notes,
         progress: snapshot.state?.progress,
+        preferences: snapshot.state?.preferences,
       },
     });
     if (new TextEncoder().encode(payload).byteLength > MAX_PAYLOAD_BYTES) {

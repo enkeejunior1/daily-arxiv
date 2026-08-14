@@ -19,6 +19,10 @@ import { PwaInstallButton } from "./PwaInstallButton";
 type Decision = "heart" | "superheart";
 type View = "daily" | "saved" | "rules" | "guide";
 type FeedFilter = "all" | "unread" | "heart" | "superheart";
+type FeedPeriodDays = 1 | 7 | 30;
+type CandidateLimit = 100 | 500 | 1000;
+type SavedSort = "saved-date" | "arxiv-date";
+type SavedLimit = 10 | 25 | 50 | 100 | "all";
 
 type DeepXivSignal = {
   rank: number;
@@ -98,6 +102,13 @@ type DownloadRecord = {
   savedAt: string;
 };
 
+type Preferences = {
+  feedPeriodDays: FeedPeriodDays;
+  candidateLimit: CandidateLimit;
+  savedSort: SavedSort;
+  savedLimit: SavedLimit;
+};
+
 type PersistedSnapshot = {
   rules?: Rules;
   state?: {
@@ -105,6 +116,7 @@ type PersistedSnapshot = {
     notes?: Record<string, NoteRecord>;
     progress?: FeedProgress;
     downloads?: Record<string, DownloadRecord>;
+    preferences?: Preferences;
   };
 };
 
@@ -123,12 +135,17 @@ const COMPANION_URL = "http://127.0.0.1:4317";
 const MAC_HELPER_URL = "daily-arxiv-helper://launch";
 const COMPANION_START_TIMEOUT_MS = 50_000;
 const USER_TIME_ZONE = "America/Los_Angeles";
-const DAILY_TARGET = 250;
 const FEATURED_SCORE = 5;
 const PDF_ZOOM_MIN = 50;
 const PDF_ZOOM_MAX = 300;
 const PDF_ZOOM_STEP = 25;
 const NOTE_MAX_LENGTH = 200;
+const DEFAULT_PREFERENCES: Preferences = {
+  feedPeriodDays: 1,
+  candidateLimit: 500,
+  savedSort: "saved-date",
+  savedLimit: 25,
+};
 
 function isMacBrowser() {
   const userAgent = window.navigator.userAgent;
@@ -323,6 +340,21 @@ function normalizeRules(value: Partial<Rules> | undefined): Rules {
   };
 }
 
+function normalizePreferences(value: Partial<Preferences> | undefined): Preferences {
+  const feedPeriodDays = [1, 7, 30].includes(Number(value?.feedPeriodDays))
+    ? (Number(value?.feedPeriodDays) as FeedPeriodDays)
+    : DEFAULT_PREFERENCES.feedPeriodDays;
+  const candidateLimit = [100, 500, 1000].includes(Number(value?.candidateLimit))
+    ? (Number(value?.candidateLimit) as CandidateLimit)
+    : DEFAULT_PREFERENCES.candidateLimit;
+  const savedSort = value?.savedSort === "arxiv-date" ? "arxiv-date" : "saved-date";
+  const savedLimit =
+    value?.savedLimit === "all" || [10, 25, 50, 100].includes(Number(value?.savedLimit))
+      ? (value.savedLimit as SavedLimit)
+      : DEFAULT_PREFERENCES.savedLimit;
+  return { feedPeriodDays, candidateLimit, savedSort, savedLimit };
+}
+
 function normalizeNotes(value: unknown): Record<string, NoteRecord> {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   return Object.fromEntries(
@@ -390,7 +422,7 @@ function stableHash(value: string) {
   return hash >>> 0;
 }
 
-function queueForToday(papers: Paper[], rules: Rules) {
+function queueForToday(papers: Paper[], rules: Rules, candidateLimit: CandidateLimit) {
   const today = todayKey();
   const scored = papers.map((paper) => scorePaper(paper, rules));
   const authorPapers = scored.filter((paper) => paper.authorHit);
@@ -404,13 +436,24 @@ function queueForToday(papers: Paper[], rules: Rules) {
     (a, b) =>
       b.baseScore - a.baseScore || stableHash(`${today}:${a.id}`) - stableHash(`${today}:${b.id}`),
   );
-  return [...authorPapers, ...regular].slice(0, DAILY_TARGET);
+  return [...authorPapers, ...regular].slice(0, candidateLimit);
 }
 
 function formatDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value.slice(0, 10);
   return new Intl.DateTimeFormat("ko-KR", {
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
+function formatLongDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value.slice(0, 10);
+  return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: USER_TIME_ZONE,
+    year: "numeric",
     month: "short",
     day: "numeric",
   }).format(date);
@@ -701,6 +744,7 @@ export function DailyArxivApp() {
   const [view, setView] = useState<View>("daily");
   const [papers, setPapers] = useState<Paper[]>(DEMO_PAPERS);
   const [rules, setRules] = useState<Rules>(DEFAULT_RULES);
+  const [preferences, setPreferences] = useState<Preferences>(DEFAULT_PREFERENCES);
   const [reviews, setReviews] = useState<ReviewRecord[]>([]);
   const [notes, setNotes] = useState<Record<string, NoteRecord>>({});
   const [source, setSource] = useState<"loading" | "arxiv" | "demo">("loading");
@@ -756,6 +800,9 @@ export function DailyArxivApp() {
         );
       }
       if (snapshot.state?.notes) setNotes(normalizeNotes(snapshot.state.notes));
+      if (snapshot.state?.preferences) {
+        setPreferences(normalizePreferences(snapshot.state.preferences));
+      }
       if (includeDownloads && snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
       if (snapshot.state?.progress?.date === todayKey()) {
         setSeenIds(new Set(snapshot.state.progress.seenIds));
@@ -775,6 +822,7 @@ export function DailyArxivApp() {
             notes?: Record<string, NoteRecord>;
             progress?: FeedProgress;
             downloads?: Record<string, DownloadRecord>;
+            preferences?: Preferences;
           };
           applySnapshot({ rules: parsed.rules, state: parsed });
         }
@@ -855,26 +903,33 @@ export function DailyArxivApp() {
   }, [notePanelOpen, selectedPaper?.id]);
 
   useEffect(() => {
+    if (!hydrated) return;
     let active = true;
-    fetch("/api/arxiv")
+    const controller = new AbortController();
+    setSource("loading");
+    fetch(
+      `/api/arxiv?days=${preferences.feedPeriodDays}&limit=${preferences.candidateLimit}`,
+      { signal: controller.signal },
+    )
       .then(async (response) => {
         if (!response.ok) throw new Error("feed unavailable");
         return (await response.json()) as { papers?: Paper[] };
       })
       .then((data) => {
-        if (!active || !data.papers?.length) throw new Error("empty feed");
+        if (!active || !Array.isArray(data.papers)) return;
         setPapers(data.papers);
         setSource("arxiv");
       })
-      .catch(() => {
-        if (!active) return;
+      .catch((error) => {
+        if (!active || (error instanceof DOMException && error.name === "AbortError")) return;
         setPapers(DEMO_PAPERS);
         setSource("demo");
       });
     return () => {
       active = false;
+      controller.abort();
     };
-  }, []);
+  }, [hydrated, preferences.candidateLimit, preferences.feedPeriodDays]);
 
   const citationSeedKey = rules.citationSeeds.map((seed) => seed.arxivId).sort().join(",");
   const activeCitationSource = citationSeedKey ? citationSource : "idle";
@@ -959,7 +1014,7 @@ export function DailyArxivApp() {
       autoBookmarkId,
       manualBookmarkId,
     };
-    const state = { reviews, notes, progress, downloads };
+    const state = { reviews, notes, progress, downloads, preferences };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ rules, ...state }));
     const companionController = new AbortController();
     const cloudController = new AbortController();
@@ -968,7 +1023,7 @@ export function DailyArxivApp() {
         fetch("/api/sync", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rules, state: { reviews, notes, progress } }),
+          body: JSON.stringify({ rules, state: { reviews, notes, progress, preferences } }),
           signal: cloudController.signal,
         }).then((response) => {
           if (!response.ok) setCloudStatus("offline");
@@ -996,7 +1051,7 @@ export function DailyArxivApp() {
       cloudController.abort();
       window.clearTimeout(timer);
     };
-  }, [autoBookmarkId, cloudStatus, companionStatus, downloads, hydrated, manualBookmarkId, notes, reviews, rules, seenIds]);
+  }, [autoBookmarkId, cloudStatus, companionStatus, downloads, hydrated, manualBookmarkId, notes, preferences, reviews, rules, seenIds]);
 
   const enrichedPapers = useMemo(
     () =>
@@ -1007,12 +1062,31 @@ export function DailyArxivApp() {
       })),
     [citationMatches, citationSeedKey, deepxivByPaper, papers],
   );
-  const queue = useMemo(() => queueForToday(enrichedPapers, rules), [enrichedPapers, rules]);
+  const queue = useMemo(
+    () => queueForToday(enrichedPapers, rules, preferences.candidateLimit),
+    [enrichedPapers, preferences.candidateLimit, rules],
+  );
   const statusByPaper = useMemo(
     () => new Map(reviews.map((review) => [review.paper.id, review.decision])),
     [reviews],
   );
   const savedReviews = reviews;
+  const visibleSavedReviews = useMemo(() => {
+    const sorted = [...savedReviews].sort((a, b) => {
+      const aPrimary = Date.parse(
+        preferences.savedSort === "saved-date" ? a.reviewedAt : a.paper.publishedAt,
+      );
+      const bPrimary = Date.parse(
+        preferences.savedSort === "saved-date" ? b.reviewedAt : b.paper.publishedAt,
+      );
+      const primaryDifference =
+        (Number.isNaN(bPrimary) ? 0 : bPrimary) - (Number.isNaN(aPrimary) ? 0 : aPrimary);
+      return primaryDifference || Date.parse(b.reviewedAt) - Date.parse(a.reviewedAt);
+    });
+    return preferences.savedLimit === "all"
+      ? sorted
+      : sorted.slice(0, preferences.savedLimit);
+  }, [preferences.savedLimit, preferences.savedSort, savedReviews]);
   const filteredQueue = queue.filter((paper) => {
     const status = statusByPaper.get(paper.id);
     if (feedFilter === "unread") return !status && !seenIds.has(paper.id);
@@ -1334,7 +1408,7 @@ export function DailyArxivApp() {
       const response = await fetch(`${COMPANION_URL}/snapshot`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rules, state: { reviews, notes, progress, downloads } }),
+        body: JSON.stringify({ rules, state: { reviews, notes, progress, downloads, preferences } }),
       });
       const data = (await response.json()) as { csvPath?: string; error?: string };
       if (!response.ok) throw new Error(data.error ?? "CSV sync failed");
@@ -1373,7 +1447,7 @@ export function DailyArxivApp() {
         <div className="topbar-actions">
           <PwaInstallButton />
           <div className="source-status">
-            <span title="규칙, 선택, 메모, 북마크를 기기 간 동기화">
+            <span title="규칙, 선택, 메모, 북마크, 피드 설정을 기기 간 동기화">
               <i className={cloudStatus === "connected" ? "online" : ""} />
               {cloudStatus === "loading"
                 ? "Cloud 확인 중"
@@ -1424,7 +1498,38 @@ export function DailyArxivApp() {
                 <h1>관심 논문 피드</h1>
                 <p>스크롤해서 지나치고, 클릭해서 저장하고 읽어보세요.</p>
               </div>
-              <strong>{queue.length}</strong>
+              <div className="feed-heading-controls">
+                <div className="period-picker" aria-label="arXiv 조회 기간">
+                  {([1, 7, 30] as FeedPeriodDays[]).map((days) => (
+                    <button
+                      className={preferences.feedPeriodDays === days ? "active" : ""}
+                      key={days}
+                      aria-label={`최근 ${days}일`}
+                      onClick={() => setPreferences((current) => ({ ...current, feedPeriodDays: days }))}
+                    >
+                      {days}d
+                    </button>
+                  ))}
+                </div>
+                <label className="candidate-picker">
+                  <span>arXiv</span>
+                  <select
+                    aria-label="전체 arXiv 후보 논문 수"
+                    value={preferences.candidateLimit}
+                    onChange={(event) =>
+                      setPreferences((current) => ({
+                        ...current,
+                        candidateLimit: Number(event.target.value) as CandidateLimit,
+                      }))
+                    }
+                  >
+                    {[100, 500, 1000].map((limit) => (
+                      <option key={limit} value={limit}>{limit}</option>
+                    ))}
+                  </select>
+                </label>
+                <strong className="feed-count" title="현재 관심 규칙에 맞는 논문 수">{queue.length}</strong>
+              </div>
             </div>
             <div className="gesture-guide" aria-label="피드 사용법">
               <span><b>Scroll</b> skip</span>
@@ -1776,13 +1881,50 @@ export function DailyArxivApp() {
               <h1>선택한 논문</h1>
               <p>Heart와 Superheart 논문을 한곳에서 관리합니다.</p>
             </div>
-            <button className="primary-button" onClick={() => void syncRepositoryCsv()} disabled={!savedReviews.length}>
-              {companionStatus === "connected" ? "Sync choices CSV" : "CSV 다운로드"}
-            </button>
+            <div className="saved-header-actions">
+              <div className="saved-display-controls">
+                <div className="saved-sort-picker" aria-label="Saved 정렬 기준">
+                  <span>정렬</span>
+                  <button
+                    className={preferences.savedSort === "saved-date" ? "active" : ""}
+                    onClick={() => setPreferences((current) => ({ ...current, savedSort: "saved-date" }))}
+                  >저장 날짜</button>
+                  <button
+                    className={preferences.savedSort === "arxiv-date" ? "active" : ""}
+                    onClick={() => setPreferences((current) => ({ ...current, savedSort: "arxiv-date" }))}
+                  >arXiv 날짜</button>
+                </div>
+                <label className="saved-limit-picker">
+                  <span>최대</span>
+                  <select
+                    aria-label="Saved 최대 표시 논문 수"
+                    value={preferences.savedLimit}
+                    onChange={(event) =>
+                      setPreferences((current) => ({
+                        ...current,
+                        savedLimit:
+                          event.target.value === "all"
+                            ? "all"
+                            : (Number(event.target.value) as SavedLimit),
+                      }))
+                    }
+                  >
+                    {[10, 25, 50, 100].map((limit) => (
+                      <option key={limit} value={limit}>{limit}</option>
+                    ))}
+                    <option value="all">전체</option>
+                  </select>
+                </label>
+                <span className="saved-count">{visibleSavedReviews.length} / {savedReviews.length}</span>
+              </div>
+              <button className="primary-button" onClick={() => void syncRepositoryCsv()} disabled={!savedReviews.length}>
+                {companionStatus === "connected" ? "Sync choices CSV" : "CSV 다운로드"}
+              </button>
+            </div>
           </div>
           {savedReviews.length ? (
             <div className="saved-list">
-              {[...savedReviews].reverse().map((review) => (
+              {visibleSavedReviews.map((review) => (
                 <article className="saved-row" key={`${review.paper.id}-${review.reviewedAt}`}>
                   <div className={`saved-decision ${review.decision}`}>{review.decision === "superheart" ? "♥+" : "♥"}</div>
                   <div className="saved-main">
@@ -1792,6 +1934,7 @@ export function DailyArxivApp() {
                     </div>
                     <h2>{review.paper.title}</h2>
                     <p>{review.paper.authors[0]} · {review.paper.authors.at(-1)}</p>
+                    <p className="saved-dates">저장 {formatLongDate(review.reviewedAt)} · arXiv {formatLongDate(review.paper.publishedAt)}</p>
                     {notes[review.paper.id]?.text.trim() ? (
                       <p className="saved-note">“{notes[review.paper.id].text.trim()}”</p>
                     ) : null}
@@ -1817,7 +1960,7 @@ export function DailyArxivApp() {
             <div>
               <p className="eyebrow">RANKING RULES</p>
               <h1>관심 신호</h1>
-              <p>Author는 항상 먼저, 나머지는 점수순으로 하루 최대 250개를 보여줍니다.</p>
+              <p>Author는 항상 먼저, 나머지는 점수순으로 선택한 기간과 후보 수 안에서 보여줍니다.</p>
             </div>
             <button className="ghost-button" onClick={() => setRules(DEFAULT_RULES)}>기본값 복원</button>
           </div>
@@ -1892,7 +2035,7 @@ export function DailyArxivApp() {
                   : "Browser fallback"}
             </span>
             <p>
-              Cloud는 규칙·선택·메모·북마크를 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
+              Cloud는 규칙·선택·메모·북마크·피드 표시 설정을 공유합니다. Mac companion은 <code>config/rules.json</code>, <code>choices/{new Date().getFullYear()}.csv</code>, gitignored PDF cache를 계속 관리합니다.
             </p>
           </div>
         </section>
@@ -1931,7 +2074,7 @@ export function DailyArxivApp() {
             <article>
               <p className="eyebrow">SYNC</p>
               <h2>기기 사이에서 이어보기</h2>
-              <ul><li>같은 ChatGPT 계정으로 로그인</li><li>Rules, Heart, ♥+, 메모, 북마크는 자동 동기화</li><li>PDF 파일 자체는 각 기기에 따로 저장</li></ul>
+              <ul><li>같은 ChatGPT 계정으로 로그인</li><li>Rules, Heart, ♥+, 메모, 북마크, 기간 설정은 자동 동기화</li><li>PDF 파일 자체는 각 기기에 따로 저장</li></ul>
             </article>
           </div>
 

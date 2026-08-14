@@ -4,18 +4,19 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 
 ## Current MVP
 
-- Reads up to 500 papers from the current arXiv feeds for `cs.LG`, `stat.ML`, `cs.CL`, `cs.CV`, `cs.AI`, and `cs.NE`.
+- Reads the latest 100, 500, or 1,000 papers over a selectable 1-, 7-, or 30-day window for `cs.LG`, `stat.ML`, `cs.CL`, `cs.CV`, `cs.AI`, and `cs.NE`.
 - Gives tracked authors absolute priority.
 - Adds a configurable score when a new paper cites one of your tracked arXiv seed papers, using Semantic Scholar's citation graph.
 - Adds `Featured +5` to papers in DeepXiv's recent 7-day Trending Top 50.
 - Scores every positive keyword once at `+2` and every negative keyword once at `-2` across the title and abstract.
 - Supports keyword alias groups separated by `|`; matching any number of aliases in one group applies that group's score only once.
-- Shows up to 250 papers, ordered by score with a stable daily shuffle for ties.
+- Shows matching papers up to the selected candidate limit, ordered by score with a stable daily shuffle for ties.
 - Uses a two-pane feed: scroll to skip, click to open the PDF, double-click a card for Heart, and double-click `♥+` for Superheart.
 - Renders papers with Mozilla PDF.js so trackpad pinch zooms only the PDF under the pointer, while the feed and app chrome stay fixed.
 - Retries temporary arXiv failures through a fallback host and offers an in-reader Retry action when a PDF still cannot load.
 - Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
-- Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
+- Syncs rules, Heart/Superheart choices, automatic/manual bookmarks, and feed/library display preferences across signed-in devices with Cloudflare D1.
+- Sorts Saved papers by the Heart date or arXiv date and limits the visible library to 10, 25, 50, 100, or all papers.
 - Adds an optional 200-character note beside the PDF and syncs it across devices without automatically selecting the paper.
 - Adds a Mac-local Codex paper guide beside the PDF, with a Korean method-focused prompt, automatic helper startup from the hosted AI button, and a per-paper cached response under `.local/ai/`.
 - Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
@@ -45,7 +46,7 @@ Android browsers choose the physical download directory. `Download PDF` saves to
 ## Recommended daily workflow
 
 1. Set tracked authors and keyword groups in **Rules**. Treat Rules as a filter profile: tune it when your interests change, not every day.
-2. Spend 15–25 minutes in **Daily**. Scroll past irrelevant papers, and open the PDF only when the title or abstract is promising. The automatic bookmark remembers how far you got.
+2. Choose a 1-, 7-, or 30-day window and a 100/500/1,000-paper candidate pool in **Daily**. Scroll past irrelevant papers, and open the PDF only when the title or abstract is promising. The automatic bookmark remembers how far you got.
 3. Use **Heart** for papers worth reading later and **Superheart** for the 1–3 papers you intend to read first. Selecting the same action again removes it.
 4. Finish in **Saved**, not in the full feed. This is the short reading queue that should lead to downloading, reading, or removing a paper.
 
