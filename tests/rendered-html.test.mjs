@@ -74,6 +74,8 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(companion, /sandboxMode: "read-only"/);
   assert.match(companion, /url\.pathname === "\/ai"/);
   assert.match(companion, /promptVersion: aiPromptVersion/);
+  assert.match(companion, /daily-arxiv-enkeejunior1\.enkeejunior1\.chatgpt\.site/);
+  assert.match(companion, /Access-Control-Allow-Private-Network/);
   assert.match(companion, /function normalizeNotes/);
   assert.match(companion, /normalizePositiveKeywordWeights/);
   assert.match(companion, /"note"/);
@@ -96,6 +98,9 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /CODEX PAPER GUIDE/);
   assert.match(component, /PDF를 읽고 method를 분석하는 중/);
   assert.match(component, /저장된 Codex 논문 소개/);
+  assert.match(component, /daily-arxiv-helper:\/\/launch/);
+  assert.match(component, /waitForCompanion/);
+  assert.match(component, /Mac helper를 시작하는 중/);
   assert.match(component, /Daily arXiv 사용법/);
   assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
@@ -188,10 +193,12 @@ test("supports Android installation and cross-device cloud state", async () => {
 });
 
 test("provides a one-click Mac background launcher", async () => {
-  const [launcher, appExecutable, infoPlist, packageJson] = await Promise.all([
+  const [launcher, appExecutable, infoPlist, helperExecutable, helperInfoPlist, packageJson] = await Promise.all([
     readFile(new URL("../scripts/launch-background.mjs", import.meta.url), "utf8"),
     readFile(new URL("../Daily arXiv.app/Contents/MacOS/Daily arXiv", import.meta.url), "utf8"),
     readFile(new URL("../Daily arXiv.app/Contents/Info.plist", import.meta.url), "utf8"),
+    readFile(new URL("../Daily arXiv Helper.app/Contents/MacOS/Daily arXiv Helper", import.meta.url), "utf8"),
+    readFile(new URL("../Daily arXiv Helper.app/Contents/Info.plist", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
@@ -200,6 +207,10 @@ test("provides a one-click Mac background launcher", async () => {
   assert.match(launcher, /appIsReady/);
   assert.match(launcher, /--stop/);
   assert.match(appExecutable, /npm run launch/);
+  assert.match(appExecutable, /lsregister/);
   assert.match(infoPlist, /com\.enkeejunior1\.daily-arxiv/);
+  assert.match(helperExecutable, /npm run launch -- --no-open/);
+  assert.match(helperInfoPlist, /daily-arxiv-helper/);
+  assert.match(helperInfoPlist, /LSBackgroundOnly/);
   assert.match(packageJson, /"launch": "node scripts\/launch-background\.mjs"/);
 });

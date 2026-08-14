@@ -120,6 +120,8 @@ type CloudSnapshotResponse = {
 const STORAGE_KEY = "daily-arxiv-state-v3";
 const LEGACY_STORAGE_KEY = "daily-arxiv-state-v2";
 const COMPANION_URL = "http://127.0.0.1:4317";
+const MAC_HELPER_URL = "daily-arxiv-helper://launch";
+const COMPANION_START_TIMEOUT_MS = 50_000;
 const USER_TIME_ZONE = "America/Los_Angeles";
 const DAILY_TARGET = 250;
 const FEATURED_SCORE = 5;
@@ -127,6 +129,46 @@ const PDF_ZOOM_MIN = 50;
 const PDF_ZOOM_MAX = 300;
 const PDF_ZOOM_STEP = 25;
 const NOTE_MAX_LENGTH = 200;
+
+function isMacBrowser() {
+  const userAgent = window.navigator.userAgent;
+  const reportsAsIPad = /Macintosh/i.test(userAgent) && window.navigator.maxTouchPoints > 1;
+  return !reportsAsIPad && /Macintosh|Mac OS X/i.test(userAgent);
+}
+
+function launchMacHelper() {
+  const link = document.createElement("a");
+  link.href = MAC_HELPER_URL;
+  link.hidden = true;
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
+async function companionIsReady(timeoutMs = 1_400) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(`${COMPANION_URL}/health`, {
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    return response.ok;
+  } catch {
+    return false;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function waitForCompanion(timeoutMs = COMPANION_START_TIMEOUT_MS) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (await companionIsReady()) return true;
+    await new Promise((resolve) => window.setTimeout(resolve, 650));
+  }
+  return false;
+}
 
 function todayKey() {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -757,25 +799,20 @@ export function DailyArxivApp() {
         setCloudStatus("offline");
       }
 
-      const isLocalApp = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-      if (isLocalApp) {
-        try {
-          const response = await fetch(`${COMPANION_URL}/snapshot`, { signal: controller.signal });
-          if (!response.ok) throw new Error("local companion unavailable");
-          const snapshot = (await response.json()) as CompanionSnapshot;
-          if (!active) return;
-          if (loadedSharedState) {
-            if (snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
-          } else {
-            applySnapshot(snapshot);
-            loadedSharedState = true;
-          }
-          setCompanionStatus("connected");
-        } catch {
-          if (!active) return;
-          setCompanionStatus("offline");
+      try {
+        const response = await fetch(`${COMPANION_URL}/snapshot`, { signal: controller.signal });
+        if (!response.ok) throw new Error("local companion unavailable");
+        const snapshot = (await response.json()) as CompanionSnapshot;
+        if (!active) return;
+        if (loadedSharedState) {
+          if (snapshot.state?.downloads) setDownloads(snapshot.state.downloads);
+        } else {
+          applySnapshot(snapshot);
+          loadedSharedState = true;
         }
-      } else {
+        setCompanionStatus("connected");
+      } catch {
+        if (!active) return;
         setCompanionStatus("offline");
       }
 
@@ -1065,16 +1102,6 @@ export function DailyArxivApp() {
   }, []);
 
   const runAiGuide = useCallback(async (paper: ScoredPaper, force = false) => {
-    if (companionStatus !== "connected") {
-      setAiGuides((previous) => ({
-        ...previous,
-        [paper.id]: {
-          status: "error",
-          error: "AI 논문 소개는 Mac에서 npm run dev로 앱을 열었을 때 사용할 수 있어요.",
-        },
-      }));
-      return;
-    }
     if (!force && aiGuides[paper.id]?.status === "ready") return;
 
     setAiGuides((previous) => ({
@@ -1082,6 +1109,20 @@ export function DailyArxivApp() {
       [paper.id]: { status: "loading" },
     }));
     try {
+      if (companionStatus !== "connected") {
+        if (!isMacBrowser()) {
+          throw new Error("AI 논문 소개 자동 실행은 Codex가 로그인된 Mac에서 사용할 수 있어요.");
+        }
+        setCompanionStatus("loading");
+        setNotice("Daily arXiv Mac helper를 시작하고 있어요.");
+        launchMacHelper();
+        if (!await waitForCompanion()) {
+          setCompanionStatus("offline");
+          throw new Error("Mac helper를 시작하지 못했어요. Dock의 Daily arXiv를 한 번 연 뒤 다시 시도해주세요.");
+        }
+        setCompanionStatus("connected");
+      }
+
       const response = await fetch(`${COMPANION_URL}/ai`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1112,6 +1153,7 @@ export function DailyArxivApp() {
       }));
       setNotice(data.cached ? "저장된 Codex 논문 소개를 열었어요." : "Codex 논문 소개가 완성됐어요.");
     } catch (error) {
+      if (error instanceof TypeError) setCompanionStatus("offline");
       setAiGuides((previous) => ({
         ...previous,
         [paper.id]: {
@@ -1681,8 +1723,8 @@ export function DailyArxivApp() {
                       {currentAiGuide?.status === "loading" ? (
                         <div className="ai-guide-loading" role="status">
                           <i />
-                          <strong>PDF를 읽고 method를 분석하는 중</strong>
-                          <span>첫 분석은 몇 분 걸릴 수 있어요. 완성된 답변은 로컬에 저장됩니다.</span>
+                          <strong>{companionStatus === "connected" ? "PDF를 읽고 method를 분석하는 중" : "Mac helper를 시작하는 중"}</strong>
+                          <span>{companionStatus === "connected" ? "첫 분석은 몇 분 걸릴 수 있어요. 완성된 답변은 로컬에 저장됩니다." : "처음 한 번은 Safari에서 Daily arXiv 앱 열기를 허용해주세요."}</span>
                         </div>
                       ) : currentAiGuide?.status === "ready" ? (
                         <>
@@ -1704,9 +1746,9 @@ export function DailyArxivApp() {
                         <div className="ai-guide-error">
                           <strong>AI 논문 소개를 열 수 없어요</strong>
                           <p>{currentAiGuide?.error ?? "Mac의 로컬 앱에서 사용할 수 있는 기능입니다."}</p>
-                          {companionStatus === "connected" ? (
-                            <button onClick={() => void runAiGuide(currentPaper)}>다시 시도</button>
-                          ) : null}
+                          <button onClick={() => void runAiGuide(currentPaper)}>
+                            {companionStatus === "connected" ? "다시 시도" : "Mac 앱 시작 후 다시 시도"}
+                          </button>
                         </div>
                       )}
                     </aside>

@@ -17,7 +17,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Installs as an Android PWA, opens the PDF reader as a mobile full-screen sheet, and supports two-finger PDF pinch zoom.
 - Syncs rules, Heart/Superheart choices, and automatic/manual bookmarks across signed-in devices with Cloudflare D1.
 - Adds an optional 200-character note beside the PDF and syncs it across devices without automatically selecting the paper.
-- Adds a Mac-local Codex paper guide beside the PDF, with a Korean method-focused prompt and a per-paper cached response under `.local/ai/`.
+- Adds a Mac-local Codex paper guide beside the PDF, with a Korean method-focused prompt, automatic helper startup from the hosted AI button, and a per-paper cached response under `.local/ai/`.
 - Downloads a selected PDF to Android's browser-managed Downloads area with a `date_title.pdf` filename.
 - Restores automatic and manual bookmarks when the app reopens.
 - Saves rules to `config/rules.json` and selected papers to a yearly CSV under `choices/`.
@@ -30,9 +30,9 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 npm run dev
 ```
 
-This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage, the PDF cache, and the Codex paper guide. The AI button uses the Codex login already available on the Mac, extracts text from the PDF, and stores the response under `.local/ai/`; it does not require an OpenAI API key. DeepXiv's public trending endpoint does not require a token.
+This starts both the web UI and the local companion. The companion only listens on `127.0.0.1` and provides repository file storage, the PDF cache, and the Codex paper guide. It accepts browser requests only from localhost or this app's exact deployed origin. The AI button uses the Codex login already available on the Mac, extracts text from the PDF, and stores the response under `.local/ai/`; it does not require an OpenAI API key. DeepXiv's public trending endpoint does not require a token.
 
-For one-click Mac startup, double-click `Daily arXiv.app` in Finder. It starts the same web UI and companion in the background, waits until both are ready, and opens `http://localhost:3000/`. Clicking it again only reopens the browser instead of starting a duplicate server. Keep the app bundle in this repository; you can drag it to the Dock without moving it. Runtime logs and the managed process ID stay under `.local/`. Run `npm run stop` when you want to stop the background server.
+For one-click Mac startup, double-click `Daily arXiv.app` in Finder. It registers the hidden `Daily arXiv Helper.app`, starts the same web UI and companion in the background, waits until both are ready, and opens `http://localhost:3000/`. Clicking it again only reopens the browser instead of starting a duplicate server. After that one-time registration, pressing **AI** on the deployed site wakes the helper, waits for the companion, and continues the selected paper analysis automatically. Safari may ask permission to open Daily arXiv Helper the first time. Keep both app bundles in this repository; you can drag the main app to the Dock without moving it. Runtime logs and the managed process ID stay under `.local/`. Run `npm run stop` when you want to stop the background server.
 
 Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
 
@@ -77,5 +77,8 @@ date,decision,arxiv_id,arxiv_link,title,first_author,last_author,score,note,sele
 ## Recent choices
 
 <!-- DAILY_ARXIV_CHOICES_START -->
-No published choices yet.
+| Date | Pick | Paper | Authors | Note |
+| --- | --- | --- | --- | --- |
+| 2026-08-13 | ♥ | [How Can Driving World Models Do Counterfactual Prediction?](https://arxiv.org/abs/2608.11601) | Jiaru Zhang · Ziran Wang |  |
+| 2026-08-13 | ♥ | [Small-Scale Experiments: Are We There Yet?](https://arxiv.org/abs/2608.11859) | Nicholas Lourie · Sanae Lotfi |  |
 <!-- DAILY_ARXIV_CHOICES_END -->

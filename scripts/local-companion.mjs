@@ -14,6 +14,9 @@ const rulesPath = path.join(projectRoot, "config", "rules.json");
 const choicesRoot = path.join(projectRoot, "choices");
 const readmePath = path.join(projectRoot, "README.md");
 const port = Number.parseInt(process.env.DAILY_ARXIV_COMPANION_PORT ?? "4317", 10);
+const allowedRemoteOrigins = new Set([
+  "https://daily-arxiv-enkeejunior1.enkeejunior1.chatgpt.site",
+]);
 const maxBodyBytes = 5 * 1024 * 1024;
 const maxPdfBytes = 100 * 1024 * 1024;
 const maxPaperTextCharacters = 140_000;
@@ -74,6 +77,7 @@ function localDateKey(date = new Date()) {
 function allowedOrigin(request) {
   const origin = request.headers.origin;
   if (!origin) return "*";
+  if (allowedRemoteOrigins.has(origin)) return origin;
   try {
     const url = new URL(origin);
     if (url.hostname === "localhost" || url.hostname === "127.0.0.1") return origin;
@@ -86,6 +90,9 @@ function allowedOrigin(request) {
 function setCors(request, response) {
   const origin = allowedOrigin(request);
   if (origin) response.setHeader("Access-Control-Allow-Origin", origin);
+  if (request.headers["access-control-request-private-network"] === "true") {
+    response.setHeader("Access-Control-Allow-Private-Network", "true");
+  }
   response.setHeader("Vary", "Origin");
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
   response.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
