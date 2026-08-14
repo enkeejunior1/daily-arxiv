@@ -152,7 +152,7 @@ export async function GET(request: Request) {
     ).slice(0, limit);
     return Response.json(
       { papers, source, days, limit },
-      { headers: { "Cache-Control": "public, max-age=300, s-maxage=3600" } },
+      { headers: { "Cache-Control": "public, max-age=0, s-maxage=900" } },
     );
   } catch (error) {
     return Response.json(
