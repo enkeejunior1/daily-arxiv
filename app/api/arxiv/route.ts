@@ -81,7 +81,8 @@ function apiDate(date: Date) {
 
 function arxivApiUrl(days: number, limit: number) {
   const end = new Date();
-  const start = new Date(end.getTime() - days * 24 * 60 * 60 * 1000);
+  const lookupDays = days === 1 ? 7 : days;
+  const start = new Date(end.getTime() - lookupDays * 24 * 60 * 60 * 1000);
   const categories = CATEGORIES.map((category) => `cat:${category}`).join(" OR ");
   const searchQuery = `(${categories}) AND submittedDate:[${apiDate(start)} TO ${apiDate(end)}]`;
   const params = new URLSearchParams({
@@ -92,6 +93,21 @@ function arxivApiUrl(days: number, limit: number) {
     sortOrder: "descending",
   });
   return `${API_URL}?${params}`;
+}
+
+function latestArxivDay(papers: ReturnType<typeof parseFeed>) {
+  const latestDate = papers.reduce((latest, paper) => {
+    const timestamp = Date.parse(paper.publishedAt);
+    if (Number.isNaN(timestamp)) return latest;
+    const date = new Date(timestamp).toISOString().slice(0, 10);
+    return date > latest ? date : latest;
+  }, "");
+  return latestDate
+    ? papers.filter((paper) => {
+        const timestamp = Date.parse(paper.publishedAt);
+        return !Number.isNaN(timestamp) && new Date(timestamp).toISOString().startsWith(latestDate);
+      })
+    : papers;
 }
 
 async function fetchFeed(url: string) {
@@ -125,13 +141,15 @@ export async function GET(request: Request) {
       );
     }
 
+    const parsedPapers = parseFeed(await response.text(), limit);
     const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
-    const papers = parseFeed(await response.text(), limit)
-      .filter((paper) => {
-        const publishedAt = Date.parse(paper.publishedAt);
-        return Number.isNaN(publishedAt) || publishedAt >= cutoff;
-      })
-      .slice(0, limit);
+    const papers = (days === 1
+      ? latestArxivDay(parsedPapers)
+      : parsedPapers.filter((paper) => {
+          const publishedAt = Date.parse(paper.publishedAt);
+          return Number.isNaN(publishedAt) || publishedAt >= cutoff;
+        })
+    ).slice(0, limit);
     return Response.json(
       { papers, source, days, limit },
       { headers: { "Cache-Control": "public, max-age=300, s-maxage=3600" } },

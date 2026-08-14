@@ -112,6 +112,8 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
   assert.match(arxivRoute, /submittedDate:/);
+  assert.match(arxivRoute, /days === 1 \? 7 : days/);
+  assert.match(arxivRoute, /latestArxivDay/);
   assert.match(arxivRoute, /ALLOWED_PERIODS = new Set\(\[1, 7, 30\]\)/);
   assert.match(arxivRoute, /ALLOWED_LIMITS = new Set\(\[100, 500, 1000\]\)/);
   assert.match(deepxivRoute, /TRENDING_LIMIT = 50/);

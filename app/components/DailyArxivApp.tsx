@@ -1504,7 +1504,8 @@ export function DailyArxivApp() {
                     <button
                       className={preferences.feedPeriodDays === days ? "active" : ""}
                       key={days}
-                      aria-label={`최근 ${days}일`}
+                      aria-label={days === 1 ? "가장 최근 arXiv 발표일" : `최근 ${days}일`}
+                      title={days === 1 ? "가장 최근 arXiv 발표일 1회분" : `최근 ${days}일`}
                       onClick={() => setPreferences((current) => ({ ...current, feedPeriodDays: days }))}
                     >
                       {days}d
