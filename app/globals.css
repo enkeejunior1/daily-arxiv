@@ -704,6 +704,83 @@ button {
   margin: 14px 0 0;
 }
 
+.saved-header-actions {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.saved-display-controls,
+.saved-sort-picker,
+.saved-limit-picker {
+  align-items: center;
+  display: flex;
+}
+
+.saved-display-controls {
+  background: #e7ebe5;
+  border: 1px solid #d8ded8;
+  border-radius: 11px;
+  gap: 7px;
+  padding: 5px;
+}
+
+.saved-sort-picker {
+  gap: 3px;
+}
+
+.saved-sort-picker > span,
+.saved-limit-picker > span {
+  color: #78827c;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0 3px;
+  text-transform: uppercase;
+}
+
+.saved-sort-picker button {
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  color: #68736c;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+  padding: 7px 9px;
+}
+
+.saved-sort-picker button.active {
+  background: var(--paper);
+  box-shadow: 0 1px 4px rgba(32, 49, 39, 0.09);
+  color: var(--green-deep);
+}
+
+.saved-limit-picker {
+  border-left: 1px solid #d3dad4;
+  gap: 2px;
+  padding-left: 6px;
+}
+
+.saved-limit-picker select {
+  background: var(--paper);
+  border: 0;
+  border-radius: 7px;
+  color: var(--green-deep);
+  font-size: 10px;
+  font-weight: 750;
+  padding: 7px 22px 7px 8px;
+}
+
+.saved-count {
+  color: #758079;
+  font-size: 9px;
+  font-weight: 750;
+  padding: 0 6px 0 2px;
+  white-space: nowrap;
+}
+
 .primary-button:disabled {
   cursor: default;
   opacity: 0.4;
@@ -866,6 +943,12 @@ button {
   line-height: 1.55;
   margin-top: 10px;
   padding-left: 10px;
+}
+
+.saved-main .saved-dates {
+  color: #809087;
+  font-size: 9px;
+  margin-top: 7px;
 }
 
 .saved-meta span {
@@ -1447,6 +1530,81 @@ button {
   height: 42px;
   justify-content: center;
   width: 42px;
+}
+
+.feed-heading-controls {
+  align-items: center;
+  display: flex;
+  gap: 7px;
+}
+
+.period-picker {
+  background: #e1e7e1;
+  border: 1px solid #d2dad3;
+  border-radius: 9px;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+}
+
+.period-picker button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: #708078;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 6px 7px;
+}
+
+.period-picker button.active {
+  background: var(--paper);
+  box-shadow: 0 1px 4px rgba(32, 49, 39, 0.1);
+  color: var(--green-deep);
+}
+
+.candidate-picker {
+  align-items: center;
+  background: #e1e7e1;
+  border: 1px solid #d2dad3;
+  border-radius: 9px;
+  display: flex;
+  gap: 3px;
+  padding: 3px 4px 3px 7px;
+}
+
+.candidate-picker span {
+  color: #728078;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.candidate-picker select {
+  background: var(--paper);
+  border: 0;
+  border-radius: 6px;
+  color: var(--green-deep);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 6px 18px 6px 6px;
+}
+
+.feed-heading .feed-count {
+  align-items: center;
+  background: var(--green-deep);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  flex: 0 0 auto;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
 }
 
 .gesture-guide {
@@ -2566,11 +2724,26 @@ button {
   }
 
   .feed-heading {
+    align-items: flex-start;
+    gap: 10px;
     padding-bottom: 12px;
   }
 
   .feed-heading h1 {
     font-size: 31px;
+  }
+
+  .feed-heading-controls {
+    align-self: flex-end;
+    gap: 5px;
+  }
+
+  .period-picker button {
+    padding: 6px;
+  }
+
+  .candidate-picker span {
+    display: none;
   }
 
   .gesture-guide {
@@ -2802,6 +2975,16 @@ button {
     align-items: start;
     flex-direction: column;
     gap: 20px;
+  }
+
+  .saved-header-actions {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .saved-display-controls {
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .guide-grid {

@@ -39,6 +39,8 @@ test("server-renders the Daily arXiv product", async () => {
   assert.match(html, /Repo 확인 중/);
   assert.match(html, /Cloud 확인 중/);
   assert.match(html, /Double-click/);
+  assert.match(html, /전체 arXiv 후보 논문 수/);
+  assert.match(html, />1(?:<!-- -->)?d<\/button>/);
   assert.match(html, />Guide<\/button>/);
   assert.doesNotMatch(html, /Figure 1|Institution|X API/);
 });
@@ -77,12 +79,17 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(companion, /daily-arxiv-enkeejunior1\.enkeejunior1\.chatgpt\.site/);
   assert.match(companion, /Access-Control-Allow-Private-Network/);
   assert.match(companion, /function normalizeNotes/);
+  assert.match(companion, /function normalizePreferences/);
   assert.match(companion, /normalizePositiveKeywordWeights/);
   assert.match(companion, /"note"/);
   assert.match(companion, /\| Note \|/);
   assert.match(component, /COMPANION_URL/);
-  assert.match(component, /DAILY_TARGET = 250/);
-  assert.match(component, /하루 최대 250개/);
+  assert.match(component, /feedPeriodDays: FeedPeriodDays/);
+  assert.match(component, /candidateLimit: CandidateLimit/);
+  assert.match(component, /savedSort: SavedSort/);
+  assert.match(component, /savedLimit: SavedLimit/);
+  assert.match(component, /저장 날짜/);
+  assert.match(component, /arXiv 날짜/);
   assert.match(component, /DeepXiv Top 50/);
   assert.match(component, /alias는 \| 로 연결/);
   assert.match(component, /custom \+1–100/);
@@ -104,10 +111,12 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /Daily arXiv 사용법/);
   assert.match(component, /추천 루틴/);
   assert.doesNotMatch(component, /institutions|featuredShares|previewMode/);
-  assert.match(arxivRoute, /entries\.slice\(0, 500\)/);
+  assert.match(arxivRoute, /submittedDate:/);
+  assert.match(arxivRoute, /ALLOWED_PERIODS = new Set\(\[1, 7, 30\]\)/);
+  assert.match(arxivRoute, /ALLOWED_LIMITS = new Set\(\[100, 500, 1000\]\)/);
   assert.match(deepxivRoute, /TRENDING_LIMIT = 50/);
   assert.match(citationRoute, /SEMANTIC_SCHOLAR_BATCH_URL/);
-  assert.match(citationRoute, /MAX_PAPERS = 500/);
+  assert.match(citationRoute, /MAX_PAPERS = 1000/);
   assert.match(citationRoute, /BATCH_SIZE = 100/);
 });
 
@@ -187,6 +196,7 @@ test("supports Android installation and cross-device cloud state", async () => {
   assert.match(syncRoute, /oai-authenticated-user-id|currentUserId/);
   assert.match(syncRoute, /ON CONFLICT\(user_id\)/);
   assert.match(syncRoute, /notes: snapshot\.state\?\.notes/);
+  assert.match(syncRoute, /preferences: snapshot\.state\?\.preferences/);
   assert.match(component, /Cloud synced across devices/);
   assert.match(component, /Download PDF/);
   assert.match(component, /paper-reader.*has-paper/);

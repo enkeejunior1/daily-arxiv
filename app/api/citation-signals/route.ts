@@ -1,7 +1,7 @@
 const SEMANTIC_SCHOLAR_BATCH_URL =
   "https://api.semanticscholar.org/graph/v1/paper/batch?fields=externalIds,references.externalIds";
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000;
-const MAX_PAPERS = 500;
+const MAX_PAPERS = 1000;
 const MAX_SEEDS = 50;
 const BATCH_SIZE = 100;
 const API_KEY =
