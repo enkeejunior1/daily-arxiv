@@ -17,10 +17,10 @@
     },
     "2025-08-27:2026-08-27:rosinality": {
       "start": "2025-08-27T00:00:00Z",
-      "end": "2026-08-27T19:34:20.101Z",
-      "nextToken": "b26v89c19zqg8o3fsch5e65kghbntz2kbue5xcjnwmq2l",
-      "complete": false,
-      "lastSyncedAt": "2026-08-27T19:34:35.101Z"
+      "end": "2026-08-27T19:35:27.750Z",
+      "nextToken": null,
+      "complete": true,
+      "lastSyncedAt": "2026-08-27T19:35:42.750Z"
     }
   }
 }
