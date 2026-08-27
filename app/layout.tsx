@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
 const description = "A local-first, mode-seeking paper feed powered by authors, keywords, citation seeds, and DeepXiv.";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#163d2f",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -13,6 +20,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Daily arXiv",
     description,
+    applicationName: "Daily arXiv",
+    manifest: "/manifest.webmanifest",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "Daily arXiv",
+    },
+    icons: {
+      apple: "/app-icon-192.png",
+    },
     openGraph: {
       title: "Daily arXiv",
       description,

@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1786504447594,
+      "tag": "0000_dizzy_hellcat",
+      "breakpoints": true
+    }
+  ]
 }
