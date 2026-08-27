@@ -283,7 +283,9 @@ async function main() {
   const maxPosts = positiveInteger(args["max-posts"], mode === "backfill" ? 2_000 : 1_000, 10_000);
   const now = new Date().toISOString();
   const start = mode === "backfill" ? isoDate(args.start) : "";
-  const end = mode === "backfill" ? isoDate(args.end, true) : "";
+  const requestedEnd = mode === "backfill" ? isoDate(args.end, true) : "";
+  const latestAllowedEnd = new Date(Date.now() - 15_000).toISOString().replace(".000Z", "Z");
+  const end = requestedEnd && requestedEnd > latestAllowedEnd ? latestAllowedEnd : requestedEnd;
   if (mode === "backfill" && (!start || !end || start >= end)) {
     throw new Error("Backfill requires --start=YYYY-MM-DD and --end=YYYY-MM-DD.");
   }
