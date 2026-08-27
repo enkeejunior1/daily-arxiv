@@ -38,6 +38,20 @@ function positiveInteger(value, fallback, maximum) {
     : fallback;
 }
 
+function normalizeBearerToken(value) {
+  const token = String(value ?? "")
+    .trim()
+    .replace(/^["'“”‘’]+|["'“”‘’]+$/g, "")
+    .trim();
+  if ([...token].some((character) => {
+    const codePoint = character.codePointAt(0);
+    return codePoint < 0x21 || codePoint > 0x7e;
+  })) {
+    throw new Error("X_BEARER_TOKEN contains an unsupported character. Copy only the token value, without surrounding quotes.");
+  }
+  return token;
+}
+
 function isoDate(value, endOfDay = false) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? "")) return "";
   const suffix = endOfDay ? "T23:59:59Z" : "T00:00:00Z";
@@ -258,7 +272,7 @@ async function writeArchive(rows, config, generatedAt) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const mode = args.mode === "backfill" ? "backfill" : "recent";
-  const token = process.env.X_BEARER_TOKEN?.trim();
+  const token = normalizeBearerToken(process.env.X_BEARER_TOKEN);
   if (!token) throw new Error("Set X_BEARER_TOKEN before running the X collector.");
 
   const config = JSON.parse(await readFile(configPath, "utf8"));
@@ -366,4 +380,4 @@ if (isDirectRun) {
   });
 }
 
-export { aggregateFeatured, extractArxivIds, normalizeArxivId, parseCsv };
+export { aggregateFeatured, extractArxivIds, normalizeArxivId, normalizeBearerToken, parseCsv };

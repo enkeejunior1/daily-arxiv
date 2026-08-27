@@ -14,6 +14,7 @@ import {
 import {
   aggregateFeatured,
   extractArxivIds,
+  normalizeBearerToken,
   parseCsv,
 } from "../scripts/x-sync.mjs";
 
@@ -171,6 +172,9 @@ test("assigns a custom score to each positive keyword group", () => {
 });
 
 test("normalizes and aggregates tracked X arXiv shares", () => {
+  assert.equal(normalizeBearerToken("  ’abc123’  "), "abc123");
+  assert.throws(() => normalizeBearerToken("abc\u00a0def"), /unsupported character/);
+
   assert.deepEqual(
     extractArxivIds([
       "paper https://arxiv.org/abs/2608.12345v2.",
