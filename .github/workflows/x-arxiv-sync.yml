@@ -1,0 +1,74 @@
+name: Sync tracked X arXiv shares
+
+on:
+  schedule:
+    - cron: "27 11 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Collection mode
+        required: true
+        type: choice
+        default: recent
+        options:
+          - recent
+          - backfill
+      start:
+        description: Backfill start date (YYYY-MM-DD)
+        required: false
+        type: string
+      end:
+        description: Backfill end date (YYYY-MM-DD)
+        required: false
+        type: string
+      max_posts:
+        description: Maximum X posts to read in this run
+        required: true
+        default: "2000"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-arxiv-x-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: X API setup status
+        if: env.X_BEARER_TOKEN == ''
+        run: echo "X_BEARER_TOKEN is not configured; skipping collection."
+      - name: Collect recent shares
+        if: env.X_BEARER_TOKEN != '' && (github.event_name == 'schedule' || inputs.mode == 'recent')
+        env:
+          X_MAX_POSTS: ${{ inputs.max_posts || '1000' }}
+        run: node scripts/x-sync.mjs --mode=recent "--max-posts=$X_MAX_POSTS"
+      - name: Backfill a date regime
+        if: env.X_BEARER_TOKEN != '' && github.event_name == 'workflow_dispatch' && inputs.mode == 'backfill'
+        env:
+          X_START: ${{ inputs.start }}
+          X_END: ${{ inputs.end }}
+          X_MAX_POSTS: ${{ inputs.max_posts }}
+        run: node scripts/x-sync.mjs --mode=backfill "--start=$X_START" "--end=$X_END" "--max-posts=$X_MAX_POSTS"
+      - name: Commit archive update
+        run: |
+          git config user.name "daily-arxiv-bot"
+          git config user.email "enkeejunior1@snu.ac.kr"
+          git add data/x-shares.csv data/x-featured.json data/x-sync-state.json
+          if git diff --cached --quiet; then
+            echo "X archive is already current."
+          else
+            git commit -m "Update tracked X arXiv shares"
+            git push
+          fi
