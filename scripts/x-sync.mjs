@@ -278,8 +278,20 @@ async function main() {
   const state = JSON.parse(await readFile(statePath, "utf8"));
   const existingRows = parseCsv(await readFile(csvPath, "utf8"));
   const rowsByKey = new Map(existingRows.map((row) => [rowKey(row), row]));
-  const accountSet = new Set(config.accounts.map(normalizeHandle));
-  const query = buildQuery(config);
+  const configuredAccounts = config.accounts.map(normalizeHandle).filter(Boolean);
+  const requestedAccounts = mode === "backfill"
+    ? String(args.accounts ?? "").split(",").map(normalizeHandle).filter(Boolean)
+    : [];
+  const requestedAccountSet = new Set(requestedAccounts);
+  const unknownAccounts = requestedAccounts.filter((account) => !configuredAccounts.includes(account));
+  if (unknownAccounts.length) {
+    throw new Error(`Backfill accounts must be tracked in config/x-sources.json: ${unknownAccounts.join(", ")}`);
+  }
+  const selectedAccounts = requestedAccounts.length
+    ? configuredAccounts.filter((account) => requestedAccountSet.has(account))
+    : configuredAccounts;
+  const accountSet = new Set(selectedAccounts);
+  const query = buildQuery({ ...config, accounts: selectedAccounts });
   const maxPosts = positiveInteger(args["max-posts"], mode === "backfill" ? 2_000 : 1_000, 10_000);
   const now = new Date().toISOString();
   const start = mode === "backfill" ? isoDate(args.start) : "";
@@ -290,7 +302,10 @@ async function main() {
     throw new Error("Backfill requires --start=YYYY-MM-DD and --end=YYYY-MM-DD.");
   }
 
-  const rangeKey = mode === "backfill" ? `${args.start}:${args.end}` : "";
+  const focusedScope = selectedAccounts.length === configuredAccounts.length
+    ? ""
+    : `:${selectedAccounts.join(",")}`;
+  const rangeKey = mode === "backfill" ? `${args.start}:${args.end}${focusedScope}` : "";
   const resume = mode === "backfill" ? state.backfills?.[rangeKey] : null;
   if (mode === "backfill" && resume?.complete) {
     process.stdout.write(`backfill ${rangeKey} is already complete; no X API request was made.\n`);
@@ -369,7 +384,7 @@ async function main() {
   await writeArchive([...rowsByKey.values()], config, now);
   await writeFile(statePath, `${JSON.stringify(state, null, 2)}\n`);
   process.stdout.write(
-    `${mode}: read ${fetchedPosts} X posts, found ${matchedRows} arXiv links, archive has ${rowsByKey.size} rows${complete ? "." : "; run the same range again to continue."}\n`,
+    `${mode} (${selectedAccounts.join(", ")}): read ${fetchedPosts} X posts, found ${matchedRows} arXiv links, archive has ${rowsByKey.size} rows${complete ? "." : "; run the same range again to continue."}\n`,
   );
 }
 

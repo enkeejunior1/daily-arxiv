@@ -137,6 +137,7 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.deepEqual(JSON.parse(xConfig).accounts, ["fly51fly", "che_shr_cat", "rosinality"]);
   assert.match(xWorkflow, /secrets\.X_BEARER_TOKEN/);
   assert.match(xWorkflow, /--mode=backfill/);
+  assert.match(xWorkflow, /--accounts=\$X_ACCOUNTS/);
 });
 
 test("treats keyword aliases as one scoring group", () => {
