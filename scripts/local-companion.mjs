@@ -253,7 +253,20 @@ function normalizePreferences(value) {
     value?.savedLimit === "all" || [10, 25, 50, 100].includes(Number(value?.savedLimit))
       ? value.savedLimit === "all" ? "all" : Number(value.savedLimit)
       : 25;
-  return { feedPeriodDays, candidateLimit, savedSort, savedLimit };
+  const normalizeSocialScore = (score, fallback) => {
+    const numericScore = Number(score);
+    return Number.isFinite(numericScore)
+      ? Math.max(0, Math.min(100, Math.round(numericScore)))
+      : fallback;
+  };
+  return {
+    feedPeriodDays,
+    candidateLimit,
+    savedSort,
+    savedLimit,
+    deepxivScore: normalizeSocialScore(value?.deepxivScore, 5),
+    trackedXScore: normalizeSocialScore(value?.trackedXScore, 5),
+  };
 }
 
 function normalizeState(value) {

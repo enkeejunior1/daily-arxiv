@@ -117,6 +117,8 @@ type Preferences = {
   candidateLimit: CandidateLimit;
   savedSort: SavedSort;
   savedLimit: SavedLimit;
+  deepxivScore: number;
+  trackedXScore: number;
 };
 
 type PersistedSnapshot = {
@@ -145,8 +147,8 @@ const COMPANION_URL = "http://127.0.0.1:4317";
 const MAC_HELPER_URL = "daily-arxiv-helper://launch";
 const COMPANION_START_TIMEOUT_MS = 50_000;
 const USER_TIME_ZONE = "America/Los_Angeles";
-const FEATURED_SCORE = 5;
-const TRACKED_X_SCORE = initialXSources.featuredScore;
+const DEFAULT_FEATURED_SCORE = 5;
+const DEFAULT_TRACKED_X_SCORE = initialXSources.featuredScore;
 const PDF_ZOOM_MIN = 50;
 const PDF_ZOOM_MAX = 300;
 const PDF_ZOOM_STEP = 25;
@@ -156,6 +158,8 @@ const DEFAULT_PREFERENCES: Preferences = {
   candidateLimit: 500,
   savedSort: "saved-date",
   savedLimit: 25,
+  deepxivScore: DEFAULT_FEATURED_SCORE,
+  trackedXScore: DEFAULT_TRACKED_X_SCORE,
 };
 
 function isMacBrowser() {
@@ -363,7 +367,20 @@ function normalizePreferences(value: Partial<Preferences> | undefined): Preferen
     value?.savedLimit === "all" || [10, 25, 50, 100].includes(Number(value?.savedLimit))
       ? (value?.savedLimit as SavedLimit)
       : DEFAULT_PREFERENCES.savedLimit;
-  return { feedPeriodDays, candidateLimit, savedSort, savedLimit };
+  const normalizeSocialScore = (score: unknown, fallback: number) => {
+    const numericScore = Number(score);
+    return Number.isFinite(numericScore)
+      ? Math.max(0, Math.min(100, Math.round(numericScore)))
+      : fallback;
+  };
+  return {
+    feedPeriodDays,
+    candidateLimit,
+    savedSort,
+    savedLimit,
+    deepxivScore: normalizeSocialScore(value?.deepxivScore, DEFAULT_PREFERENCES.deepxivScore),
+    trackedXScore: normalizeSocialScore(value?.trackedXScore, DEFAULT_PREFERENCES.trackedXScore),
+  };
 }
 
 function normalizeNotes(value: unknown): Record<string, NoteRecord> {
@@ -379,7 +396,7 @@ function normalizeNotes(value: unknown): Record<string, NoteRecord> {
   );
 }
 
-function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
+function scorePaper(paper: Paper, rules: Rules, preferences: Preferences): ScoredPaper {
   const authorHit = rules.authors.some((tracked) =>
     paper.authors.some((author) => normalize(author) === normalize(tracked)),
   );
@@ -399,14 +416,14 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
   if (isFeatured) {
     reasons.push({
       label: `DeepXiv 7d #${paper.deepxiv?.rank}`,
-      value: FEATURED_SCORE,
+      value: preferences.deepxivScore,
       kind: "featured",
     });
   }
   if (isTrackedXShare) {
     reasons.push({
       label: `X ${paper.xFeatured?.sharedBy.map((account) => `@${account}`).join(", ")}`,
-      value: TRACKED_X_SCORE,
+      value: preferences.trackedXScore,
       kind: "social",
     });
   }
@@ -424,8 +441,8 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
     ...paper,
     authorHit,
     baseScore:
-      (isFeatured ? FEATURED_SCORE : 0) +
-      (isTrackedXShare ? TRACKED_X_SCORE : 0) +
+      (isFeatured ? preferences.deepxivScore : 0) +
+      (isTrackedXShare ? preferences.trackedXScore : 0) +
       positiveHits.reduce((total, hit) => total + hit.weight, 0) -
       negativeHits.length * 2 +
       citationHits.reduce((total, seed) => total + seed.weight, 0),
@@ -442,9 +459,9 @@ function stableHash(value: string) {
   return hash >>> 0;
 }
 
-function queueForToday(papers: Paper[], rules: Rules, candidateLimit: CandidateLimit) {
+function queueForToday(papers: Paper[], rules: Rules, preferences: Preferences) {
   const today = todayKey();
-  const scored = papers.map((paper) => scorePaper(paper, rules));
+  const scored = papers.map((paper) => scorePaper(paper, rules, preferences));
   const authorPapers = scored.filter((paper) => paper.authorHit);
   const regular = scored
     .filter((paper) => !paper.authorHit && paper.baseScore > 0)
@@ -456,7 +473,7 @@ function queueForToday(papers: Paper[], rules: Rules, candidateLimit: CandidateL
     (a, b) =>
       b.baseScore - a.baseScore || stableHash(`${today}:${a.id}`) - stableHash(`${today}:${b.id}`),
   );
-  return [...authorPapers, ...regular].slice(0, candidateLimit);
+  return [...authorPapers, ...regular].slice(0, preferences.candidateLimit);
 }
 
 function formatDate(value: string) {
@@ -1116,8 +1133,8 @@ export function DailyArxivApp() {
     [citationMatches, citationSeedKey, deepxivByPaper, papers, xByPaper],
   );
   const queue = useMemo(
-    () => queueForToday(enrichedPapers, rules, preferences.candidateLimit),
-    [enrichedPapers, preferences.candidateLimit, rules],
+    () => queueForToday(enrichedPapers, rules, preferences),
+    [enrichedPapers, preferences, rules],
   );
   const statusByPaper = useMemo(
     () => new Map(reviews.map((review) => [review.paper.id, review.decision])),
@@ -1652,8 +1669,8 @@ export function DailyArxivApp() {
                           <div className="feed-card-topline">
                             <div className="paper-tags">
                               {paper.authorHit && <span className="author-priority">Tracked author</span>}
-                              {paper.deepxiv ? <span className="featured-pill">DeepXiv #{paper.deepxiv.rank} · +5</span> : null}
-                              {paper.xFeatured ? <span className="x-featured-pill">Tracked X · +{TRACKED_X_SCORE}</span> : null}
+                              {paper.deepxiv ? <span className="featured-pill">DeepXiv #{paper.deepxiv.rank} · +{preferences.deepxivScore}</span> : null}
+                              {paper.xFeatured ? <span className="x-featured-pill">Tracked X · +{preferences.trackedXScore}</span> : null}
                               {paper.citationSeedIds?.length ? (
                                 <span className="citation-pill">
                                   Cites {paper.citationSeedIds.length} seed{paper.citationSeedIds.length > 1 ? "s" : ""}
@@ -1744,8 +1761,8 @@ export function DailyArxivApp() {
                 <div className="reader-details">
                   <div className="reader-title-copy">
                     <span>
-                      {currentPaper.deepxiv ? `DeepXiv #${currentPaper.deepxiv.rank} · Featured +5 · ` : ""}
-                      {currentPaper.xFeatured ? `Tracked X +${TRACKED_X_SCORE} · ` : ""}
+                      {currentPaper.deepxiv ? `DeepXiv #${currentPaper.deepxiv.rank} · Featured +${preferences.deepxivScore} · ` : ""}
+                      {currentPaper.xFeatured ? `Tracked X +${preferences.trackedXScore} · ` : ""}
                       {currentPaper.categories[0]} · {currentPaper.id}
                     </span>
                     <h2>{currentPaper.title}</h2>
@@ -2012,8 +2029,8 @@ export function DailyArxivApp() {
                   <div className="saved-main">
                     <div className="saved-meta">
                       <span>{decisionLabel(review.decision)}</span> · Score {review.paper.baseScore} · {review.paper.categories[0]}
-                      {review.paper.deepxiv ? ` · DeepXiv #${review.paper.deepxiv.rank} · Featured +5` : ""}
-                      {review.paper.xFeatured ? ` · Tracked X +${TRACKED_X_SCORE}` : ""}
+                      {review.paper.deepxiv ? ` · DeepXiv #${review.paper.deepxiv.rank} · Featured +${preferences.deepxivScore}` : ""}
+                      {review.paper.xFeatured ? ` · Tracked X +${preferences.trackedXScore}` : ""}
                     </div>
                     <h2>{review.paper.title}</h2>
                     <p>{review.paper.authors[0]} · {review.paper.authors.at(-1)}</p>
@@ -2045,14 +2062,24 @@ export function DailyArxivApp() {
               <h1>관심 신호</h1>
               <p>Author는 항상 먼저, 나머지는 점수순으로 선택한 기간과 후보 수 안에서 보여줍니다.</p>
             </div>
-            <button className="ghost-button" onClick={() => setRules(DEFAULT_RULES)}>기본값 복원</button>
+            <button
+              className="ghost-button"
+              onClick={() => {
+                setRules(DEFAULT_RULES);
+                setPreferences((current) => ({
+                  ...current,
+                  deepxivScore: DEFAULT_PREFERENCES.deepxivScore,
+                  trackedXScore: DEFAULT_PREFERENCES.trackedXScore,
+                }));
+              }}
+            >기본값 복원</button>
           </div>
           <div className="formula-card">
             <div><span>Author</span><strong>absolute priority</strong></div>
             <b>→</b>
             <div><span>Cites seed paper</span><strong>custom weight each</strong></div>
             <b>+</b>
-            <div><span>Social signal</span><strong>DeepXiv +5 · tracked X +{TRACKED_X_SCORE}</strong></div>
+            <div><span>Social signal</span><strong>DeepXiv +{preferences.deepxivScore} · tracked X +{preferences.trackedXScore}</strong></div>
             <b>+</b>
             <div><span>Positive keyword</span><strong>custom +1–100</strong></div>
             <b>−</b>
@@ -2060,10 +2087,26 @@ export function DailyArxivApp() {
           </div>
           <section className="featured-sources">
             <div>
-              <p className="eyebrow">FEATURED SOURCES · +5</p>
+              <p className="eyebrow">FEATURED SOURCES · +{preferences.deepxivScore}</p>
               <h2>DeepXiv에서 주목받는 논문</h2>
-              <p>최근 7일 소셜 신호 기준 Top 50에 포함되면 논문당 한 번만 +5를 적용합니다.</p>
+              <p>최근 7일 소셜 신호 기준 Top 50에 포함되면 논문당 한 번만 +{preferences.deepxivScore}를 적용합니다. 0이면 점수에 반영하지 않습니다.</p>
             </div>
+            <label className="source-score-control">
+              <span>가중치</span>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                aria-label="DeepXiv 가중치"
+                value={preferences.deepxivScore}
+                onChange={(event) =>
+                  setPreferences((current) =>
+                    normalizePreferences({ ...current, deepxivScore: Number(event.target.value) }),
+                  )
+                }
+              />
+            </label>
             <div className="featured-handles">
               <span>7 days</span><span>Top 50</span><span>social signals</span>
             </div>
@@ -2077,10 +2120,26 @@ export function DailyArxivApp() {
           </section>
           <section className="featured-sources tracked-x-sources">
             <div>
-              <p className="eyebrow">TRACKED X ARCHIVE · +{TRACKED_X_SCORE}</p>
+              <p className="eyebrow">TRACKED X ARCHIVE · +{preferences.trackedXScore}</p>
               <h2>내가 팔로우하는 연구자들의 arXiv 공유</h2>
-              <p>GitHub에 누적한 과거 공유 기록과 일일 증분 기록을 합쳐, 논문당 한 번만 +5를 적용합니다.</p>
+              <p>GitHub에 누적한 과거 공유 기록과 일일 증분 기록을 합쳐, 논문당 한 번만 +{preferences.trackedXScore}를 적용합니다. 0이면 점수에 반영하지 않습니다.</p>
             </div>
+            <label className="source-score-control">
+              <span>가중치</span>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                aria-label="Tracked X 가중치"
+                value={preferences.trackedXScore}
+                onChange={(event) =>
+                  setPreferences((current) =>
+                    normalizePreferences({ ...current, trackedXScore: Number(event.target.value) }),
+                  )
+                }
+              />
+            </label>
             <div className="featured-handles">
               {initialXSources.accounts.map((account) => <span key={account}>@{account}</span>)}
             </div>

@@ -41,7 +41,7 @@ function positiveInteger(value, fallback, maximum) {
 function normalizeBearerToken(value) {
   const token = String(value ?? "")
     .trim()
-    .replace(/[\s"'“”‘’]+/gu, "");
+    .replace(/[ \t\r\n"'“”‘’]+/gu, "");
   if ([...token].some((character) => {
     const codePoint = character.codePointAt(0);
     return codePoint < 0x21 || codePoint > 0x7e;

@@ -98,10 +98,16 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /candidateLimit: CandidateLimit/);
   assert.match(component, /savedSort: SavedSort/);
   assert.match(component, /savedLimit: SavedLimit/);
+  assert.match(component, /deepxivScore: number/);
+  assert.match(component, /trackedXScore: number/);
   assert.match(component, /저장 날짜/);
   assert.match(component, /arXiv 날짜/);
-  assert.match(component, /DeepXiv \+5 · tracked X \+\{TRACKED_X_SCORE\}/);
-  assert.match(component, /TRACKED X ARCHIVE · \+\{TRACKED_X_SCORE\}/);
+  assert.match(component, /DeepXiv \+\{preferences\.deepxivScore\} · tracked X \+\{preferences\.trackedXScore\}/);
+  assert.match(component, /TRACKED X ARCHIVE · \+\{preferences\.trackedXScore\}/);
+  assert.match(component, /aria-label="DeepXiv 가중치"/);
+  assert.match(component, /aria-label="Tracked X 가중치"/);
+  assert.match(companion, /deepxivScore: normalizeSocialScore/);
+  assert.match(companion, /trackedXScore: normalizeSocialScore/);
   assert.match(component, /xFeatured: xByPaper\[paper\.id\]/);
   assert.match(component, /alias는 \| 로 연결/);
   assert.match(component, /custom \+1–100/);
