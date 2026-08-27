@@ -21,10 +21,6 @@ on:
         description: Backfill end date (YYYY-MM-DD)
         required: false
         type: string
-      accounts:
-        description: Optional comma-separated tracked X accounts for a focused backfill
-        required: false
-        type: string
       max_posts:
         description: Maximum X posts to read in this run
         required: true
@@ -63,9 +59,8 @@ jobs:
         env:
           X_START: ${{ inputs.start }}
           X_END: ${{ inputs.end }}
-          X_ACCOUNTS: ${{ inputs.accounts }}
           X_MAX_POSTS: ${{ inputs.max_posts }}
-        run: node scripts/x-sync.mjs --mode=backfill "--start=$X_START" "--end=$X_END" "--accounts=$X_ACCOUNTS" "--max-posts=$X_MAX_POSTS"
+        run: node scripts/x-sync.mjs --mode=backfill "--start=$X_START" "--end=$X_END" "--max-posts=$X_MAX_POSTS"
       - name: Commit archive update
         run: |
           git config user.name "daily-arxiv-bot"

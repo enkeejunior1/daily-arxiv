@@ -279,8 +279,9 @@ async function main() {
   const existingRows = parseCsv(await readFile(csvPath, "utf8"));
   const rowsByKey = new Map(existingRows.map((row) => [rowKey(row), row]));
   const configuredAccounts = config.accounts.map(normalizeHandle).filter(Boolean);
+  const [maxPostsValue, focusedAccountsValue = ""] = String(args["max-posts"] ?? "").split("@", 2);
   const requestedAccounts = mode === "backfill"
-    ? String(args.accounts ?? "").split(",").map(normalizeHandle).filter(Boolean)
+    ? String(args.accounts || focusedAccountsValue).split(",").map(normalizeHandle).filter(Boolean)
     : [];
   const requestedAccountSet = new Set(requestedAccounts);
   const unknownAccounts = requestedAccounts.filter((account) => !configuredAccounts.includes(account));
@@ -292,7 +293,7 @@ async function main() {
     : configuredAccounts;
   const accountSet = new Set(selectedAccounts);
   const query = buildQuery({ ...config, accounts: selectedAccounts });
-  const maxPosts = positiveInteger(args["max-posts"], mode === "backfill" ? 2_000 : 1_000, 10_000);
+  const maxPosts = positiveInteger(maxPostsValue, mode === "backfill" ? 2_000 : 1_000, 10_000);
   const now = new Date().toISOString();
   const start = mode === "backfill" ? isoDate(args.start) : "";
   const requestedEnd = mode === "backfill" ? isoDate(args.end, true) : "";
