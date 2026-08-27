@@ -13,6 +13,7 @@ import {
   positiveKeywordWeight,
 } from "../lib/keyword-weights.mjs";
 import initialRules from "../../config/rules.json";
+import initialXSources from "../../config/x-sources.json";
 import { PdfCanvasReader } from "./PdfCanvasReader";
 import { PwaInstallButton } from "./PwaInstallButton";
 
@@ -34,6 +35,14 @@ type DeepXivSignal = {
   latestMention: string;
 };
 
+type XFeaturedSignal = {
+  sharedBy: string[];
+  firstSharedAt: string;
+  latestSharedAt: string;
+  postUrls: string[];
+  shareCount: number;
+};
+
 type CitationSeed = {
   arxivId: string;
   weight: number;
@@ -49,6 +58,7 @@ type Paper = {
   arxivUrl: string;
   pdfUrl: string;
   deepxiv?: DeepXivSignal;
+  xFeatured?: XFeaturedSignal;
   citationSeedIds?: string[];
 };
 
@@ -66,7 +76,7 @@ type ScoredPaper = Paper & {
   reasons: {
     label: string;
     value: number;
-    kind: "positive" | "negative" | "featured" | "citation";
+    kind: "positive" | "negative" | "featured" | "social" | "citation";
   }[];
 };
 
@@ -136,6 +146,7 @@ const MAC_HELPER_URL = "daily-arxiv-helper://launch";
 const COMPANION_START_TIMEOUT_MS = 50_000;
 const USER_TIME_ZONE = "America/Los_Angeles";
 const FEATURED_SCORE = 5;
+const TRACKED_X_SCORE = initialXSources.featuredScore;
 const PDF_ZOOM_MIN = 50;
 const PDF_ZOOM_MAX = 300;
 const PDF_ZOOM_STEP = 25;
@@ -157,7 +168,7 @@ function launchMacHelper() {
   const link = document.createElement("a");
   link.href = MAC_HELPER_URL;
   link.hidden = true;
-  document.body.append(link);
+  document.body.appendChild(link);
   link.click();
   link.remove();
 }
@@ -350,7 +361,7 @@ function normalizePreferences(value: Partial<Preferences> | undefined): Preferen
   const savedSort = value?.savedSort === "arxiv-date" ? "arxiv-date" : "saved-date";
   const savedLimit =
     value?.savedLimit === "all" || [10, 25, 50, 100].includes(Number(value?.savedLimit))
-      ? (value.savedLimit as SavedLimit)
+      ? (value?.savedLimit as SavedLimit)
       : DEFAULT_PREFERENCES.savedLimit;
   return { feedPeriodDays, candidateLimit, savedSort, savedLimit };
 }
@@ -382,6 +393,7 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
     return seed ? [seed] : [];
   });
   const isFeatured = Boolean(paper.deepxiv);
+  const isTrackedXShare = Boolean(paper.xFeatured);
   const reasons: ScoredPaper["reasons"] = [];
 
   if (isFeatured) {
@@ -389,6 +401,13 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
       label: `DeepXiv 7d #${paper.deepxiv?.rank}`,
       value: FEATURED_SCORE,
       kind: "featured",
+    });
+  }
+  if (isTrackedXShare) {
+    reasons.push({
+      label: `X ${paper.xFeatured?.sharedBy.map((account) => `@${account}`).join(", ")}`,
+      value: TRACKED_X_SCORE,
+      kind: "social",
     });
   }
   positiveHits.forEach(({ group, weight }) =>
@@ -406,6 +425,7 @@ function scorePaper(paper: Paper, rules: Rules): ScoredPaper {
     authorHit,
     baseScore:
       (isFeatured ? FEATURED_SCORE : 0) +
+      (isTrackedXShare ? TRACKED_X_SCORE : 0) +
       positiveHits.reduce((total, hit) => total + hit.weight, 0) -
       negativeHits.length * 2 +
       citationHits.reduce((total, seed) => total + seed.weight, 0),
@@ -750,6 +770,9 @@ export function DailyArxivApp() {
   const [source, setSource] = useState<"loading" | "arxiv" | "demo">("loading");
   const [deepxivSource, setDeepxivSource] = useState<"loading" | "connected" | "error">("loading");
   const [deepxivByPaper, setDeepxivByPaper] = useState<Record<string, DeepXivSignal>>({});
+  const [xSource, setXSource] = useState<"loading" | "connected" | "stale" | "setup" | "error">("loading");
+  const [xByPaper, setXByPaper] = useState<Record<string, XFeaturedSignal>>({});
+  const [xGeneratedAt, setXGeneratedAt] = useState<string | null>(null);
   const [citationSource, setCitationSource] = useState<
     "idle" | "loading" | "connected" | "error"
   >("idle");
@@ -876,6 +899,35 @@ export function DailyArxivApp() {
       active = false;
       controller.abort();
       window.clearTimeout(timeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/x-featured")
+      .then(async (response) => {
+        const data = (await response.json()) as {
+          connected?: boolean;
+          stale?: boolean;
+          featured?: Record<string, XFeaturedSignal>;
+          generatedAt?: string | null;
+        };
+        if (!response.ok) throw new Error("Tracked X archive unavailable");
+        return data;
+      })
+      .then((data) => {
+        if (!active) return;
+        setXByPaper(data.featured ?? {});
+        setXGeneratedAt(data.generatedAt ?? null);
+        setXSource(data.connected ? (data.stale ? "stale" : "connected") : "setup");
+      })
+      .catch(() => {
+        if (!active) return;
+        setXByPaper({});
+        setXSource("error");
+      });
+    return () => {
+      active = false;
     };
   }, []);
 
@@ -1058,9 +1110,10 @@ export function DailyArxivApp() {
       papers.map((paper) => ({
         ...paper,
         deepxiv: deepxivByPaper[paper.id],
+        xFeatured: xByPaper[paper.id],
         citationSeedIds: citationSeedKey ? citationMatches[paper.id] ?? [] : [],
       })),
-    [citationMatches, citationSeedKey, deepxivByPaper, papers],
+    [citationMatches, citationSeedKey, deepxivByPaper, papers, xByPaper],
   );
   const queue = useMemo(
     () => queueForToday(enrichedPapers, rules, preferences.candidateLimit),
@@ -1467,6 +1520,18 @@ export function DailyArxivApp() {
                 ? `DeepXiv ${Object.keys(deepxivByPaper).length}`
                 : "DeepXiv 오류"}
             </span>
+            <span title={`${initialXSources.accounts.map((account) => `@${account}`).join(", ")}의 arXiv 공유 archive`}>
+            <i className={xSource === "connected" ? "x-online" : xSource === "stale" ? "featured-online" : ""} />
+            {xSource === "loading"
+              ? "X 확인 중"
+              : xSource === "connected"
+                ? `X ${Object.keys(xByPaper).length}`
+                : xSource === "stale"
+                  ? `X ${Object.keys(xByPaper).length} · 오래됨`
+                  : xSource === "setup"
+                    ? "X 준비 필요"
+                    : "X 오류"}
+            </span>
             <span title="Semantic Scholar citation graph">
             <i className={activeCitationSource === "connected" ? "citation-online" : ""} />
             {activeCitationSource === "loading"
@@ -1588,6 +1653,7 @@ export function DailyArxivApp() {
                             <div className="paper-tags">
                               {paper.authorHit && <span className="author-priority">Tracked author</span>}
                               {paper.deepxiv ? <span className="featured-pill">DeepXiv #{paper.deepxiv.rank} · +5</span> : null}
+                              {paper.xFeatured ? <span className="x-featured-pill">Tracked X · +{TRACKED_X_SCORE}</span> : null}
                               {paper.citationSeedIds?.length ? (
                                 <span className="citation-pill">
                                   Cites {paper.citationSeedIds.length} seed{paper.citationSeedIds.length > 1 ? "s" : ""}
@@ -1608,6 +1674,12 @@ export function DailyArxivApp() {
                               {paper.deepxiv.mentionedBy.length
                                 ? ` · ${paper.deepxiv.mentionedBy.slice(0, 3).map((account) => `@${account}`).join(", ")}`
                                 : ""}
+                            </p>
+                          ) : null}
+                          {paper.xFeatured ? (
+                            <p className="x-featured-by">
+                              {paper.xFeatured.sharedBy.map((account) => `@${account}`).join(", ")} shared
+                              {paper.xFeatured.shareCount > 1 ? ` · ${paper.xFeatured.shareCount} posts` : ""}
                             </p>
                           ) : null}
                           <p className="feed-abstract">{paper.abstract}</p>
@@ -1673,6 +1745,7 @@ export function DailyArxivApp() {
                   <div className="reader-title-copy">
                     <span>
                       {currentPaper.deepxiv ? `DeepXiv #${currentPaper.deepxiv.rank} · Featured +5 · ` : ""}
+                      {currentPaper.xFeatured ? `Tracked X +${TRACKED_X_SCORE} · ` : ""}
                       {currentPaper.categories[0]} · {currentPaper.id}
                     </span>
                     <h2>{currentPaper.title}</h2>
@@ -1681,6 +1754,14 @@ export function DailyArxivApp() {
                         <span>
                           7일간 {currentPaper.deepxiv.mentions} mentions · {currentPaper.deepxiv.likes.toLocaleString()} likes · {currentPaper.deepxiv.views.toLocaleString()} views
                         </span>
+                      </div>
+                    ) : null}
+                    {currentPaper.xFeatured ? (
+                      <div className="reader-featured-links x-links">
+                        <span>{currentPaper.xFeatured.sharedBy.map((account) => `@${account}`).join(", ")} shared</span>
+                        {currentPaper.xFeatured.postUrls.slice(0, 3).map((url, index) => (
+                          <a href={url} key={url} target="_blank" rel="noreferrer">X post {index + 1} ↗</a>
+                        ))}
                       </div>
                     ) : null}
                   </div>
@@ -1932,6 +2013,7 @@ export function DailyArxivApp() {
                     <div className="saved-meta">
                       <span>{decisionLabel(review.decision)}</span> · Score {review.paper.baseScore} · {review.paper.categories[0]}
                       {review.paper.deepxiv ? ` · DeepXiv #${review.paper.deepxiv.rank} · Featured +5` : ""}
+                      {review.paper.xFeatured ? ` · Tracked X +${TRACKED_X_SCORE}` : ""}
                     </div>
                     <h2>{review.paper.title}</h2>
                     <p>{review.paper.authors[0]} · {review.paper.authors.at(-1)}</p>
@@ -1970,7 +2052,7 @@ export function DailyArxivApp() {
             <b>→</b>
             <div><span>Cites seed paper</span><strong>custom weight each</strong></div>
             <b>+</b>
-            <div><span>DeepXiv Top 50</span><strong>+5 once</strong></div>
+            <div><span>Social signal</span><strong>DeepXiv +5 · tracked X +{TRACKED_X_SCORE}</strong></div>
             <b>+</b>
             <div><span>Positive keyword</span><strong>custom +1–100</strong></div>
             <b>−</b>
@@ -1991,6 +2073,27 @@ export function DailyArxivApp() {
                 : deepxivSource === "loading"
                   ? "확인 중"
                   : "DeepXiv 확인 필요"}
+            </span>
+          </section>
+          <section className="featured-sources tracked-x-sources">
+            <div>
+              <p className="eyebrow">TRACKED X ARCHIVE · +{TRACKED_X_SCORE}</p>
+              <h2>내가 팔로우하는 연구자들의 arXiv 공유</h2>
+              <p>GitHub에 누적한 과거 공유 기록과 일일 증분 기록을 합쳐, 논문당 한 번만 +5를 적용합니다.</p>
+            </div>
+            <div className="featured-handles">
+              {initialXSources.accounts.map((account) => <span key={account}>@{account}</span>)}
+            </div>
+            <span className={`x-connection ${xSource}`}>
+              {xSource === "connected"
+                ? `연결됨 · ${Object.keys(xByPaper).length} papers`
+                : xSource === "stale"
+                  ? `마지막 수집 ${xGeneratedAt ? formatLongDate(xGeneratedAt) : "확인 필요"}`
+                  : xSource === "loading"
+                    ? "확인 중"
+                    : xSource === "setup"
+                      ? "X token 설정 필요"
+                      : "X archive 확인 필요"}
             </span>
           </section>
           <div className="rules-grid">

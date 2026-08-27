@@ -1,2 +1,2 @@
-# No credentials are required for the MVP.
-# DeepXiv's public 7-day trending endpoint is used without a token.
+# No runtime credential is required for DeepXiv or the tracked-X archive reader.
+# X_BEARER_TOKEN belongs in GitHub Actions secrets; never expose it to the browser.

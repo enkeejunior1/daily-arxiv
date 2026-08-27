@@ -1,0 +1,11 @@
+{
+  "recent": {
+    "sinceId": null,
+    "nextToken": null,
+    "baseSinceId": null,
+    "baseStartTime": null,
+    "pendingNewestId": null,
+    "lastSyncedAt": null
+  },
+  "backfills": {}
+}

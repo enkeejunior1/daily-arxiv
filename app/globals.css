@@ -209,6 +209,11 @@ button {
   box-shadow: 0 0 0 4px rgba(192, 139, 39, 0.13);
 }
 
+.source-status i.x-online {
+  background: #2f79a8;
+  box-shadow: 0 0 0 4px rgba(47, 121, 168, 0.13);
+}
+
 .source-status i.citation-online {
   background: #6f63b5;
   box-shadow: 0 0 0 4px rgba(111, 99, 181, 0.13);
@@ -344,6 +349,11 @@ button {
   color: #6f4a04;
 }
 
+.paper-tags span.x-featured-pill {
+  background: #dfeef8;
+  color: #245f84;
+}
+
 .paper-tags span.citation-pill {
   background: #e9e5f8;
   color: #51458f;
@@ -405,6 +415,11 @@ button {
 .score-reasons .featured {
   background: #f4dfaa;
   color: #6f4a04;
+}
+
+.score-reasons .social {
+  background: #dfeef8;
+  color: #245f84;
 }
 
 .score-reasons .citation {
@@ -989,7 +1004,7 @@ button {
   color: #fff;
   display: grid;
   gap: 16px;
-  grid-template-columns: 1.15fr auto 1fr auto 1.1fr auto 1.1fr;
+  grid-template-columns: 1.15fr auto 1fr auto 1.35fr auto 1.1fr auto 1.1fr;
   margin-bottom: 22px;
   padding: 23px 28px;
 }
@@ -1029,6 +1044,16 @@ button {
   grid-template-columns: minmax(250px, 1fr) auto auto;
   margin-bottom: 16px;
   padding: 20px 23px;
+}
+
+.featured-sources.tracked-x-sources {
+  background: linear-gradient(120deg, #f1f8fc, #fff 70%);
+  border-color: #bed7e7;
+}
+
+.tracked-x-sources .featured-handles span {
+  background: #dfeef8;
+  color: #245f84;
 }
 
 .featured-sources h2 {
@@ -1080,6 +1105,13 @@ button {
   background: var(--coral-soft);
   border-color: #ebc6bd;
   color: #863824;
+}
+
+.x-connection.stale,
+.x-connection.setup {
+  background: #fff4d8;
+  border-color: #e5d2a1;
+  color: #73530f;
 }
 
 .rules-grid {
@@ -1830,6 +1862,14 @@ button {
   margin: 6px 0 0;
 }
 
+.x-featured-by {
+  color: #2d6e96;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  margin: 5px 0 0;
+}
+
 .feed-abstract {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -2026,6 +2066,11 @@ button {
   font-size: 8px;
   font-weight: 750;
   text-decoration: none;
+}
+
+.reader-featured-links.x-links a,
+.reader-featured-links.x-links span {
+  color: #2d6e96;
 }
 
 .reader-actions {

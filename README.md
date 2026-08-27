@@ -8,6 +8,7 @@ A local-first, mode-seeking paper feed for machine learning, language, and visio
 - Gives tracked authors absolute priority.
 - Adds a configurable score when a new paper cites one of your tracked arXiv seed papers, using Semantic Scholar's citation graph.
 - Adds `Featured +5` to papers in DeepXiv's recent 7-day Trending Top 50.
+- Adds `Tracked X +5` once when `@fly51fly`, `@che_shr_cat`, or `@rosinality` has shared the paper, using a durable GitHub archive rather than a live browser scrape.
 - Scores every positive keyword once at `+2` and every negative keyword once at `-2` across the title and abstract.
 - Supports keyword alias groups separated by `|`; matching any number of aliases in one group applies that group's score only once.
 - Shows matching papers up to the selected candidate limit, ordered by score with a stable daily shuffle for ties.
@@ -37,6 +38,17 @@ For one-click Mac startup, double-click `Daily arXiv.app` in Finder. It register
 
 Citation matching uses Semantic Scholar's public Academic Graph API. It works without authentication when shared capacity is available. For reliable use, copy `.env.example` to `.env.local`, add a free `SEMANTIC_SCHOLAR_API_KEY`, and restart the app.
 
+## Tracked X archive
+
+The official X API collector runs in GitHub Actions once per day. It searches only the configured accounts and arXiv-related URL domains, follows expanded and quoted-post URLs, normalizes arXiv versions to one paper ID, and appends unique `(X post, arXiv paper)` pairs to `data/x-shares.csv`. The app reads the compact `data/x-featured.json` index and adds `+5` once per paper even if more than one tracked account shared it.
+
+1. Create an X developer app with pay-per-use credits and copy its Bearer Token.
+2. In the GitHub repository, open **Settings → Secrets and variables → Actions** and create the secret `X_BEARER_TOKEN`.
+3. Open **Actions → Sync tracked X arXiv shares → Run workflow** and run `recent` once.
+4. For history, run `backfill` with a bounded date regime such as `2025-01-01` through `2025-04-01`. The default cap is 2,000 X posts per run; if a regime is incomplete, running the same dates again resumes from its saved cursor.
+
+The scheduled workflow uses Recent Search plus `since_id`, so after the first run it pays only for newly returned matching posts. Backfill uses Full-archive Search and is never scheduled automatically. Edit `config/x-sources.json` to change tracked accounts, the `+5` weight, or supported arXiv-link domains. The token is never committed or sent to the browser.
+
 ## Android
 
 Open the deployed HTTPS URL in Chrome and choose **Install app** (or **Add to Home screen**). Sign in with the same account on each device to share rules, choices, and bookmarks. On touch screens, tap `♡` or `♥+` directly; tapping a paper opens a full-screen PDF reader, where a two-finger pinch changes only the PDF zoom.
@@ -64,6 +76,9 @@ The files intended for GitHub are:
 - Keyword alias example: `"ttt | test-time training | test time training"` is one `+2` group.
 - Citation seed example: `{ "arxivId": "1706.03762", "weight": 10 }` adds `+10` to a paper that cites that seed.
 - `choices/YYYY.csv`: Heart and Superheart choices, regenerated for the current day whenever state changes.
+- `data/x-shares.csv`: append-only normalized arXiv shares from tracked X accounts.
+- `data/x-featured.json`: compact paper-to-X-signal index consumed by the app.
+- `data/x-sync-state.json`: recent-search and bounded-backfill cursors, allowing idempotent resume.
 - The Recent choices table below, generated from the same CSV.
 
 Progress, downloaded PDFs, extracted paper text, and Codex paper guides stay local under `.local/` and are excluded by `.gitignore`.

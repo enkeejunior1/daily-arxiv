@@ -1,0 +1,14 @@
+{
+  "accounts": [
+    "fly51fly",
+    "che_shr_cat",
+    "rosinality"
+  ],
+  "featuredScore": 5,
+  "archiveUrl": "https://raw.githubusercontent.com/enkeejunior1/daily-arxiv/HEAD/data/x-featured.json",
+  "urlDomains": [
+    "arxiv.org",
+    "ar5iv.labs.arxiv.org",
+    "alphaxiv.org"
+  ]
+}

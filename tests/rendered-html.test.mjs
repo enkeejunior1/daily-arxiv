@@ -11,6 +11,11 @@ import {
   normalizePositiveKeywordWeights,
   positiveKeywordWeight,
 } from "../app/lib/keyword-weights.mjs";
+import {
+  aggregateFeatured,
+  extractArxivIds,
+  parseCsv,
+} from "../scripts/x-sync.mjs";
 
 async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -36,6 +41,7 @@ test("server-renders the Daily arXiv product", async () => {
   assert.match(html, /http:\/\/localhost(?::3000)?\/og\.png/i);
   assert.match(html, /관심 논문 피드/);
   assert.match(html, /DeepXiv 확인 중/);
+  assert.match(html, /X 확인 중/);
   assert.match(html, /Repo 확인 중/);
   assert.match(html, /Cloud 확인 중/);
   assert.match(html, /Double-click/);
@@ -46,7 +52,7 @@ test("server-renders the Daily arXiv product", async () => {
 });
 
 test("keeps GitHub data separate from local state and PDFs", async () => {
-  const [gitignore, rules, choices, companion, component, arxivRoute, deepxivRoute, citationRoute] =
+  const [gitignore, rules, choices, companion, component, arxivRoute, deepxivRoute, citationRoute, xRoute, xConfig, xWorkflow] =
     await Promise.all([
       readFile(new URL("../.gitignore", import.meta.url), "utf8"),
       readFile(new URL("../config/rules.json", import.meta.url), "utf8"),
@@ -56,6 +62,9 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
       readFile(new URL("../app/api/arxiv/route.ts", import.meta.url), "utf8"),
       readFile(new URL("../app/api/deepxiv-featured/route.ts", import.meta.url), "utf8"),
       readFile(new URL("../app/api/citation-signals/route.ts", import.meta.url), "utf8"),
+      readFile(new URL("../app/api/x-featured/route.ts", import.meta.url), "utf8"),
+      readFile(new URL("../config/x-sources.json", import.meta.url), "utf8"),
+      readFile(new URL("../.github/workflows/x-arxiv-sync.yml", import.meta.url), "utf8"),
     ]);
 
   assert.match(gitignore, /^\/\.local\/$/m);
@@ -90,7 +99,9 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /savedLimit: SavedLimit/);
   assert.match(component, /저장 날짜/);
   assert.match(component, /arXiv 날짜/);
-  assert.match(component, /DeepXiv Top 50/);
+  assert.match(component, /DeepXiv \+5 · tracked X \+\{TRACKED_X_SCORE\}/);
+  assert.match(component, /TRACKED X ARCHIVE · \+\{TRACKED_X_SCORE\}/);
+  assert.match(component, /xFeatured: xByPaper\[paper\.id\]/);
   assert.match(component, /alias는 \| 로 연결/);
   assert.match(component, /custom \+1–100/);
   assert.match(component, /weighted-keyword-row/);
@@ -120,6 +131,11 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(citationRoute, /SEMANTIC_SCHOLAR_BATCH_URL/);
   assert.match(citationRoute, /MAX_PAPERS = 1000/);
   assert.match(citationRoute, /BATCH_SIZE = 100/);
+  assert.match(xRoute, /xSources\.archiveUrl/);
+  assert.match(xRoute, /STALE_AFTER_MS/);
+  assert.deepEqual(JSON.parse(xConfig).accounts, ["fly51fly", "che_shr_cat", "rosinality"]);
+  assert.match(xWorkflow, /secrets\.X_BEARER_TOKEN/);
+  assert.match(xWorkflow, /--mode=backfill/);
 });
 
 test("treats keyword aliases as one scoring group", () => {
@@ -152,6 +168,38 @@ test("assigns a custom score to each positive keyword group", () => {
     "scaling law": 2,
   });
   assert.equal(positiveKeywordWeight(weights, "TTT | test time training"), 4);
+});
+
+test("normalizes and aggregates tracked X arXiv shares", () => {
+  assert.deepEqual(
+    extractArxivIds([
+      "paper https://arxiv.org/abs/2608.12345v2.",
+      "mirror https://ar5iv.labs.arxiv.org/html/1706.03762",
+      "arXiv:cs/9901001",
+    ]),
+    ["2608.12345", "1706.03762", "cs/9901001"],
+  );
+
+  const csv = '"shared_at","x_account","x_post_id","arxiv_id","post_text"\n' +
+    '"2026-01-01T00:00:00Z","fly51fly","1","2608.12345","a ""quoted"" paper"\n';
+  assert.equal(parseCsv(csv)[0].post_text, 'a "quoted" paper');
+
+  const featured = aggregateFeatured([
+    {
+      shared_at: "2026-01-01T00:00:00Z",
+      x_account: "fly51fly",
+      x_post_url: "https://x.com/fly51fly/status/1",
+      arxiv_id: "2608.12345",
+    },
+    {
+      shared_at: "2026-01-02T00:00:00Z",
+      x_account: "rosinality",
+      x_post_url: "https://x.com/rosinality/status/2",
+      arxiv_id: "2608.12345",
+    },
+  ], { accounts: ["fly51fly", "rosinality"] }, "2026-01-03T00:00:00Z");
+  assert.deepEqual(featured.featured["2608.12345"].sharedBy, ["fly51fly", "rosinality"]);
+  assert.equal(featured.featured["2608.12345"].shareCount, 2);
 });
 
 test("handles trackpad pinch inside the app PDF reader", async () => {
