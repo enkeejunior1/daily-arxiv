@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-27T19:25:18.950Z",
+  "generatedAt": "2026-08-27T19:34:35.101Z",
   "accounts": [
     "fly51fly",
     "che_shr_cat",
     "rosinality"
   ],
-  "rowCount": 188,
+  "rowCount": 713,
   "featured": {
     "2608.24004": {
       "sharedBy": [
@@ -1436,14 +1436,16 @@
     },
     "2607.09024": {
       "sharedBy": [
-        "che_shr_cat"
+        "che_shr_cat",
+        "rosinality"
       ],
-      "firstSharedAt": "2026-08-05T21:23:10.000Z",
+      "firstSharedAt": "2026-07-13T07:56:04.000Z",
       "latestSharedAt": "2026-08-05T21:23:10.000Z",
       "postUrls": [
-        "https://x.com/che_shr_cat/status/2085114413741138167"
+        "https://x.com/che_shr_cat/status/2085114413741138167",
+        "https://x.com/rosinality/status/2076576380041527435"
       ],
-      "shareCount": 1
+      "shareCount": 2
     },
     "2608.02352": {
       "sharedBy": [
@@ -1883,6 +1885,5270 @@
       "latestSharedAt": "2026-07-29T20:19:03.000Z",
       "postUrls": [
         "https://x.com/che_shr_cat/status/2082561562460524695"
+      ],
+      "shareCount": 1
+    },
+    "2607.20594": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-24T13:05:22.000Z",
+      "latestSharedAt": "2026-07-24T13:05:22.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2080640483450093681"
+      ],
+      "shareCount": 1
+    },
+    "2607.21453": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-24T12:04:19.000Z",
+      "latestSharedAt": "2026-07-24T12:04:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2080625121958486497"
+      ],
+      "shareCount": 1
+    },
+    "2607.18082": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-21T10:56:40.000Z",
+      "latestSharedAt": "2026-07-21T10:56:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2079520930657669331"
+      ],
+      "shareCount": 1
+    },
+    "2607.18110": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-21T10:41:14.000Z",
+      "latestSharedAt": "2026-07-21T10:41:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2079517048837656650"
+      ],
+      "shareCount": 1
+    },
+    "2607.16097": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-20T07:41:31.000Z",
+      "latestSharedAt": "2026-07-20T07:41:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2079109435033616506"
+      ],
+      "shareCount": 1
+    },
+    "2605.06216": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T10:01:07.000Z",
+      "latestSharedAt": "2026-07-16T13:45:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077751498247750004",
+        "https://x.com/rosinality/status/2052690252167315552"
+      ],
+      "shareCount": 2
+    },
+    "2607.13394": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-16T08:30:34.000Z",
+      "latestSharedAt": "2026-07-16T08:30:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077672225088434254"
+      ],
+      "shareCount": 1
+    },
+    "2509.15207": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-16T08:30:34.000Z",
+      "latestSharedAt": "2026-07-16T08:30:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077672225088434254"
+      ],
+      "shareCount": 1
+    },
+    "2607.13095": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-16T08:22:20.000Z",
+      "latestSharedAt": "2026-07-16T08:22:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077670153546801319"
+      ],
+      "shareCount": 1
+    },
+    "2607.13188": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-16T08:11:34.000Z",
+      "latestSharedAt": "2026-07-16T08:11:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077667445507055926"
+      ],
+      "shareCount": 1
+    },
+    "2607.12395": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-15T12:43:05.000Z",
+      "latestSharedAt": "2026-07-15T12:43:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2077373387102404741"
+      ],
+      "shareCount": 1
+    },
+    "2607.11052": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-14T11:13:14.000Z",
+      "latestSharedAt": "2026-07-14T11:13:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2076988387630743559"
+      ],
+      "shareCount": 1
+    },
+    "2607.08964": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-13T07:40:28.000Z",
+      "latestSharedAt": "2026-07-13T07:40:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2076572455854825894"
+      ],
+      "shareCount": 1
+    },
+    "2607.09657": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-13T07:34:02.000Z",
+      "latestSharedAt": "2026-07-13T07:34:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2076570835783909524"
+      ],
+      "shareCount": 1
+    },
+    "2607.08646": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-10T08:00:40.000Z",
+      "latestSharedAt": "2026-07-10T08:00:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2075490375792230718"
+      ],
+      "shareCount": 1
+    },
+    "2409.17115": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-10T08:00:40.000Z",
+      "latestSharedAt": "2026-07-10T08:00:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2075490375792230718"
+      ],
+      "shareCount": 1
+    },
+    "2607.07386": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-09T08:58:19.000Z",
+      "latestSharedAt": "2026-07-09T08:58:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2075142494753353776"
+      ],
+      "shareCount": 1
+    },
+    "2607.07508": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-09T08:52:50.000Z",
+      "latestSharedAt": "2026-07-09T08:52:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2075141113124458990"
+      ],
+      "shareCount": 1
+    },
+    "2504.05118": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-09T08:52:50.000Z",
+      "latestSharedAt": "2026-07-09T08:52:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2075141113124458990"
+      ],
+      "shareCount": 1
+    },
+    "2607.05804": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-08T09:44:27.000Z",
+      "latestSharedAt": "2026-07-08T09:44:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074791715131605178"
+      ],
+      "shareCount": 1
+    },
+    "2607.04763": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T13:18:32.000Z",
+      "latestSharedAt": "2026-07-07T13:18:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074483203398668513"
+      ],
+      "shareCount": 1
+    },
+    "2607.04969": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T12:45:10.000Z",
+      "latestSharedAt": "2026-07-07T12:45:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074474804879528104"
+      ],
+      "shareCount": 1
+    },
+    "2607.04728": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T11:58:35.000Z",
+      "latestSharedAt": "2026-07-07T11:58:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074463084840632463"
+      ],
+      "shareCount": 1
+    },
+    "2607.05184": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T11:52:20.000Z",
+      "latestSharedAt": "2026-07-07T11:52:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074461512014405812"
+      ],
+      "shareCount": 1
+    },
+    "2607.04751": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T11:09:25.000Z",
+      "latestSharedAt": "2026-07-07T11:09:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074450708837879915"
+      ],
+      "shareCount": 1
+    },
+    "2607.04033": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T09:04:18.000Z",
+      "latestSharedAt": "2026-07-07T09:04:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074419223577719111"
+      ],
+      "shareCount": 1
+    },
+    "2607.02980": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T08:43:30.000Z",
+      "latestSharedAt": "2026-07-07T08:43:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074413990923362640"
+      ],
+      "shareCount": 1
+    },
+    "2607.05394": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-07-07T08:20:18.000Z",
+      "latestSharedAt": "2026-07-07T08:20:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2074408152229953788"
+      ],
+      "shareCount": 1
+    },
+    "2606.29526": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T12:30:13.000Z",
+      "latestSharedAt": "2026-06-30T12:30:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071934330041938352"
+      ],
+      "shareCount": 1
+    },
+    "2606.30044": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T12:07:50.000Z",
+      "latestSharedAt": "2026-06-30T12:07:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071928697066516835"
+      ],
+      "shareCount": 1
+    },
+    "2606.28436": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T11:08:43.000Z",
+      "latestSharedAt": "2026-06-30T11:08:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071913818452607058"
+      ],
+      "shareCount": 1
+    },
+    "2606.30626": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T10:05:31.000Z",
+      "latestSharedAt": "2026-06-30T10:05:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071897913349824852"
+      ],
+      "shareCount": 1
+    },
+    "2606.29158": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T09:05:12.000Z",
+      "latestSharedAt": "2026-06-30T09:05:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071882737087021105"
+      ],
+      "shareCount": 1
+    },
+    "2606.30406": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T08:53:38.000Z",
+      "latestSharedAt": "2026-06-30T08:53:38.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071879824071622882"
+      ],
+      "shareCount": 1
+    },
+    "2606.29858": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-30T08:40:52.000Z",
+      "latestSharedAt": "2026-06-30T08:40:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2071876611733860455"
+      ],
+      "shareCount": 1
+    },
+    "2606.25450": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-25T11:46:50.000Z",
+      "latestSharedAt": "2026-06-25T11:46:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2070111472030474494"
+      ],
+      "shareCount": 1
+    },
+    "2606.26091": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-25T11:38:02.000Z",
+      "latestSharedAt": "2026-06-25T11:38:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2070109256762683605"
+      ],
+      "shareCount": 1
+    },
+    "2606.25451": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-25T11:28:56.000Z",
+      "latestSharedAt": "2026-06-25T11:28:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2070106969294143866"
+      ],
+      "shareCount": 1
+    },
+    "2606.24998": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-25T11:23:46.000Z",
+      "latestSharedAt": "2026-06-25T11:23:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2070105667818373173"
+      ],
+      "shareCount": 1
+    },
+    "2205.10487": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-25T11:23:46.000Z",
+      "latestSharedAt": "2026-06-25T11:23:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2070105667818373173"
+      ],
+      "shareCount": 1
+    },
+    "2606.24020": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-24T06:21:20.000Z",
+      "latestSharedAt": "2026-06-24T06:21:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2069667167943995737"
+      ],
+      "shareCount": 1
+    },
+    "2606.20002": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T09:35:13.000Z",
+      "latestSharedAt": "2026-06-19T09:35:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067904021260538343"
+      ],
+      "shareCount": 1
+    },
+    "2606.19659": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T09:29:37.000Z",
+      "latestSharedAt": "2026-06-19T09:29:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067902612427493527"
+      ],
+      "shareCount": 1
+    },
+    "2604.24005": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-28T08:08:11.000Z",
+      "latestSharedAt": "2026-06-19T09:29:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067902612427493527",
+        "https://x.com/rosinality/status/2049037949765857499"
+      ],
+      "shareCount": 2
+    },
+    "2606.20560": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T09:11:55.000Z",
+      "latestSharedAt": "2026-06-19T09:11:55.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067898159376789701"
+      ],
+      "shareCount": 1
+    },
+    "2606.20097": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T08:41:52.000Z",
+      "latestSharedAt": "2026-06-19T08:41:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067890595457015935"
+      ],
+      "shareCount": 1
+    },
+    "2606.20381": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T08:18:25.000Z",
+      "latestSharedAt": "2026-06-19T08:18:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067884695086363130"
+      ],
+      "shareCount": 1
+    },
+    "2606.20008": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-19T08:03:02.000Z",
+      "latestSharedAt": "2026-06-19T08:03:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067880823181689174"
+      ],
+      "shareCount": 1
+    },
+    "2606.18246": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-17T08:23:59.000Z",
+      "latestSharedAt": "2026-06-17T08:23:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2067161320164581394"
+      ],
+      "shareCount": 1
+    },
+    "2606.17024": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-16T08:30:26.000Z",
+      "latestSharedAt": "2026-06-16T08:30:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2066800557851849035"
+      ],
+      "shareCount": 1
+    },
+    "2606.15378": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-16T08:12:36.000Z",
+      "latestSharedAt": "2026-06-16T08:12:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2066796066503045510"
+      ],
+      "shareCount": 1
+    },
+    "2606.09821": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-09T08:08:23.000Z",
+      "latestSharedAt": "2026-06-09T08:08:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2064258291824226708"
+      ],
+      "shareCount": 1
+    },
+    "2602.04879": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-05T05:44:36.000Z",
+      "latestSharedAt": "2026-06-09T08:08:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2064258291824226708",
+        "https://x.com/rosinality/status/2019675790619844891",
+        "https://x.com/rosinality/status/2019675759552655735",
+        "https://x.com/rosinality/status/2019286011650707792"
+      ],
+      "shareCount": 4
+    },
+    "2507.15857": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-04T04:40:55.000Z",
+      "latestSharedAt": "2026-06-08T08:31:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2063901664147378177",
+        "https://x.com/rosinality/status/1974333891764015283"
+      ],
+      "shareCount": 2
+    },
+    "2606.07082": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-08T07:34:36.000Z",
+      "latestSharedAt": "2026-06-08T07:34:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2063887402385523149"
+      ],
+      "shareCount": 1
+    },
+    "2606.06888": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-08T06:50:04.000Z",
+      "latestSharedAt": "2026-06-08T06:50:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2063876196253806729"
+      ],
+      "shareCount": 1
+    },
+    "2606.06470": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-05T07:06:20.000Z",
+      "latestSharedAt": "2026-06-05T07:06:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062793125488185569"
+      ],
+      "shareCount": 1
+    },
+    "2606.06479": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-05T06:57:03.000Z",
+      "latestSharedAt": "2026-06-05T06:57:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062790787230736825"
+      ],
+      "shareCount": 1
+    },
+    "2606.05014": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-04T09:09:01.000Z",
+      "latestSharedAt": "2026-06-04T09:09:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062461612603101459"
+      ],
+      "shareCount": 1
+    },
+    "2606.04101": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-04T08:19:25.000Z",
+      "latestSharedAt": "2026-06-04T08:19:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062449129737830467"
+      ],
+      "shareCount": 1
+    },
+    "2606.04058": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-04T08:03:49.000Z",
+      "latestSharedAt": "2026-06-04T08:03:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062445202027974950"
+      ],
+      "shareCount": 1
+    },
+    "2606.04272": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-04T07:57:48.000Z",
+      "latestSharedAt": "2026-06-04T07:57:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062443688635117720"
+      ],
+      "shareCount": 1
+    },
+    "2606.03825": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-03T07:27:30.000Z",
+      "latestSharedAt": "2026-06-03T07:27:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062073676518801784"
+      ],
+      "shareCount": 1
+    },
+    "2606.03938": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-06-03T07:23:23.000Z",
+      "latestSharedAt": "2026-06-03T07:23:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2062072638046892111"
+      ],
+      "shareCount": 1
+    },
+    "2605.28751": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-28T09:34:01.000Z",
+      "latestSharedAt": "2026-05-28T09:34:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059931189553573966"
+      ],
+      "shareCount": 1
+    },
+    "2605.26484": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-28T09:34:01.000Z",
+      "latestSharedAt": "2026-05-28T09:34:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059931189553573966"
+      ],
+      "shareCount": 1
+    },
+    "2605.28079": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-28T07:41:12.000Z",
+      "latestSharedAt": "2026-05-28T07:41:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059902797886153058"
+      ],
+      "shareCount": 1
+    },
+    "2605.28769": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-28T07:36:52.000Z",
+      "latestSharedAt": "2026-05-28T07:36:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059901708000514162"
+      ],
+      "shareCount": 1
+    },
+    "2605.26971": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-27T10:24:44.000Z",
+      "latestSharedAt": "2026-05-27T10:24:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059581561779941409"
+      ],
+      "shareCount": 1
+    },
+    "2605.26647": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-27T07:03:55.000Z",
+      "latestSharedAt": "2026-05-27T07:03:55.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059531027408716069"
+      ],
+      "shareCount": 1
+    },
+    "2605.26842": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-27T06:56:51.000Z",
+      "latestSharedAt": "2026-05-27T06:56:51.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059529249548087452"
+      ],
+      "shareCount": 1
+    },
+    "2605.25395": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-27T06:56:51.000Z",
+      "latestSharedAt": "2026-05-27T06:56:51.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059529249548087452"
+      ],
+      "shareCount": 1
+    },
+    "2605.26895": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-27T06:54:56.000Z",
+      "latestSharedAt": "2026-05-27T06:54:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059528763793109344"
+      ],
+      "shareCount": 1
+    },
+    "2605.24326": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-26T09:22:51.000Z",
+      "latestSharedAt": "2026-05-26T09:22:51.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059203603441545607"
+      ],
+      "shareCount": 1
+    },
+    "2605.25698": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-26T09:10:22.000Z",
+      "latestSharedAt": "2026-05-26T09:10:22.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059200458724454425"
+      ],
+      "shareCount": 1
+    },
+    "2605.25704": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-26T08:23:40.000Z",
+      "latestSharedAt": "2026-05-26T08:23:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2059188707064758410"
+      ],
+      "shareCount": 1
+    },
+    "2605.23857": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-25T12:26:02.000Z",
+      "latestSharedAt": "2026-05-25T12:26:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2058887313623491038"
+      ],
+      "shareCount": 1
+    },
+    "2605.23061": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-25T12:17:54.000Z",
+      "latestSharedAt": "2026-05-25T12:17:54.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2058885268464074811"
+      ],
+      "shareCount": 1
+    },
+    "2605.22432": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-25T12:17:54.000Z",
+      "latestSharedAt": "2026-05-25T12:17:54.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2058885268464074811"
+      ],
+      "shareCount": 1
+    },
+    "2605.21654": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-22T09:33:06.000Z",
+      "latestSharedAt": "2026-05-22T09:33:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057756628565234050"
+      ],
+      "shareCount": 1
+    },
+    "2605.22703": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-22T08:25:59.000Z",
+      "latestSharedAt": "2026-05-22T08:25:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057739737486508398"
+      ],
+      "shareCount": 1
+    },
+    "2605.22769": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-22T07:49:42.000Z",
+      "latestSharedAt": "2026-05-22T07:49:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057730607321432487"
+      ],
+      "shareCount": 1
+    },
+    "2605.21803": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-22T07:31:42.000Z",
+      "latestSharedAt": "2026-05-22T07:31:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057726078341251559"
+      ],
+      "shareCount": 1
+    },
+    "2605.22297": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-22T07:16:26.000Z",
+      "latestSharedAt": "2026-05-22T07:16:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057722238321782837"
+      ],
+      "shareCount": 1
+    },
+    "2605.21486": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T08:56:04.000Z",
+      "latestSharedAt": "2026-05-21T08:56:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057384923225313534"
+      ],
+      "shareCount": 1
+    },
+    "2407.05872": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T08:56:04.000Z",
+      "latestSharedAt": "2026-05-21T08:56:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057384923225313534"
+      ],
+      "shareCount": 1
+    },
+    "2304.09871": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T08:56:04.000Z",
+      "latestSharedAt": "2026-05-21T08:56:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057384923225313534"
+      ],
+      "shareCount": 1
+    },
+    "2605.20285": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T08:09:27.000Z",
+      "latestSharedAt": "2026-05-21T08:09:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057373191811522786"
+      ],
+      "shareCount": 1
+    },
+    "2605.20798": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T07:57:36.000Z",
+      "latestSharedAt": "2026-05-21T07:57:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057370209434939792"
+      ],
+      "shareCount": 1
+    },
+    "2102.11972": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-21T07:57:36.000Z",
+      "latestSharedAt": "2026-05-21T07:57:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057370209434939792"
+      ],
+      "shareCount": 1
+    },
+    "2605.19762": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-20T15:21:41.000Z",
+      "latestSharedAt": "2026-05-20T15:21:41.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057119578669408363"
+      ],
+      "shareCount": 1
+    },
+    "2404.07177": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-20T15:21:17.000Z",
+      "latestSharedAt": "2026-05-20T15:21:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057119476118679884"
+      ],
+      "shareCount": 1
+    },
+    "2605.19407": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-20T08:15:23.000Z",
+      "latestSharedAt": "2026-05-20T08:15:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057012296178688131"
+      ],
+      "shareCount": 1
+    },
+    "2605.19095": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-20T07:53:49.000Z",
+      "latestSharedAt": "2026-05-20T07:53:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2057006867071549480"
+      ],
+      "shareCount": 1
+    },
+    "2605.15220": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-19T09:07:47.000Z",
+      "latestSharedAt": "2026-05-19T09:07:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056663095003488342"
+      ],
+      "shareCount": 1
+    },
+    "2605.17849": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-19T08:16:31.000Z",
+      "latestSharedAt": "2026-05-19T08:16:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056650194712715427"
+      ],
+      "shareCount": 1
+    },
+    "2605.18607": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-19T07:54:06.000Z",
+      "latestSharedAt": "2026-05-19T07:54:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056644552375632273"
+      ],
+      "shareCount": 1
+    },
+    "2605.15422": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-18T12:38:14.000Z",
+      "latestSharedAt": "2026-05-18T12:38:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056353668622868833"
+      ],
+      "shareCount": 1
+    },
+    "2605.15403": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-18T11:56:59.000Z",
+      "latestSharedAt": "2026-05-18T11:56:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056343285929590917"
+      ],
+      "shareCount": 1
+    },
+    "2605.15514": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-18T11:05:41.000Z",
+      "latestSharedAt": "2026-05-18T11:05:41.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056330376738488829"
+      ],
+      "shareCount": 1
+    },
+    "2605.16147": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-18T10:31:00.000Z",
+      "latestSharedAt": "2026-05-18T10:31:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2056321647716479127"
+      ],
+      "shareCount": 1
+    },
+    "2605.12715": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-14T08:02:03.000Z",
+      "latestSharedAt": "2026-05-14T08:02:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054834613168578712"
+      ],
+      "shareCount": 1
+    },
+    "2603.16177": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-18T08:02:22.000Z",
+      "latestSharedAt": "2026-05-14T08:02:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054834613168578712",
+        "https://x.com/rosinality/status/2034178586911928604"
+      ],
+      "shareCount": 2
+    },
+    "2605.11739": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-13T09:55:23.000Z",
+      "latestSharedAt": "2026-05-13T09:55:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054500746842812440"
+      ],
+      "shareCount": 1
+    },
+    "2605.11181": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-13T09:42:43.000Z",
+      "latestSharedAt": "2026-05-13T09:42:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054497558282612789"
+      ],
+      "shareCount": 1
+    },
+    "2605.11182": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-13T09:05:53.000Z",
+      "latestSharedAt": "2026-05-13T09:05:53.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054488288954667048"
+      ],
+      "shareCount": 1
+    },
+    "2605.11978": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-13T09:02:44.000Z",
+      "latestSharedAt": "2026-05-13T09:02:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054487495757156510"
+      ],
+      "shareCount": 1
+    },
+    "2605.11689": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-13T09:02:19.000Z",
+      "latestSharedAt": "2026-05-13T09:02:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054487392359170062"
+      ],
+      "shareCount": 1
+    },
+    "2605.09165": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-12T11:17:35.000Z",
+      "latestSharedAt": "2026-05-12T11:17:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054159045414494525"
+      ],
+      "shareCount": 1
+    },
+    "2310.07096": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-12T11:17:28.000Z",
+      "latestSharedAt": "2026-05-12T11:17:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054159045414494525",
+        "https://x.com/rosinality/status/2054159017744736671"
+      ],
+      "shareCount": 2
+    },
+    "2405.16039": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-12T11:17:28.000Z",
+      "latestSharedAt": "2026-05-12T11:17:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054159045414494525",
+        "https://x.com/rosinality/status/2054159017744736671"
+      ],
+      "shareCount": 2
+    },
+    "2605.06665": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-12T11:17:28.000Z",
+      "latestSharedAt": "2026-05-12T11:17:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054159045414494525",
+        "https://x.com/rosinality/status/2054159017744736671"
+      ],
+      "shareCount": 2
+    },
+    "2605.10129": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-12T10:09:49.000Z",
+      "latestSharedAt": "2026-05-12T10:09:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2054141989352788076"
+      ],
+      "shareCount": 1
+    },
+    "2605.06326": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T10:12:16.000Z",
+      "latestSharedAt": "2026-05-08T10:12:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2052693054717366369"
+      ],
+      "shareCount": 1
+    },
+    "2605.06067": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T09:12:12.000Z",
+      "latestSharedAt": "2026-05-08T09:12:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2052677941826318585"
+      ],
+      "shareCount": 1
+    },
+    "2605.06639": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T07:28:51.000Z",
+      "latestSharedAt": "2026-05-08T07:28:51.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2052651930636190117"
+      ],
+      "shareCount": 1
+    },
+    "2605.06638": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T07:19:28.000Z",
+      "latestSharedAt": "2026-05-08T07:19:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2052649570815914302"
+      ],
+      "shareCount": 1
+    },
+    "2605.06654": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-08T06:44:45.000Z",
+      "latestSharedAt": "2026-05-08T06:44:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2052640832507822574"
+      ],
+      "shareCount": 1
+    },
+    "2605.03677": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-06T07:08:58.000Z",
+      "latestSharedAt": "2026-05-06T07:08:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2051922150458581107"
+      ],
+      "shareCount": 1
+    },
+    "2605.02572": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-05T08:43:13.000Z",
+      "latestSharedAt": "2026-05-05T08:43:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2051583482728423893"
+      ],
+      "shareCount": 1
+    },
+    "2605.02087": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-05T08:11:16.000Z",
+      "latestSharedAt": "2026-05-05T08:11:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2051575441643741187"
+      ],
+      "shareCount": 1
+    },
+    "2605.01640": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-05T07:30:26.000Z",
+      "latestSharedAt": "2026-05-05T07:30:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2051565166962061507"
+      ],
+      "shareCount": 1
+    },
+    "2605.00809": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-04T07:20:11.000Z",
+      "latestSharedAt": "2026-05-04T07:20:11.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2051200199909949816"
+      ],
+      "shareCount": 1
+    },
+    "2604.27077": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-01T08:45:33.000Z",
+      "latestSharedAt": "2026-05-01T08:45:33.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2050134516736381351"
+      ],
+      "shareCount": 1
+    },
+    "2604.27083": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-01T08:15:51.000Z",
+      "latestSharedAt": "2026-05-01T08:15:51.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2050127043170292182"
+      ],
+      "shareCount": 1
+    },
+    "2604.27043": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-05-01T07:59:37.000Z",
+      "latestSharedAt": "2026-05-01T07:59:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2050122960636088718"
+      ],
+      "shareCount": 1
+    },
+    "2604.26326": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-30T09:00:48.000Z",
+      "latestSharedAt": "2026-04-30T09:00:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049775969909571895"
+      ],
+      "shareCount": 1
+    },
+    "2604.26256": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-30T08:53:01.000Z",
+      "latestSharedAt": "2026-04-30T08:53:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049774008573300833"
+      ],
+      "shareCount": 1
+    },
+    "2604.25872": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-29T08:27:14.000Z",
+      "latestSharedAt": "2026-04-29T08:27:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049405134631800985"
+      ],
+      "shareCount": 1
+    },
+    "2511.20102": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T06:19:24.000Z",
+      "latestSharedAt": "2026-04-29T07:00:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049383358308733203",
+        "https://x.com/rosinality/status/1993565233328406868"
+      ],
+      "shareCount": 2
+    },
+    "2604.22951": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-28T08:24:42.000Z",
+      "latestSharedAt": "2026-04-28T08:24:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049042107713679472"
+      ],
+      "shareCount": 1
+    },
+    "2604.08510": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-10T08:40:04.000Z",
+      "latestSharedAt": "2026-04-28T08:24:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049042107713679472",
+        "https://x.com/rosinality/status/2049042083499958753",
+        "https://x.com/rosinality/status/2042522991326568744"
+      ],
+      "shareCount": 3
+    },
+    "2604.23747": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-28T07:12:57.000Z",
+      "latestSharedAt": "2026-04-28T07:12:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049024051922804764"
+      ],
+      "shareCount": 1
+    },
+    "2604.24432": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-28T06:31:18.000Z",
+      "latestSharedAt": "2026-04-28T06:31:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049013569153331382"
+      ],
+      "shareCount": 1
+    },
+    "2604.24763": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-28T05:52:21.000Z",
+      "latestSharedAt": "2026-04-28T05:52:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2049003767073218920"
+      ],
+      "shareCount": 1
+    },
+    "2604.22753": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-27T08:28:48.000Z",
+      "latestSharedAt": "2026-04-27T08:28:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2048680751948820937"
+      ],
+      "shareCount": 1
+    },
+    "2604.21106": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-24T07:43:44.000Z",
+      "latestSharedAt": "2026-04-24T07:43:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2047582246702309414"
+      ],
+      "shareCount": 1
+    },
+    "2604.21724": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-24T07:19:50.000Z",
+      "latestSharedAt": "2026-04-24T07:19:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2047576232984748256"
+      ],
+      "shareCount": 1
+    },
+    "2604.21254": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-24T06:57:47.000Z",
+      "latestSharedAt": "2026-04-24T06:57:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2047570683471823002"
+      ],
+      "shareCount": 1
+    },
+    "2604.20835": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-23T06:53:28.000Z",
+      "latestSharedAt": "2026-04-23T06:53:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2047207206953574468"
+      ],
+      "shareCount": 1
+    },
+    "2604.20209": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-23T06:44:31.000Z",
+      "latestSharedAt": "2026-04-23T06:44:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2047204956948529317"
+      ],
+      "shareCount": 1
+    },
+    "2604.19295": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-22T07:22:44.000Z",
+      "latestSharedAt": "2026-04-22T07:22:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2046852186928214142"
+      ],
+      "shareCount": 1
+    },
+    "2604.13977": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-16T06:29:13.000Z",
+      "latestSharedAt": "2026-04-16T06:29:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2044664391811957122"
+      ],
+      "shareCount": 1
+    },
+    "2604.12002": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-15T07:29:31.000Z",
+      "latestSharedAt": "2026-04-15T07:29:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2044317177902211156"
+      ],
+      "shareCount": 1
+    },
+    "2604.12946": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-15T06:46:53.000Z",
+      "latestSharedAt": "2026-04-15T06:46:53.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2044306449875030032"
+      ],
+      "shareCount": 1
+    },
+    "2604.13030": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-15T06:26:42.000Z",
+      "latestSharedAt": "2026-04-15T06:26:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2044301368991645795"
+      ],
+      "shareCount": 1
+    },
+    "2604.11791": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-14T07:22:39.000Z",
+      "latestSharedAt": "2026-04-14T07:22:39.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2043953062050427266"
+      ],
+      "shareCount": 1
+    },
+    "2604.08706": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-13T12:02:38.000Z",
+      "latestSharedAt": "2026-04-13T12:02:38.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2043661135635722426"
+      ],
+      "shareCount": 1
+    },
+    "2604.09168": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-13T08:37:01.000Z",
+      "latestSharedAt": "2026-04-13T08:37:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2043609387952996691"
+      ],
+      "shareCount": 1
+    },
+    "2604.09258": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-13T08:24:17.000Z",
+      "latestSharedAt": "2026-04-13T08:24:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2043606183072743727"
+      ],
+      "shareCount": 1
+    },
+    "2604.07569": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-10T08:31:03.000Z",
+      "latestSharedAt": "2026-04-10T08:31:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2042520725391585373"
+      ],
+      "shareCount": 1
+    },
+    "2604.08519": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-10T08:19:03.000Z",
+      "latestSharedAt": "2026-04-10T08:19:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2042517705433944168"
+      ],
+      "shareCount": 1
+    },
+    "2604.08423": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-10T07:06:43.000Z",
+      "latestSharedAt": "2026-04-10T07:06:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2042499501621993525"
+      ],
+      "shareCount": 1
+    },
+    "2604.06425": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-09T10:16:59.000Z",
+      "latestSharedAt": "2026-04-09T10:16:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2042184995578483047"
+      ],
+      "shareCount": 1
+    },
+    "2604.06829": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-09T10:09:58.000Z",
+      "latestSharedAt": "2026-04-09T10:09:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2042183228593684823"
+      ],
+      "shareCount": 1
+    },
+    "2604.03128": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-06T11:13:28.000Z",
+      "latestSharedAt": "2026-04-06T11:13:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2041112045936906385"
+      ],
+      "shareCount": 1
+    },
+    "2604.03044": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-06T10:58:21.000Z",
+      "latestSharedAt": "2026-04-06T10:58:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2041108241287930200"
+      ],
+      "shareCount": 1
+    },
+    "2604.02650": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-06T10:50:23.000Z",
+      "latestSharedAt": "2026-04-06T10:50:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2041106235257233885"
+      ],
+      "shareCount": 1
+    },
+    "2603.29957": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-04-01T07:01:50.000Z",
+      "latestSharedAt": "2026-04-01T07:01:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2039236782080819347"
+      ],
+      "shareCount": 1
+    },
+    "2603.23911": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-26T14:02:03.000Z",
+      "latestSharedAt": "2026-03-26T14:02:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2037168204187885732"
+      ],
+      "shareCount": 1
+    },
+    "2602.06019": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-26T14:01:56.000Z",
+      "latestSharedAt": "2026-03-26T14:02:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2037168204187885732",
+        "https://x.com/rosinality/status/2037168177709294045"
+      ],
+      "shareCount": 2
+    },
+    "2603.24472": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-26T11:50:34.000Z",
+      "latestSharedAt": "2026-03-26T11:50:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2037135115952799976"
+      ],
+      "shareCount": 1
+    },
+    "2603.23500": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-25T08:55:08.000Z",
+      "latestSharedAt": "2026-03-25T08:55:08.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036728577631121612"
+      ],
+      "shareCount": 1
+    },
+    "2603.23355": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-25T08:53:26.000Z",
+      "latestSharedAt": "2026-03-25T08:53:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036728149837291684"
+      ],
+      "shareCount": 1
+    },
+    "2603.21719": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-24T13:55:01.000Z",
+      "latestSharedAt": "2026-03-24T13:55:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036441657621557363"
+      ],
+      "shareCount": 1
+    },
+    "2603.22283": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-24T13:51:41.000Z",
+      "latestSharedAt": "2026-03-24T13:51:41.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036440821600301484"
+      ],
+      "shareCount": 1
+    },
+    "2603.21862": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-24T11:28:05.000Z",
+      "latestSharedAt": "2026-03-24T11:28:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036404680633250128"
+      ],
+      "shareCount": 1
+    },
+    "2603.21383": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-24T10:24:01.000Z",
+      "latestSharedAt": "2026-03-24T10:24:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2036388557774901512"
+      ],
+      "shareCount": 1
+    },
+    "2603.18886": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-20T10:07:10.000Z",
+      "latestSharedAt": "2026-03-20T10:07:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2034934768647680264"
+      ],
+      "shareCount": 1
+    },
+    "2603.18297": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-20T09:51:57.000Z",
+      "latestSharedAt": "2026-03-20T09:51:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2034930938979741895"
+      ],
+      "shareCount": 1
+    },
+    "2603.18534": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-20T09:25:58.000Z",
+      "latestSharedAt": "2026-03-20T09:25:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2034924398746968085"
+      ],
+      "shareCount": 1
+    },
+    "2603.17378": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-19T07:58:28.000Z",
+      "latestSharedAt": "2026-03-19T07:58:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2034539992542851219"
+      ],
+      "shareCount": 1
+    },
+    "2603.16127": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-18T08:53:38.000Z",
+      "latestSharedAt": "2026-03-18T08:53:38.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2034191485562712269"
+      ],
+      "shareCount": 1
+    },
+    "2603.15389": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-17T07:55:34.000Z",
+      "latestSharedAt": "2026-03-17T07:55:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2033814483987042333"
+      ],
+      "shareCount": 1
+    },
+    "2603.15619": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-17T07:40:12.000Z",
+      "latestSharedAt": "2026-03-17T07:40:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2033810617455267988"
+      ],
+      "shareCount": 1
+    },
+    "2310.01693": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-15T13:42:00.000Z",
+      "latestSharedAt": "2026-03-15T13:42:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2033176891549434280"
+      ],
+      "shareCount": 1
+    },
+    "2603.12248": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-13T06:19:57.000Z",
+      "latestSharedAt": "2026-03-13T06:19:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032340873480909229"
+      ],
+      "shareCount": 1
+    },
+    "2603.12246": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-13T05:55:19.000Z",
+      "latestSharedAt": "2026-03-13T05:55:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032334672584208867"
+      ],
+      "shareCount": 1
+    },
+    "2603.12151": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-13T05:34:27.000Z",
+      "latestSharedAt": "2026-03-13T05:34:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032329420778709131"
+      ],
+      "shareCount": 1
+    },
+    "2603.10535": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-12T11:00:59.000Z",
+      "latestSharedAt": "2026-03-12T11:00:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032049207117291865"
+      ],
+      "shareCount": 1
+    },
+    "2603.10848": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-12T10:08:25.000Z",
+      "latestSharedAt": "2026-03-12T10:08:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032035978332832127"
+      ],
+      "shareCount": 1
+    },
+    "2602.03584": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T03:57:06.000Z",
+      "latestSharedAt": "2026-03-12T10:08:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032035978332832127",
+        "https://x.com/rosinality/status/2032035940454297898",
+        "https://x.com/rosinality/status/2018896572562718953"
+      ],
+      "shareCount": 3
+    },
+    "2603.10379": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-12T09:02:36.000Z",
+      "latestSharedAt": "2026-03-12T09:02:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2032019413986115940"
+      ],
+      "shareCount": 1
+    },
+    "2603.07197": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-10T11:42:33.000Z",
+      "latestSharedAt": "2026-03-10T11:42:33.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2031334893771227447"
+      ],
+      "shareCount": 1
+    },
+    "2603.07980": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-10T11:42:08.000Z",
+      "latestSharedAt": "2026-03-10T11:42:08.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2031334788200616217"
+      ],
+      "shareCount": 1
+    },
+    "2603.07779": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-10T11:41:28.000Z",
+      "latestSharedAt": "2026-03-10T11:41:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2031334618599735440"
+      ],
+      "shareCount": 1
+    },
+    "2603.08660": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-10T11:41:00.000Z",
+      "latestSharedAt": "2026-03-10T11:41:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2031334502321062149"
+      ],
+      "shareCount": 1
+    },
+    "2603.08022": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-10T11:39:47.000Z",
+      "latestSharedAt": "2026-03-10T11:39:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2031334198041026676"
+      ],
+      "shareCount": 1
+    },
+    "2603.05433": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-09T11:23:17.000Z",
+      "latestSharedAt": "2026-03-09T11:23:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2030967657290195044"
+      ],
+      "shareCount": 1
+    },
+    "2603.05369": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-09T10:25:02.000Z",
+      "latestSharedAt": "2026-03-09T10:25:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2030952996570288200"
+      ],
+      "shareCount": 1
+    },
+    "2603.03276": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-03-04T04:48:21.000Z",
+      "latestSharedAt": "2026-03-04T04:48:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2029056329810419916"
+      ],
+      "shareCount": 1
+    },
+    "2602.22681": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-27T06:08:48.000Z",
+      "latestSharedAt": "2026-02-27T06:08:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2027264633690825014"
+      ],
+      "shareCount": 1
+    },
+    "2602.22437": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-27T05:20:17.000Z",
+      "latestSharedAt": "2026-02-27T05:20:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2027252425879687428"
+      ],
+      "shareCount": 1
+    },
+    "2602.21371": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-26T04:47:05.000Z",
+      "latestSharedAt": "2026-02-26T04:47:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026881681190433126"
+      ],
+      "shareCount": 1
+    },
+    "2602.20945": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-25T07:56:27.000Z",
+      "latestSharedAt": "2026-02-25T07:56:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026566950298726894"
+      ],
+      "shareCount": 1
+    },
+    "2602.21185": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-25T07:45:30.000Z",
+      "latestSharedAt": "2026-02-25T07:45:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026564194951430220"
+      ],
+      "shareCount": 1
+    },
+    "2602.21196": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-25T06:13:00.000Z",
+      "latestSharedAt": "2026-02-25T06:13:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026540917814079984"
+      ],
+      "shareCount": 1
+    },
+    "2602.21193": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-25T04:46:19.000Z",
+      "latestSharedAt": "2026-02-25T04:46:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026519100357558475"
+      ],
+      "shareCount": 1
+    },
+    "2602.19548": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-24T04:32:40.000Z",
+      "latestSharedAt": "2026-02-24T04:32:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026153280779452851"
+      ],
+      "shareCount": 1
+    },
+    "2602.19362": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-24T04:23:36.000Z",
+      "latestSharedAt": "2026-02-24T04:23:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026150995634643358"
+      ],
+      "shareCount": 1
+    },
+    "2505.20686": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-24T04:23:27.000Z",
+      "latestSharedAt": "2026-02-24T04:23:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2026150995634643358",
+        "https://x.com/rosinality/status/2026150958800253093"
+      ],
+      "shareCount": 2
+    },
+    "2602.17547": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-20T05:26:48.000Z",
+      "latestSharedAt": "2026-02-20T05:26:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2024717350248075588"
+      ],
+      "shareCount": 1
+    },
+    "2602.16819": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-20T04:40:10.000Z",
+      "latestSharedAt": "2026-02-20T04:40:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2024705614610649258"
+      ],
+      "shareCount": 1
+    },
+    "2602.17270": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-20T04:29:56.000Z",
+      "latestSharedAt": "2026-02-20T04:29:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2024703039308005483"
+      ],
+      "shareCount": 1
+    },
+    "2602.16813": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-20T04:08:23.000Z",
+      "latestSharedAt": "2026-02-20T04:08:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2024697615519187448"
+      ],
+      "shareCount": 1
+    },
+    "2602.15327": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-18T04:35:09.000Z",
+      "latestSharedAt": "2026-02-18T04:35:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2023979576473296951"
+      ],
+      "shareCount": 1
+    },
+    "2602.15322": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-18T04:13:31.000Z",
+      "latestSharedAt": "2026-02-18T04:13:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2023974133847957609"
+      ],
+      "shareCount": 1
+    },
+    "2602.15210": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-18T04:03:07.000Z",
+      "latestSharedAt": "2026-02-18T04:03:07.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2023971513406194034"
+      ],
+      "shareCount": 1
+    },
+    "2602.12108": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T07:22:43.000Z",
+      "latestSharedAt": "2026-02-13T07:22:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022209805138706925"
+      ],
+      "shareCount": 1
+    },
+    "2602.11549": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T07:19:17.000Z",
+      "latestSharedAt": "2026-02-13T07:19:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022208944668852624"
+      ],
+      "shareCount": 1
+    },
+    "2506.13351": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T07:19:12.000Z",
+      "latestSharedAt": "2026-02-13T07:19:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022208944668852624",
+        "https://x.com/rosinality/status/2022208920710979982"
+      ],
+      "shareCount": 2
+    },
+    "2602.12275": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T07:04:25.000Z",
+      "latestSharedAt": "2026-02-13T07:04:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022205203379105927"
+      ],
+      "shareCount": 1
+    },
+    "2602.12125": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T06:58:13.000Z",
+      "latestSharedAt": "2026-02-13T06:58:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022203641516765390"
+      ],
+      "shareCount": 1
+    },
+    "2602.12237": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T06:42:25.000Z",
+      "latestSharedAt": "2026-02-13T06:42:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022199663735328877"
+      ],
+      "shareCount": 1
+    },
+    "2602.11217": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-13T06:32:56.000Z",
+      "latestSharedAt": "2026-02-13T06:32:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2022197277734187376"
+      ],
+      "shareCount": 1
+    },
+    "2602.10885": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T08:07:52.000Z",
+      "latestSharedAt": "2026-02-12T08:07:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021858782452887820"
+      ],
+      "shareCount": 1
+    },
+    "2602.07824": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:57:46.000Z",
+      "latestSharedAt": "2026-02-12T07:57:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021856241866485929"
+      ],
+      "shareCount": 1
+    },
+    "2602.11137": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:37:17.000Z",
+      "latestSharedAt": "2026-02-12T07:37:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021851084223127592"
+      ],
+      "shareCount": 1
+    },
+    "2602.11149": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:24:27.000Z",
+      "latestSharedAt": "2026-02-12T07:24:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021847856957861930"
+      ],
+      "shareCount": 1
+    },
+    "2412.04318": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:24:21.000Z",
+      "latestSharedAt": "2026-02-12T07:24:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021847856957861930",
+        "https://x.com/rosinality/status/2021847830131023929"
+      ],
+      "shareCount": 2
+    },
+    "2602.07712": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:15:24.000Z",
+      "latestSharedAt": "2026-02-12T07:15:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021845576489542048"
+      ],
+      "shareCount": 1
+    },
+    "2602.07145": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-12T07:01:43.000Z",
+      "latestSharedAt": "2026-02-12T07:01:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2021842135092539695"
+      ],
+      "shareCount": 1
+    },
+    "2602.06797": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-09T05:19:30.000Z",
+      "latestSharedAt": "2026-02-09T05:19:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2020729246042525735"
+      ],
+      "shareCount": 1
+    },
+    "2602.04774": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-09T05:19:21.000Z",
+      "latestSharedAt": "2026-02-09T05:19:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2020729246042525735",
+        "https://x.com/rosinality/status/2020729208956469416"
+      ],
+      "shareCount": 2
+    },
+    "2602.06960": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-09T04:04:58.000Z",
+      "latestSharedAt": "2026-02-09T04:04:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2020710492025872869"
+      ],
+      "shareCount": 1
+    },
+    "2602.03773": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-09T04:04:52.000Z",
+      "latestSharedAt": "2026-02-09T04:04:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2020710492025872869",
+        "https://x.com/rosinality/status/2020710466197303430"
+      ],
+      "shareCount": 2
+    },
+    "2602.06932": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-09T03:55:19.000Z",
+      "latestSharedAt": "2026-02-09T03:55:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2020708062458413320"
+      ],
+      "shareCount": 1
+    },
+    "2602.05494": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-06T07:33:26.000Z",
+      "latestSharedAt": "2026-02-06T07:33:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019675790619844891"
+      ],
+      "shareCount": 1
+    },
+    "2602.05910": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-06T06:07:56.000Z",
+      "latestSharedAt": "2026-02-06T06:07:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019654273320251410"
+      ],
+      "shareCount": 1
+    },
+    "2602.05970": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-06T05:47:43.000Z",
+      "latestSharedAt": "2026-02-06T05:47:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019649183867892179"
+      ],
+      "shareCount": 1
+    },
+    "2505.13898": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-06T05:47:37.000Z",
+      "latestSharedAt": "2026-02-06T05:47:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019649183867892179",
+        "https://x.com/rosinality/status/2019649160400777467"
+      ],
+      "shareCount": 2
+    },
+    "2602.05085": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-06T05:36:26.000Z",
+      "latestSharedAt": "2026-02-06T05:36:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019646345230053675"
+      ],
+      "shareCount": 1
+    },
+    "2602.04417": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-05T05:49:50.000Z",
+      "latestSharedAt": "2026-02-05T05:49:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019287327999422717"
+      ],
+      "shareCount": 1
+    },
+    "2602.04770": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-05T04:09:34.000Z",
+      "latestSharedAt": "2026-02-05T04:09:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2019262096555536416"
+      ],
+      "shareCount": 1
+    },
+    "2602.03075": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T05:02:25.000Z",
+      "latestSharedAt": "2026-02-04T05:02:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018913009855541497"
+      ],
+      "shareCount": 1
+    },
+    "2602.02710": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T04:53:20.000Z",
+      "latestSharedAt": "2026-02-04T04:53:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018910722466701612"
+      ],
+      "shareCount": 1
+    },
+    "2602.02619": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T04:25:43.000Z",
+      "latestSharedAt": "2026-02-04T04:25:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018903772764995834"
+      ],
+      "shareCount": 1
+    },
+    "2602.03702": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T04:15:26.000Z",
+      "latestSharedAt": "2026-02-04T04:15:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018901183533142345"
+      ],
+      "shareCount": 1
+    },
+    "2505.12082": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T04:15:20.000Z",
+      "latestSharedAt": "2026-02-04T04:15:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018901183533142345",
+        "https://x.com/rosinality/status/2018901158253957191"
+      ],
+      "shareCount": 2
+    },
+    "2507.17634": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T04:15:20.000Z",
+      "latestSharedAt": "2026-02-04T04:15:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018901183533142345",
+        "https://x.com/rosinality/status/2018901158253957191"
+      ],
+      "shareCount": 2
+    },
+    "2602.03560": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T03:31:38.000Z",
+      "latestSharedAt": "2026-02-04T03:31:38.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018890163099963675"
+      ],
+      "shareCount": 1
+    },
+    "2602.02361": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T01:30:16.000Z",
+      "latestSharedAt": "2026-02-04T01:30:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018859620220186627"
+      ],
+      "shareCount": 1
+    },
+    "2602.02400": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-04T01:08:43.000Z",
+      "latestSharedAt": "2026-02-04T01:08:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018854196045664554"
+      ],
+      "shareCount": 1
+    },
+    "2602.01826": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T05:24:57.000Z",
+      "latestSharedAt": "2026-02-03T05:24:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018556290193404263"
+      ],
+      "shareCount": 1
+    },
+    "2602.02039": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T05:00:52.000Z",
+      "latestSharedAt": "2026-02-03T05:00:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018550229650522121"
+      ],
+      "shareCount": 1
+    },
+    "2602.00277": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T04:34:18.000Z",
+      "latestSharedAt": "2026-02-03T04:34:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018543544601039000"
+      ],
+      "shareCount": 1
+    },
+    "2602.00747": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T04:12:56.000Z",
+      "latestSharedAt": "2026-02-03T04:12:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018538166609920043"
+      ],
+      "shareCount": 1
+    },
+    "2602.00800": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T04:05:55.000Z",
+      "latestSharedAt": "2026-02-03T04:05:55.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018536402380870127"
+      ],
+      "shareCount": 1
+    },
+    "2602.00398": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-03T04:00:29.000Z",
+      "latestSharedAt": "2026-02-03T04:00:29.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018535035314573396"
+      ],
+      "shareCount": 1
+    },
+    "2601.23000": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T08:29:41.000Z",
+      "latestSharedAt": "2026-02-02T08:29:41.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018240391334785196"
+      ],
+      "shareCount": 1
+    },
+    "2601.22887": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T08:02:28.000Z",
+      "latestSharedAt": "2026-02-02T08:02:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018233543902810535"
+      ],
+      "shareCount": 1
+    },
+    "2601.23261": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T07:56:39.000Z",
+      "latestSharedAt": "2026-02-02T07:56:39.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018232078823993526"
+      ],
+      "shareCount": 1
+    },
+    "2601.22580": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T07:07:42.000Z",
+      "latestSharedAt": "2026-02-02T07:07:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018219761587667403"
+      ],
+      "shareCount": 1
+    },
+    "2601.22966": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T06:57:04.000Z",
+      "latestSharedAt": "2026-02-02T06:57:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018217084967407976"
+      ],
+      "shareCount": 1
+    },
+    "2601.22975": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-02-02T06:52:56.000Z",
+      "latestSharedAt": "2026-02-02T06:52:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2018216043387466154"
+      ],
+      "shareCount": 1
+    },
+    "2601.21461": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T05:30:23.000Z",
+      "latestSharedAt": "2026-01-30T05:30:23.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017108105637863594"
+      ],
+      "shareCount": 1
+    },
+    "2601.21459": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T05:19:02.000Z",
+      "latestSharedAt": "2026-01-30T05:19:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017105249438429301"
+      ],
+      "shareCount": 1
+    },
+    "2601.22095": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T05:10:04.000Z",
+      "latestSharedAt": "2026-01-30T05:10:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017102994148643113"
+      ],
+      "shareCount": 1
+    },
+    "2601.22154": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T04:52:30.000Z",
+      "latestSharedAt": "2026-01-30T04:52:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017098572425224557"
+      ],
+      "shareCount": 1
+    },
+    "2601.21571": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T04:40:11.000Z",
+      "latestSharedAt": "2026-01-30T04:40:11.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017095475695145463"
+      ],
+      "shareCount": 1
+    },
+    "2601.21420": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T04:27:12.000Z",
+      "latestSharedAt": "2026-01-30T04:27:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017092204687478976"
+      ],
+      "shareCount": 1
+    },
+    "2601.22158": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-30T04:10:48.000Z",
+      "latestSharedAt": "2026-01-30T04:10:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017088081426600068"
+      ],
+      "shareCount": 1
+    },
+    "2601.20802": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-29T03:31:31.000Z",
+      "latestSharedAt": "2026-01-29T22:57:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2017009262808232410",
+        "https://x.com/rosinality/status/2016715803828306209"
+      ],
+      "shareCount": 2
+    },
+    "2601.19362": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-28T05:47:54.000Z",
+      "latestSharedAt": "2026-01-28T05:47:54.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016387738510221453"
+      ],
+      "shareCount": 1
+    },
+    "2601.19897": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-28T05:36:49.000Z",
+      "latestSharedAt": "2026-01-28T05:36:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016384951172923411"
+      ],
+      "shareCount": 1
+    },
+    "2601.19895": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-28T04:10:56.000Z",
+      "latestSharedAt": "2026-01-28T04:10:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016363339031707893"
+      ],
+      "shareCount": 1
+    },
+    "2601.16596": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T07:25:05.000Z",
+      "latestSharedAt": "2026-01-27T07:25:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016049809980064124"
+      ],
+      "shareCount": 1
+    },
+    "2601.18130": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T07:25:05.000Z",
+      "latestSharedAt": "2026-01-27T07:25:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016049809980064124"
+      ],
+      "shareCount": 1
+    },
+    "2601.17124": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T07:14:48.000Z",
+      "latestSharedAt": "2026-01-27T07:14:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016047221490561307"
+      ],
+      "shareCount": 1
+    },
+    "2601.18734": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:49:02.000Z",
+      "latestSharedAt": "2026-01-27T05:49:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016025637950259466"
+      ],
+      "shareCount": 1
+    },
+    "2601.18779": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:43:02.000Z",
+      "latestSharedAt": "2026-01-27T05:43:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016024125769449570"
+      ],
+      "shareCount": 1
+    },
+    "2601.18778": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:39:24.000Z",
+      "latestSharedAt": "2026-01-27T05:39:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016023212749140240"
+      ],
+      "shareCount": 1
+    },
+    "2601.18795": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:33:52.000Z",
+      "latestSharedAt": "2026-01-27T05:33:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016021821221659045"
+      ],
+      "shareCount": 1
+    },
+    "2507.01679": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:33:46.000Z",
+      "latestSharedAt": "2026-01-27T05:33:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016021821221659045",
+        "https://x.com/rosinality/status/2016021794470428983"
+      ],
+      "shareCount": 2
+    },
+    "2601.18418": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:27:03.000Z",
+      "latestSharedAt": "2026-01-27T05:27:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016020105944302066"
+      ],
+      "shareCount": 1
+    },
+    "2601.18150": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:19:49.000Z",
+      "latestSharedAt": "2026-01-27T05:19:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016018285868040604"
+      ],
+      "shareCount": 1
+    },
+    "2601.17858": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:12:29.000Z",
+      "latestSharedAt": "2026-01-27T05:12:29.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016016439690592583"
+      ],
+      "shareCount": 1
+    },
+    "2601.18089": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-27T05:03:24.000Z",
+      "latestSharedAt": "2026-01-27T05:03:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2016014154549887136"
+      ],
+      "shareCount": 1
+    },
+    "2601.16443": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-26T07:55:45.000Z",
+      "latestSharedAt": "2026-01-26T07:55:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2015695137096274106"
+      ],
+      "shareCount": 1
+    },
+    "2601.16979": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-26T07:49:45.000Z",
+      "latestSharedAt": "2026-01-26T07:49:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2015693628061208699"
+      ],
+      "shareCount": 1
+    },
+    "2408.15664": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-24T01:54:58.000Z",
+      "latestSharedAt": "2026-01-24T01:54:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014879570567299404"
+      ],
+      "shareCount": 1
+    },
+    "2501.11873": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-24T01:54:58.000Z",
+      "latestSharedAt": "2026-01-24T01:54:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014879570567299404"
+      ],
+      "shareCount": 1
+    },
+    "2601.16208": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-23T04:23:45.000Z",
+      "latestSharedAt": "2026-01-23T04:23:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014554621440889125"
+      ],
+      "shareCount": 1
+    },
+    "2601.14952": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-22T05:14:22.000Z",
+      "latestSharedAt": "2026-01-22T05:14:22.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014204972171485546"
+      ],
+      "shareCount": 1
+    },
+    "2601.15165": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-22T05:04:06.000Z",
+      "latestSharedAt": "2026-01-22T05:04:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014202389499453782"
+      ],
+      "shareCount": 1
+    },
+    "2601.14327": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-22T04:55:17.000Z",
+      "latestSharedAt": "2026-01-22T04:55:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2014200170817245552"
+      ],
+      "shareCount": 1
+    },
+    "2601.14243": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-21T06:17:18.000Z",
+      "latestSharedAt": "2026-01-21T06:17:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2013858422668828865"
+      ],
+      "shareCount": 1
+    },
+    "2601.10825": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-19T07:56:04.000Z",
+      "latestSharedAt": "2026-01-19T07:56:04.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2013158502215348634"
+      ],
+      "shareCount": 1
+    },
+    "2601.10639": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-16T08:32:27.000Z",
+      "latestSharedAt": "2026-01-16T08:32:27.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2012080497870979341"
+      ],
+      "shareCount": 1
+    },
+    "2210.05144": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-14T07:53:12.000Z",
+      "latestSharedAt": "2026-01-14T07:53:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2011345840858870029"
+      ],
+      "shareCount": 1
+    },
+    "2601.04890": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-09T08:33:37.000Z",
+      "latestSharedAt": "2026-01-09T08:33:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2009544076144898464"
+      ],
+      "shareCount": 1
+    },
+    "2601.05034": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-09T05:19:28.000Z",
+      "latestSharedAt": "2026-01-09T05:19:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2009495214591975559"
+      ],
+      "shareCount": 1
+    },
+    "2601.05049": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-09T05:00:21.000Z",
+      "latestSharedAt": "2026-01-09T05:00:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2009490402974519405"
+      ],
+      "shareCount": 1
+    },
+    "2601.01498": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-06T07:11:41.000Z",
+      "latestSharedAt": "2026-01-06T07:11:41.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2008436291172790376"
+      ],
+      "shareCount": 1
+    },
+    "2601.01569": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-06T07:04:26.000Z",
+      "latestSharedAt": "2026-01-06T07:04:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2008434467418108286"
+      ],
+      "shareCount": 1
+    },
+    "2601.02204": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-06T05:19:14.000Z",
+      "latestSharedAt": "2026-01-06T05:19:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2008407990924378421"
+      ],
+      "shareCount": 1
+    },
+    "2601.00364": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-05T04:16:57.000Z",
+      "latestSharedAt": "2026-01-05T04:16:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2008029932656710137"
+      ],
+      "shareCount": 1
+    },
+    "2601.00671": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-05T03:51:03.000Z",
+      "latestSharedAt": "2026-01-05T03:51:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2008023412741160990"
+      ],
+      "shareCount": 1
+    },
+    "2512.23852": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T07:35:17.000Z",
+      "latestSharedAt": "2026-01-01T07:35:17.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006630293340565921"
+      ],
+      "shareCount": 1
+    },
+    "2512.24618": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T07:13:56.000Z",
+      "latestSharedAt": "2026-01-01T07:13:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006624918931485017"
+      ],
+      "shareCount": 1
+    },
+    "2512.24873": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T06:55:58.000Z",
+      "latestSharedAt": "2026-01-01T06:55:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006620395571655127"
+      ],
+      "shareCount": 1
+    },
+    "2512.23966": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T05:55:21.000Z",
+      "latestSharedAt": "2026-01-01T05:55:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006605141198471407"
+      ],
+      "shareCount": 1
+    },
+    "2512.24503": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T05:35:37.000Z",
+      "latestSharedAt": "2026-01-01T05:35:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006600176505696311"
+      ],
+      "shareCount": 1
+    },
+    "2512.24265": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2026-01-01T05:17:01.000Z",
+      "latestSharedAt": "2026-01-01T05:17:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006595495121342675"
+      ],
+      "shareCount": 1
+    },
+    "2512.22219": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-31T00:31:58.000Z",
+      "latestSharedAt": "2025-12-31T00:31:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2006161370325078038"
+      ],
+      "shareCount": 1
+    },
+    "2512.23447": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-30T08:45:36.000Z",
+      "latestSharedAt": "2025-12-30T08:45:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005923211826118933"
+      ],
+      "shareCount": 1
+    },
+    "2512.22955": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-30T07:28:34.000Z",
+      "latestSharedAt": "2025-12-30T07:28:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005903824473772065"
+      ],
+      "shareCount": 1
+    },
+    "2512.22382": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-30T07:18:12.000Z",
+      "latestSharedAt": "2025-12-30T07:18:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005901216711385588"
+      ],
+      "shareCount": 1
+    },
+    "2512.21625": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-29T07:01:13.000Z",
+      "latestSharedAt": "2025-12-29T07:01:13.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005534552606023986"
+      ],
+      "shareCount": 1
+    },
+    "2512.21852": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-29T06:39:34.000Z",
+      "latestSharedAt": "2025-12-29T06:39:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005529104389661085"
+      ],
+      "shareCount": 1
+    },
+    "2510.01555": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T07:04:35.000Z",
+      "latestSharedAt": "2025-12-29T06:39:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005529104389661085",
+        "https://x.com/rosinality/status/2005529066624184435",
+        "https://x.com/rosinality/status/1974007656584188213"
+      ],
+      "shareCount": 3
+    },
+    "2512.21919": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-29T06:34:01.000Z",
+      "latestSharedAt": "2025-12-29T06:34:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2005527708403634259"
+      ],
+      "shareCount": 1
+    },
+    "2512.20757": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-25T06:11:01.000Z",
+      "latestSharedAt": "2025-12-25T06:11:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2004072371943363074"
+      ],
+      "shareCount": 1
+    },
+    "2512.20491": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-24T04:54:43.000Z",
+      "latestSharedAt": "2025-12-24T04:54:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003690782172283295"
+      ],
+      "shareCount": 1
+    },
+    "2512.18160": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-23T07:16:31.000Z",
+      "latestSharedAt": "2025-12-23T07:16:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003364078635630840"
+      ],
+      "shareCount": 1
+    },
+    "2512.19126": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-23T07:12:49.000Z",
+      "latestSharedAt": "2025-12-23T07:12:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003363145734324507"
+      ],
+      "shareCount": 1
+    },
+    "2512.18215": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-23T05:56:26.000Z",
+      "latestSharedAt": "2025-12-23T05:56:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003343924459700584"
+      ],
+      "shareCount": 1
+    },
+    "2509.13232": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-23T05:56:18.000Z",
+      "latestSharedAt": "2025-12-23T05:56:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003343924459700584",
+        "https://x.com/rosinality/status/2003343890221531319"
+      ],
+      "shareCount": 2
+    },
+    "2512.18552": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-23T04:34:50.000Z",
+      "latestSharedAt": "2025-12-23T04:34:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2003323389705134219"
+      ],
+      "shareCount": 1
+    },
+    "2512.17636": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-22T05:37:37.000Z",
+      "latestSharedAt": "2025-12-22T05:37:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2002976801862353301"
+      ],
+      "shareCount": 1
+    },
+    "2512.17901": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-22T05:34:12.000Z",
+      "latestSharedAt": "2025-12-22T05:34:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2002975939156992483"
+      ],
+      "shareCount": 1
+    },
+    "2512.15923": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-19T06:28:31.000Z",
+      "latestSharedAt": "2025-12-19T06:28:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001902448789852211"
+      ],
+      "shareCount": 1
+    },
+    "2512.16848": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-19T05:06:19.000Z",
+      "latestSharedAt": "2025-12-19T05:06:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001881759324180673"
+      ],
+      "shareCount": 1
+    },
+    "2512.16649": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-19T04:18:09.000Z",
+      "latestSharedAt": "2025-12-19T04:18:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001869639375294896"
+      ],
+      "shareCount": 1
+    },
+    "2512.16248": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-19T04:16:00.000Z",
+      "latestSharedAt": "2025-12-19T04:16:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001869099560022111"
+      ],
+      "shareCount": 1
+    },
+    "2512.16922": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-19T04:01:44.000Z",
+      "latestSharedAt": "2025-12-19T04:01:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001865509265088588"
+      ],
+      "shareCount": 1
+    },
+    "2512.15657": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-18T07:09:08.000Z",
+      "latestSharedAt": "2025-12-18T07:09:08.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001550280102687111"
+      ],
+      "shareCount": 1
+    },
+    "2512.15715": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-18T06:43:26.000Z",
+      "latestSharedAt": "2025-12-18T06:43:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/2001543813190586632"
+      ],
+      "shareCount": 1
+    },
+    "2506.02285": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-24T03:25:35.000Z",
+      "latestSharedAt": "2025-12-10T08:30:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998671614494519528",
+        "https://x.com/rosinality/status/1981562689878196495"
+      ],
+      "shareCount": 2
+    },
+    "2512.08854": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-10T08:23:25.000Z",
+      "latestSharedAt": "2025-12-10T08:23:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998669869873766446"
+      ],
+      "shareCount": 1
+    },
+    "2512.08894": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-10T07:35:20.000Z",
+      "latestSharedAt": "2025-12-10T07:35:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998657771483586728"
+      ],
+      "shareCount": 1
+    },
+    "2512.08217": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-10T07:30:37.000Z",
+      "latestSharedAt": "2025-12-10T07:30:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998656582004126063"
+      ],
+      "shareCount": 1
+    },
+    "2512.07783": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-09T05:07:28.000Z",
+      "latestSharedAt": "2025-12-09T05:07:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998258172054892813"
+      ],
+      "shareCount": 1
+    },
+    "2512.07710": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-09T04:10:55.000Z",
+      "latestSharedAt": "2025-12-09T04:10:55.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998243940232012227"
+      ],
+      "shareCount": 1
+    },
+    "2505.13738": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-08T04:00:37.000Z",
+      "latestSharedAt": "2025-12-08T14:05:54.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1998031286515163647",
+        "https://x.com/rosinality/status/1997878961746149767"
+      ],
+      "shareCount": 2
+    },
+    "2511.20347": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T04:46:26.000Z",
+      "latestSharedAt": "2025-12-08T04:41:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1997889266438041829",
+        "https://x.com/rosinality/status/1993541836833800440"
+      ],
+      "shareCount": 2
+    },
+    "2512.05591": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-08T04:09:35.000Z",
+      "latestSharedAt": "2025-12-08T04:09:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1997881215672852528"
+      ],
+      "shareCount": 1
+    },
+    "2512.05962": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-08T04:03:49.000Z",
+      "latestSharedAt": "2025-12-08T04:03:49.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1997879764108161117"
+      ],
+      "shareCount": 1
+    },
+    "2512.05620": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-08T03:30:31.000Z",
+      "latestSharedAt": "2025-12-08T03:30:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1997871386052972799"
+      ],
+      "shareCount": 1
+    },
+    "2512.04220": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-05T04:42:56.000Z",
+      "latestSharedAt": "2025-12-05T04:42:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1996802445473993193"
+      ],
+      "shareCount": 1
+    },
+    "2512.04601": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-05T04:13:35.000Z",
+      "latestSharedAt": "2025-12-05T04:13:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1996795061275971626"
+      ],
+      "shareCount": 1
+    },
+    "2512.04040": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-04T04:39:48.000Z",
+      "latestSharedAt": "2025-12-04T04:39:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1996439268483559528"
+      ],
+      "shareCount": 1
+    },
+    "2512.03442": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-04T04:11:58.000Z",
+      "latestSharedAt": "2025-12-04T04:11:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1996432264427905372"
+      ],
+      "shareCount": 1
+    },
+    "2512.02010": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-02T07:29:52.000Z",
+      "latestSharedAt": "2025-12-02T07:29:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995757292135088584"
+      ],
+      "shareCount": 1
+    },
+    "2512.01374": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-02T05:41:36.000Z",
+      "latestSharedAt": "2025-12-02T05:41:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995730044753182808"
+      ],
+      "shareCount": 1
+    },
+    "2512.01970": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-02T05:00:20.000Z",
+      "latestSharedAt": "2025-12-02T05:00:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995719659828519342"
+      ],
+      "shareCount": 1
+    },
+    "2512.02014": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-02T04:38:07.000Z",
+      "latestSharedAt": "2025-12-02T04:38:07.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995714069286748497"
+      ],
+      "shareCount": 1
+    },
+    "2511.22699": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-01T04:56:06.000Z",
+      "latestSharedAt": "2025-12-01T04:56:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995356208048513344"
+      ],
+      "shareCount": 1
+    },
+    "2511.23473": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-01T04:49:57.000Z",
+      "latestSharedAt": "2025-12-01T04:49:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995354660736209070"
+      ],
+      "shareCount": 1
+    },
+    "2511.23319": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-12-01T04:13:20.000Z",
+      "latestSharedAt": "2025-12-01T04:13:20.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1995345445342806039"
+      ],
+      "shareCount": 1
+    },
+    "2511.21522": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-27T04:38:33.000Z",
+      "latestSharedAt": "2025-11-27T04:38:33.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993902241103925309"
+      ],
+      "shareCount": 1
+    },
+    "2511.20849": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-27T04:29:16.000Z",
+      "latestSharedAt": "2025-11-27T04:29:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993899904134156527"
+      ],
+      "shareCount": 1
+    },
+    "2511.21631": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-27T04:24:50.000Z",
+      "latestSharedAt": "2025-11-27T04:24:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993898787925053780"
+      ],
+      "shareCount": 1
+    },
+    "2511.19942": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T06:44:59.000Z",
+      "latestSharedAt": "2025-11-26T06:44:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993571669924024330"
+      ],
+      "shareCount": 1
+    },
+    "2511.19575": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T06:39:34.000Z",
+      "latestSharedAt": "2025-11-26T06:39:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993570307500917190"
+      ],
+      "shareCount": 1
+    },
+    "2511.20478": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T06:39:25.000Z",
+      "latestSharedAt": "2025-11-26T06:39:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993570307500917190",
+        "https://x.com/rosinality/status/1993570269013983512"
+      ],
+      "shareCount": 2
+    },
+    "2511.20256": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T06:14:18.000Z",
+      "latestSharedAt": "2025-11-26T06:14:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993563946792759361"
+      ],
+      "shareCount": 1
+    },
+    "2511.20645": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T03:53:59.000Z",
+      "latestSharedAt": "2025-11-26T03:53:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993528634632814696"
+      ],
+      "shareCount": 1
+    },
+    "2511.18822": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T03:53:52.000Z",
+      "latestSharedAt": "2025-11-26T03:53:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993528634632814696",
+        "https://x.com/rosinality/status/1993528606484832661"
+      ],
+      "shareCount": 2
+    },
+    "2511.19365": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-26T03:53:52.000Z",
+      "latestSharedAt": "2025-11-26T03:53:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993528634632814696",
+        "https://x.com/rosinality/status/1993528606484832661"
+      ],
+      "shareCount": 2
+    },
+    "2510.02300": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T04:51:05.000Z",
+      "latestSharedAt": "2025-11-25T23:22:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993460423610556842",
+        "https://x.com/rosinality/status/1973974059122897178"
+      ],
+      "shareCount": 2
+    },
+    "2511.17864": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-25T05:14:47.000Z",
+      "latestSharedAt": "2025-11-25T05:14:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993186584263622681"
+      ],
+      "shareCount": 1
+    },
+    "2511.17826": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-25T04:11:29.000Z",
+      "latestSharedAt": "2025-11-25T04:11:29.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993170654150181085"
+      ],
+      "shareCount": 1
+    },
+    "2511.18890": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-25T03:48:39.000Z",
+      "latestSharedAt": "2025-11-25T03:48:39.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1993164906871570736"
+      ],
+      "shareCount": 1
+    },
+    "2503.12964": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-24T11:26:22.000Z",
+      "latestSharedAt": "2025-11-24T11:26:22.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1992917706241421641"
+      ],
+      "shareCount": 1
+    },
+    "2511.14617": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-19T04:06:44.000Z",
+      "latestSharedAt": "2025-11-21T08:43:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991789638093303965",
+        "https://x.com/rosinality/status/1990995128123789669"
+      ],
+      "shareCount": 2
+    },
+    "2511.16665": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-21T04:57:50.000Z",
+      "latestSharedAt": "2025-11-21T04:57:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991732765876973640"
+      ],
+      "shareCount": 1
+    },
+    "2511.16397": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-21T03:45:58.000Z",
+      "latestSharedAt": "2025-11-21T03:45:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991714677991305441"
+      ],
+      "shareCount": 1
+    },
+    "2511.08567": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-12T06:51:21.000Z",
+      "latestSharedAt": "2025-11-20T12:28:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991483834072973677",
+        "https://x.com/rosinality/status/1988499840469213357"
+      ],
+      "shareCount": 2
+    },
+    "2511.15076": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-20T06:05:10.000Z",
+      "latestSharedAt": "2025-11-20T06:05:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991387321472819575"
+      ],
+      "shareCount": 1
+    },
+    "2511.15248": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-20T04:12:02.000Z",
+      "latestSharedAt": "2025-11-20T04:12:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991358852219170831"
+      ],
+      "shareCount": 1
+    },
+    "2511.13841": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-19T04:29:12.000Z",
+      "latestSharedAt": "2025-11-19T04:29:12.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1991000784427974922"
+      ],
+      "shareCount": 1
+    },
+    "2511.14761": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-19T03:39:06.000Z",
+      "latestSharedAt": "2025-11-19T03:39:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990988174919606774"
+      ],
+      "shareCount": 1
+    },
+    "2511.11881": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-18T07:52:07.000Z",
+      "latestSharedAt": "2025-11-18T07:52:07.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990689460590457253"
+      ],
+      "shareCount": 1
+    },
+    "2511.13421": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-18T07:15:07.000Z",
+      "latestSharedAt": "2025-11-18T07:15:07.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990680149344550945"
+      ],
+      "shareCount": 1
+    },
+    "2511.11966": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-18T07:03:15.000Z",
+      "latestSharedAt": "2025-11-18T07:03:15.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990677165101494643"
+      ],
+      "shareCount": 1
+    },
+    "2511.13027": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-18T05:53:45.000Z",
+      "latestSharedAt": "2025-11-18T05:53:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990659671527731416"
+      ],
+      "shareCount": 1
+    },
+    "2511.11571": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-17T04:35:56.000Z",
+      "latestSharedAt": "2025-11-17T04:35:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990277704080597431"
+      ],
+      "shareCount": 1
+    },
+    "2511.11373": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-17T04:29:40.000Z",
+      "latestSharedAt": "2025-11-17T04:29:40.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990276123557826707"
+      ],
+      "shareCount": 1
+    },
+    "2511.11238": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-17T04:06:29.000Z",
+      "latestSharedAt": "2025-11-17T04:06:29.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990270293110292690"
+      ],
+      "shareCount": 1
+    },
+    "2508.18672": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-27T21:55:11.000Z",
+      "latestSharedAt": "2025-11-17T00:17:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1990212788560748716",
+        "https://x.com/rosinality/status/1982929092266864914"
+      ],
+      "shareCount": 2
+    },
+    "2511.08923": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-13T06:14:45.000Z",
+      "latestSharedAt": "2025-11-13T06:14:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1988853018809237629"
+      ],
+      "shareCount": 1
+    },
+    "2509.04259": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-12T08:08:31.000Z",
+      "latestSharedAt": "2025-11-12T08:08:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1988519260495229268"
+      ],
+      "shareCount": 1
+    },
+    "2509.12235": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-12T08:08:31.000Z",
+      "latestSharedAt": "2025-11-12T08:08:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1988519260495229268"
+      ],
+      "shareCount": 1
+    },
+    "2511.06876": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-11T08:24:32.000Z",
+      "latestSharedAt": "2025-11-11T08:24:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1988160902294802901"
+      ],
+      "shareCount": 1
+    },
+    "2511.00413": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-05T04:42:00.000Z",
+      "latestSharedAt": "2025-11-05T04:42:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1985930576290066554"
+      ],
+      "shareCount": 1
+    },
+    "2511.01758": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-05T04:28:53.000Z",
+      "latestSharedAt": "2025-11-05T04:28:53.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1985927273179201548"
+      ],
+      "shareCount": 1
+    },
+    "2509.26030": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T07:12:56.000Z",
+      "latestSharedAt": "2025-11-03T10:07:55.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1985287819024367691",
+        "https://x.com/rosinality/status/1973284982279032948"
+      ],
+      "shareCount": 2
+    },
+    "2510.27492": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-03T04:04:44.000Z",
+      "latestSharedAt": "2025-11-03T04:04:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1985196420081791222"
+      ],
+      "shareCount": 1
+    },
+    "2510.27688": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-11-03T03:51:57.000Z",
+      "latestSharedAt": "2025-11-03T03:51:57.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1985193204363497741"
+      ],
+      "shareCount": 1
+    },
+    "2411.09661": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-31T11:58:52.000Z",
+      "latestSharedAt": "2025-10-31T11:58:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984228577068630090"
+      ],
+      "shareCount": 1
+    },
+    "2510.26768": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-31T04:49:18.000Z",
+      "latestSharedAt": "2025-10-31T04:49:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984120473073152409"
+      ],
+      "shareCount": 1
+    },
+    "2510.26697": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-31T04:36:05.000Z",
+      "latestSharedAt": "2025-10-31T04:36:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984117144884502844"
+      ],
+      "shareCount": 1
+    },
+    "2510.26788": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-31T04:19:47.000Z",
+      "latestSharedAt": "2025-10-31T04:19:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984113043673149831"
+      ],
+      "shareCount": 1
+    },
+    "2407.04620": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-30T21:23:21.000Z",
+      "latestSharedAt": "2025-10-30T21:24:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984008417749692716",
+        "https://x.com/rosinality/status/1984008243618968043"
+      ],
+      "shareCount": 2
+    },
+    "2501.12352": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-30T21:23:21.000Z",
+      "latestSharedAt": "2025-10-30T21:24:02.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1984008417749692716",
+        "https://x.com/rosinality/status/1984008243618968043"
+      ],
+      "shareCount": 2
+    },
+    "2510.23691": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-29T08:08:16.000Z",
+      "latestSharedAt": "2025-10-29T08:08:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983445770180407356"
+      ],
+      "shareCount": 1
+    },
+    "2510.24320": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-29T06:23:19.000Z",
+      "latestSharedAt": "2025-10-29T06:23:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983419355250733107"
+      ],
+      "shareCount": 1
+    },
+    "2510.24397": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-29T04:05:58.000Z",
+      "latestSharedAt": "2025-10-29T04:24:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983389428728148052",
+        "https://x.com/rosinality/status/1983384791786672236"
+      ],
+      "shareCount": 2
+    },
+    "2507.19427": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-29T04:24:24.000Z",
+      "latestSharedAt": "2025-10-29T04:24:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983389428728148052"
+      ],
+      "shareCount": 1
+    },
+    "2510.24684": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-29T03:58:56.000Z",
+      "latestSharedAt": "2025-10-29T03:58:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983383023585505323"
+      ],
+      "shareCount": 1
+    },
+    "2510.22777": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-28T07:34:50.000Z",
+      "latestSharedAt": "2025-10-28T07:34:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983074967496654868"
+      ],
+      "shareCount": 1
+    },
+    "2510.23049": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-28T05:29:48.000Z",
+      "latestSharedAt": "2025-10-28T05:29:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983043500288745812"
+      ],
+      "shareCount": 1
+    },
+    "2510.23027": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-28T04:59:03.000Z",
+      "latestSharedAt": "2025-10-28T04:59:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983035761097355463"
+      ],
+      "shareCount": 1
+    },
+    "2510.20817": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-28T04:41:37.000Z",
+      "latestSharedAt": "2025-10-28T04:41:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1983031375856021969"
+      ],
+      "shareCount": 1
+    },
+    "2503.16057": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-28T01:22:32.000Z",
+      "latestSharedAt": "2025-10-28T01:22:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1982981272491487492"
+      ],
+      "shareCount": 1
+    },
+    "2510.21450": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-27T22:54:32.000Z",
+      "latestSharedAt": "2025-10-27T22:54:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1982944029945016619"
+      ],
+      "shareCount": 1
+    },
+    "2510.20171": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-24T16:16:36.000Z",
+      "latestSharedAt": "2025-10-24T16:16:36.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1981756723301110127"
+      ],
+      "shareCount": 1
+    },
+    "2510.20111": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-24T16:15:46.000Z",
+      "latestSharedAt": "2025-10-24T16:15:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1981756513267138831"
+      ],
+      "shareCount": 1
+    },
+    "2510.20535": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-24T07:24:39.000Z",
+      "latestSharedAt": "2025-10-24T07:24:39.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1981622852454690916"
+      ],
+      "shareCount": 1
+    },
+    "2510.19338": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-23T04:10:27.000Z",
+      "latestSharedAt": "2025-10-23T15:18:42.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1981379762003091932",
+        "https://x.com/rosinality/status/1981211594798616998"
+      ],
+      "shareCount": 2
+    },
+    "2510.18855": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-22T05:08:26.000Z",
+      "latestSharedAt": "2025-10-22T05:08:26.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1980863798845358509"
+      ],
+      "shareCount": 1
+    },
+    "2510.18840": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-22T04:51:45.000Z",
+      "latestSharedAt": "2025-10-22T04:51:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1980859596706288052"
+      ],
+      "shareCount": 1
+    },
+    "2510.15262": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-21T06:21:01.000Z",
+      "latestSharedAt": "2025-10-21T06:21:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1980519673247732081"
+      ],
+      "shareCount": 1
+    },
+    "2510.17800": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-21T03:23:15.000Z",
+      "latestSharedAt": "2025-10-21T03:23:15.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1980474940773265864"
+      ],
+      "shareCount": 1
+    },
+    "2510.15301": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-20T16:40:10.000Z",
+      "latestSharedAt": "2025-10-20T16:40:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1980313100348977238"
+      ],
+      "shareCount": 1
+    },
+    "2510.14978": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T08:03:22.000Z",
+      "latestSharedAt": "2025-10-17T08:03:22.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979095879869968685"
+      ],
+      "shareCount": 1
+    },
+    "2510.14751": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T08:03:03.000Z",
+      "latestSharedAt": "2025-10-17T08:03:03.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979095802661474471"
+      ],
+      "shareCount": 1
+    },
+    "2510.14961": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T08:02:48.000Z",
+      "latestSharedAt": "2025-10-17T08:02:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979095739830579216"
+      ],
+      "shareCount": 1
+    },
+    "2510.14686": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T08:02:29.000Z",
+      "latestSharedAt": "2025-10-17T08:02:29.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979095656578142716"
+      ],
+      "shareCount": 1
+    },
+    "2510.14807": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T07:59:58.000Z",
+      "latestSharedAt": "2025-10-17T07:59:58.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979095025381445722"
+      ],
+      "shareCount": 1
+    },
+    "2510.14826": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-17T05:36:47.000Z",
+      "latestSharedAt": "2025-10-17T05:36:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1979058991360586071"
+      ],
+      "shareCount": 1
+    },
+    "2506.13585": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-16T12:31:34.000Z",
+      "latestSharedAt": "2025-10-16T12:31:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978800988321652814"
+      ],
+      "shareCount": 1
+    },
+    "2510.13786": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-16T12:19:59.000Z",
+      "latestSharedAt": "2025-10-16T12:19:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978798073683038373"
+      ],
+      "shareCount": 1
+    },
+    "2510.13079": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-16T04:45:33.000Z",
+      "latestSharedAt": "2025-10-16T04:45:33.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978683711022391660"
+      ],
+      "shareCount": 1
+    },
+    "2510.12225": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-15T05:55:21.000Z",
+      "latestSharedAt": "2025-10-15T05:55:21.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978338890680275037"
+      ],
+      "shareCount": 1
+    },
+    "2510.10489": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-15T05:55:09.000Z",
+      "latestSharedAt": "2025-10-15T05:55:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978338836556992990"
+      ],
+      "shareCount": 1
+    },
+    "2510.10575": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-15T05:45:50.000Z",
+      "latestSharedAt": "2025-10-15T05:45:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978336493040025891"
+      ],
+      "shareCount": 1
+    },
+    "2510.12402": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-15T04:41:43.000Z",
+      "latestSharedAt": "2025-10-15T04:41:43.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978320356877152386"
+      ],
+      "shareCount": 1
+    },
+    "2510.11495": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T08:28:45.000Z",
+      "latestSharedAt": "2025-10-14T08:28:45.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978015106031063503"
+      ],
+      "shareCount": 1
+    },
+    "2510.09389": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T08:28:00.000Z",
+      "latestSharedAt": "2025-10-14T08:28:00.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1978014917950087525"
+      ],
+      "shareCount": 1
+    },
+    "2510.11690": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T05:18:05.000Z",
+      "latestSharedAt": "2025-10-14T05:18:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1977967121268375898"
+      ],
+      "shareCount": 1
+    },
+    "2510.11370": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T05:17:24.000Z",
+      "latestSharedAt": "2025-10-14T05:17:24.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1977966952439279975"
+      ],
+      "shareCount": 1
+    },
+    "2510.11345": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T04:49:18.000Z",
+      "latestSharedAt": "2025-10-14T04:49:18.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1977959880188436881"
+      ],
+      "shareCount": 1
+    },
+    "2510.09544": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T03:40:30.000Z",
+      "latestSharedAt": "2025-10-14T03:40:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1977942565371674832"
+      ],
+      "shareCount": 1
+    },
+    "2510.09295": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-14T02:55:28.000Z",
+      "latestSharedAt": "2025-10-14T02:55:28.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1977931231997382856"
+      ],
+      "shareCount": 1
+    },
+    "2509.17514": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-05T10:22:16.000Z",
+      "latestSharedAt": "2025-10-05T10:22:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1974782183148798417"
+      ],
+      "shareCount": 1
+    },
+    "2510.01656": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T07:05:50.000Z",
+      "latestSharedAt": "2025-10-03T07:05:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1974007971110588876"
+      ],
+      "shareCount": 1
+    },
+    "2510.01624": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T07:05:25.000Z",
+      "latestSharedAt": "2025-10-03T07:05:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1974007867930734683"
+      ],
+      "shareCount": 1
+    },
+    "2509.25810": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T07:05:18.000Z",
+      "latestSharedAt": "2025-10-03T07:05:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1974007867930734683",
+        "https://x.com/rosinality/status/1974007838210199772"
+      ],
+      "shareCount": 2
+    },
+    "2510.02272": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-03T06:00:34.000Z",
+      "latestSharedAt": "2025-10-03T06:00:34.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973991546849567049"
+      ],
+      "shareCount": 1
+    },
+    "2509.25808": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-02T03:10:54.000Z",
+      "latestSharedAt": "2025-10-02T14:19:59.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973754840913506625",
+        "https://x.com/rosinality/status/1973586459400740890"
+      ],
+      "shareCount": 2
+    },
+    "2509.25300": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-02T03:11:06.000Z",
+      "latestSharedAt": "2025-10-02T03:11:06.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973586512555164081"
+      ],
+      "shareCount": 1
+    },
+    "2509.26625": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T07:40:01.000Z",
+      "latestSharedAt": "2025-10-01T07:40:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973291797364502599"
+      ],
+      "shareCount": 1
+    },
+    "2507.12224": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T07:12:52.000Z",
+      "latestSharedAt": "2025-10-01T07:12:56.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973284982279032948",
+        "https://x.com/rosinality/status/1973284967313711483"
+      ],
+      "shareCount": 2
+    },
+    "2509.23678": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T04:44:31.000Z",
+      "latestSharedAt": "2025-10-01T04:44:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973247633197244577"
+      ],
+      "shareCount": 1
+    },
+    "2507.17702": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T04:44:25.000Z",
+      "latestSharedAt": "2025-10-01T04:44:31.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973247633197244577",
+        "https://x.com/rosinality/status/1973247608647983513"
+      ],
+      "shareCount": 2
+    },
+    "2509.23045": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T03:59:47.000Z",
+      "latestSharedAt": "2025-10-01T03:59:47.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973236375131660318"
+      ],
+      "shareCount": 1
+    },
+    "2509.24375": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-10-01T00:32:01.000Z",
+      "latestSharedAt": "2025-10-01T00:32:01.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973184087964995916"
+      ],
+      "shareCount": 1
+    },
+    "2509.23962": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T13:33:46.000Z",
+      "latestSharedAt": "2025-09-30T13:33:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973018434826097021"
+      ],
+      "shareCount": 1
+    },
+    "2508.09726": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T13:33:43.000Z",
+      "latestSharedAt": "2025-09-30T13:33:46.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973018434826097021",
+        "https://x.com/rosinality/status/1973018420783599875"
+      ],
+      "shareCount": 2
+    },
+    "2509.24007": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T12:46:10.000Z",
+      "latestSharedAt": "2025-09-30T12:46:10.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973006454388113868"
+      ],
+      "shareCount": 1
+    },
+    "2509.24218": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T12:45:38.000Z",
+      "latestSharedAt": "2025-09-30T12:45:38.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1973006320795254838"
+      ],
+      "shareCount": 1
+    },
+    "2509.24771": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T11:53:09.000Z",
+      "latestSharedAt": "2025-09-30T11:53:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972993115054289172"
+      ],
+      "shareCount": 1
+    },
+    "2509.25020": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T11:53:09.000Z",
+      "latestSharedAt": "2025-09-30T11:53:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972993115054289172"
+      ],
+      "shareCount": 1
+    },
+    "2509.24704": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T11:53:09.000Z",
+      "latestSharedAt": "2025-09-30T11:53:09.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972993115054289172"
+      ],
+      "shareCount": 1
+    },
+    "2509.25133": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T08:28:52.000Z",
+      "latestSharedAt": "2025-09-30T08:28:52.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972941704023134324"
+      ],
+      "shareCount": 1
+    },
+    "2509.25050": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T08:09:32.000Z",
+      "latestSharedAt": "2025-09-30T08:09:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972936838844395614"
+      ],
+      "shareCount": 1
+    },
+    "2509.25123": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T08:09:16.000Z",
+      "latestSharedAt": "2025-09-30T08:09:16.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972936772461240799"
+      ],
+      "shareCount": 1
+    },
+    "2509.24981": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T07:39:37.000Z",
+      "latestSharedAt": "2025-09-30T07:39:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972929309187994053"
+      ],
+      "shareCount": 1
+    },
+    "2509.24663": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T07:39:25.000Z",
+      "latestSharedAt": "2025-09-30T07:39:25.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972929258273341877"
+      ],
+      "shareCount": 1
+    },
+    "2509.25087": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T05:44:37.000Z",
+      "latestSharedAt": "2025-09-30T05:44:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972900369866133664"
+      ],
+      "shareCount": 1
+    },
+    "2507.02119": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-30T05:44:33.000Z",
+      "latestSharedAt": "2025-09-30T05:44:37.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972900369866133664",
+        "https://x.com/rosinality/status/1972900352706920850"
+      ],
+      "shareCount": 2
+    },
+    "2509.22624": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-29T05:54:32.000Z",
+      "latestSharedAt": "2025-09-29T05:54:32.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972540476285923398"
+      ],
+      "shareCount": 1
+    },
+    "2509.22576": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-29T05:54:19.000Z",
+      "latestSharedAt": "2025-09-29T05:54:19.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972540422812737573"
+      ],
+      "shareCount": 1
+    },
+    "2509.22638": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-29T05:54:14.000Z",
+      "latestSharedAt": "2025-09-29T05:54:14.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972540402210316331"
+      ],
+      "shareCount": 1
+    },
+    "2509.22611": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-29T04:21:50.000Z",
+      "latestSharedAt": "2025-09-29T04:21:50.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972517147885863055"
+      ],
+      "shareCount": 1
+    },
+    "2507.20673": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-27T23:56:15.000Z",
+      "latestSharedAt": "2025-09-27T23:56:15.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1972087924553666992"
+      ],
+      "shareCount": 1
+    },
+    "2509.20837": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-26T08:54:48.000Z",
+      "latestSharedAt": "2025-09-26T08:54:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971498681393406304"
+      ],
+      "shareCount": 1
+    },
+    "2509.20712": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-26T08:54:35.000Z",
+      "latestSharedAt": "2025-09-26T08:54:35.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971498626443788564"
+      ],
+      "shareCount": 1
+    },
+    "2509.21124": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-26T06:29:05.000Z",
+      "latestSharedAt": "2025-09-26T06:29:05.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971462006659322348"
+      ],
+      "shareCount": 1
+    },
+    "2509.21319": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-26T04:24:48.000Z",
+      "latestSharedAt": "2025-09-26T04:24:48.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971430731055497660"
+      ],
+      "shareCount": 1
+    },
+    "2509.20186": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-25T05:36:30.000Z",
+      "latestSharedAt": "2025-09-25T05:36:30.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971086385705898327"
+      ],
+      "shareCount": 1
+    },
+    "2509.20328": {
+      "sharedBy": [
+        "rosinality"
+      ],
+      "firstSharedAt": "2025-09-25T04:13:44.000Z",
+      "latestSharedAt": "2025-09-25T04:13:44.000Z",
+      "postUrls": [
+        "https://x.com/rosinality/status/1971065557828161880"
       ],
       "shareCount": 1
     }
