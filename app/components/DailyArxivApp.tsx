@@ -1239,11 +1239,12 @@ export function DailyArxivApp() {
   }, [cachePdf, statusByPaper]);
 
   const openPaper = useCallback((paper: ScoredPaper) => {
+    const isAlreadyOpen = selectedPaper?.id === paper.id;
     setSelectedPaper(paper);
     setNotePanelOpen(false);
     setAiPanelOpen(false);
-    setPdfState("loading");
-  }, []);
+    if (!isAlreadyOpen) setPdfState("loading");
+  }, [selectedPaper?.id]);
 
   const runAiGuide = useCallback(async (paper: ScoredPaper, force = false) => {
     if (!force && aiGuides[paper.id]?.status === "ready") return;

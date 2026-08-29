@@ -116,6 +116,8 @@ test("keeps GitHub data separate from local state and PDFs", async () => {
   assert.match(component, /custom weight each/);
   assert.match(component, /PDF 확대 및 축소/);
   assert.match(component, /PDF_ZOOM_MAX = 300/);
+  assert.match(component, /const isAlreadyOpen = selectedPaper\?\.id === paper\.id/);
+  assert.match(component, /if \(!isAlreadyOpen\) setPdfState\("loading"\)/);
   assert.match(component, /NOTE_MAX_LENGTH = 200/);
   assert.match(component, /paper-note-panel/);
   assert.match(component, /자동 저장됨/);
