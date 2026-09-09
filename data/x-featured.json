@@ -1,12 +1,78 @@
 {
-  "generatedAt": "2026-09-08T15:13:14.436Z",
+  "generatedAt": "2026-09-09T15:13:25.867Z",
   "accounts": [
     "fly51fly",
     "che_shr_cat",
     "rosinality"
   ],
-  "rowCount": 852,
+  "rowCount": 858,
   "featured": {
+    "2609.02217": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-08T21:47:43.000Z",
+      "latestSharedAt": "2026-09-08T21:47:43.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2097441779301941404"
+      ],
+      "shareCount": 1
+    },
+    "2609.03874": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-08T21:38:54.000Z",
+      "latestSharedAt": "2026-09-08T21:38:54.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2097439558938030139"
+      ],
+      "shareCount": 1
+    },
+    "2609.04463": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-08T21:26:49.000Z",
+      "latestSharedAt": "2026-09-08T21:26:49.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2097436520076759088"
+      ],
+      "shareCount": 1
+    },
+    "2609.04531": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-08T21:17:22.000Z",
+      "latestSharedAt": "2026-09-08T21:17:22.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2097434140715213180"
+      ],
+      "shareCount": 1
+    },
+    "2609.04494": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-08T21:09:41.000Z",
+      "latestSharedAt": "2026-09-08T21:09:41.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2097432209502441854"
+      ],
+      "shareCount": 1
+    },
+    "2609.03344": {
+      "sharedBy": [
+        "che_shr_cat"
+      ],
+      "firstSharedAt": "2026-09-08T19:26:43.000Z",
+      "latestSharedAt": "2026-09-08T19:26:43.000Z",
+      "postUrls": [
+        "https://x.com/che_shr_cat/status/2097406295338836446"
+      ],
+      "shareCount": 1
+    },
     "2609.04564": {
       "sharedBy": [
         "fly51fly"
