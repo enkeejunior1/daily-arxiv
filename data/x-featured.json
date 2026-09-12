@@ -1,12 +1,67 @@
 {
-  "generatedAt": "2026-09-11T15:08:06.043Z",
+  "generatedAt": "2026-09-12T14:16:29.435Z",
   "accounts": [
     "fly51fly",
     "che_shr_cat",
     "rosinality"
   ],
-  "rowCount": 871,
+  "rowCount": 876,
   "featured": {
+    "2609.11699": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-11T22:01:33.000Z",
+      "latestSharedAt": "2026-09-11T22:01:33.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2098532423873212698"
+      ],
+      "shareCount": 1
+    },
+    "2609.11900": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-11T21:48:01.000Z",
+      "latestSharedAt": "2026-09-11T21:48:01.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2098529017838420019"
+      ],
+      "shareCount": 1
+    },
+    "2609.11917": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-11T21:36:32.000Z",
+      "latestSharedAt": "2026-09-11T21:36:32.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2098526127187005917"
+      ],
+      "shareCount": 1
+    },
+    "2609.10712": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-11T21:25:28.000Z",
+      "latestSharedAt": "2026-09-11T21:25:28.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2098523343494525082"
+      ],
+      "shareCount": 1
+    },
+    "2609.11873": {
+      "sharedBy": [
+        "fly51fly"
+      ],
+      "firstSharedAt": "2026-09-11T21:11:03.000Z",
+      "latestSharedAt": "2026-09-11T21:11:03.000Z",
+      "postUrls": [
+        "https://x.com/fly51fly/status/2098519714695938292"
+      ],
+      "shareCount": 1
+    },
     "2608.12610": {
       "sharedBy": [
         "che_shr_cat"
