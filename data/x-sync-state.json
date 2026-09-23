@@ -1,11 +1,11 @@
 {
   "recent": {
-    "sinceId": "2102152783436939438",
+    "sinceId": "2102514608791760945",
     "nextToken": null,
     "baseSinceId": null,
     "baseStartTime": null,
     "pendingNewestId": null,
-    "lastSyncedAt": "2026-09-22T15:34:44.031Z"
+    "lastSyncedAt": "2026-09-23T15:30:22.911Z"
   },
   "backfills": {
     "2026-07-29:2026-08-27": {
